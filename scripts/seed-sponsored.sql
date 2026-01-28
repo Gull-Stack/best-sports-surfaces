@@ -1,0 +1,7 @@
+-- Sponsored Products for BestSportsSurfaces.com
+INSERT INTO sponsored_products (id, name, description, image_url, link_url, sponsor_name, placement, is_active) VALUES
+('d0000001-0000-0000-0000-000000000001', 'Pro Tennis Court Surface System', 'Professional-grade acrylic tennis court surface system for long-lasting performance and consistent ball bounce.', '', 'https://atsports.com/tennis-surfaces', 'ATSports.com', 'sidebar', true),
+('d0000002-0000-0000-0000-000000000002', 'Modular Sport Court Tiles', 'Interlocking modular sport court tiles for basketball, pickleball, and multi-sport courts. Easy installation and maintenance.', '', 'https://atsports.com/sport-tiles', 'ATSports.com', 'sidebar', true),
+('d0000003-0000-0000-0000-000000000003', 'LED Court Lighting Systems', 'Energy-efficient LED lighting systems designed specifically for outdoor sports courts. Reduce energy costs by up to 60%.', '', 'https://atsports.com/lighting', 'ATSports.com', 'banner', true),
+('d0000004-0000-0000-0000-000000000004', 'Court Resurfacing Kits', 'Complete court resurfacing kits for tennis and basketball courts. Professional results with DIY convenience.', '', 'https://atsports.com/resurfacing', 'ATSports.com', 'inline', true),
+('d0000005-0000-0000-0000-000000000005', 'Synthetic Turf for Sports Fields', 'Premium synthetic turf systems for soccer fields, football fields, and multi-sport facilities. FIFA and NFL approved.', '', 'https://atsports.com/synthetic-turf', 'ATSports.com', 'sidebar', true);
