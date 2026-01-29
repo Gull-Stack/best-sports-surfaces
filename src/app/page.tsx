@@ -6,6 +6,7 @@ import SearchBar from '@/components/ui/SearchBar';
 import { SPORT_TYPES, SITE_NAME, SITE_URL } from '@/lib/constants';
 import SchemaOrg from '@/components/seo/SchemaOrg';
 import { createClient } from '@/lib/supabase/server';
+import { formatDate } from '@/lib/utils';
 import type { MapPin } from '@/components/ui/Map';
 
 const howItWorks = [
@@ -15,11 +16,18 @@ const howItWorks = [
 ];
 
 export default async function HomePage() {
-  // Fetch vendors for map pins
+  // Fetch vendors for map pins and recent blog posts
   const supabase = await createClient();
   const { data: vendors } = await supabase
     .from('vendors')
     .select('id, latitude, longitude, name, tier, slug');
+
+  const { data: recentPosts } = await supabase
+    .from('blog_posts')
+    .select('title, slug, excerpt, category, featured_image, published_at')
+    .eq('published', true)
+    .order('published_at', { ascending: false })
+    .limit(4);
 
   const mapPins: MapPin[] = (vendors || [])
     .filter((v: { latitude: number | null; longitude: number | null }) => v.latitude && v.longitude)
@@ -182,6 +190,53 @@ export default async function HomePage() {
           </Card>
         </div>
       </section>
+
+      {/* Recent Blog Posts */}
+      {recentPosts && recentPosts.length > 0 && (
+        <section className="py-16">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="text-center mb-10">
+              <h2 className="text-3xl font-bold text-gray-900">Latest Guides & Tips</h2>
+              <p className="text-gray-600 mt-2">Expert advice on sports surface construction, costs, and maintenance.</p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {recentPosts.map((post) => (
+                <Link
+                  key={post.slug}
+                  href={`/blog/${post.slug}`}
+                  className="group bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-md transition-all"
+                >
+                  {post.featured_image && (
+                    <div className="aspect-video bg-gray-100 overflow-hidden">
+                      <img
+                        src={post.featured_image}
+                        alt={post.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                  )}
+                  <div className="p-4">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-xs font-medium text-brand bg-brand-light px-2 py-0.5 rounded">{post.category}</span>
+                      <span className="text-xs text-gray-400">{formatDate(post.published_at)}</span>
+                    </div>
+                    <h3 className="font-semibold text-gray-900 group-hover:text-brand transition-colors line-clamp-2">{post.title}</h3>
+                    <p className="text-sm text-gray-600 mt-1 line-clamp-2">{post.excerpt}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+            <div className="text-center mt-8">
+              <Link
+                href="/blog"
+                className="inline-flex items-center gap-2 text-brand font-semibold hover:underline"
+              >
+                View All Articles <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Contractor CTA */}
       <section className="py-16 bg-plum text-white">
