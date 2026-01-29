@@ -3,7 +3,7 @@ import { Search, Shield, DollarSign, Users, ArrowRight, CheckCircle } from 'luci
 import Card from '@/components/ui/Card';
 import MapComponent from '@/components/ui/DynamicMap';
 import SearchBar from '@/components/ui/SearchBar';
-import { SPORT_TYPES, SITE_NAME } from '@/lib/constants';
+import { SPORT_TYPES, SITE_NAME, SITE_URL } from '@/lib/constants';
 import SchemaOrg from '@/components/seo/SchemaOrg';
 import { createClient } from '@/lib/supabase/server';
 import type { MapPin } from '@/components/ui/Map';
@@ -36,20 +36,32 @@ export default async function HomePage() {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: SITE_NAME,
+    url: SITE_URL,
     description: 'Find trusted sports surface contractors near you.',
     potentialAction: {
       '@type': 'SearchAction',
       target: {
         '@type': 'EntryPoint',
-        urlTemplate: '/search?q={search_term_string}',
+        urlTemplate: `${SITE_URL}/search?q={search_term_string}`,
       },
       'query-input': 'required name=search_term_string',
     },
   };
 
+  const organizationSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: SITE_NAME,
+    url: SITE_URL,
+    logo: `${SITE_URL}/og-image.png`,
+    description: 'Find trusted sports surface contractors near you. Compare quotes for tennis courts, basketball courts, pickleball courts, and more.',
+    sameAs: [],
+  };
+
   return (
     <>
       <SchemaOrg schema={websiteSchema} />
+      <SchemaOrg schema={organizationSchema} />
 
       {/* Hero Section */}
       <section
