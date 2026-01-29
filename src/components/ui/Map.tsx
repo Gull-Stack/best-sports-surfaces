@@ -5,7 +5,7 @@ import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { US_CENTER, DEFAULT_ZOOM } from '@/lib/constants';
 
-interface MapPin {
+export interface MapPin {
   id: string;
   latitude: number;
   longitude: number;

@@ -2,8 +2,11 @@ import Link from 'next/link';
 import { Search, Shield, DollarSign, Users, ArrowRight, CheckCircle } from 'lucide-react';
 import Card from '@/components/ui/Card';
 import MapComponent from '@/components/ui/DynamicMap';
+import SearchBar from '@/components/ui/SearchBar';
 import { SPORT_TYPES, SITE_NAME } from '@/lib/constants';
 import SchemaOrg from '@/components/seo/SchemaOrg';
+import { createClient } from '@/lib/supabase/server';
+import type { MapPin } from '@/components/ui/Map';
 
 const howItWorks = [
   { icon: Search, title: 'Search', description: 'Enter your ZIP code and sport type to find local contractors.' },
@@ -11,7 +14,24 @@ const howItWorks = [
   { icon: CheckCircle, title: 'Connect', description: 'Request free quotes and hire the best contractor for your project.' },
 ];
 
-export default function HomePage() {
+export default async function HomePage() {
+  // Fetch vendors for map pins
+  const supabase = await createClient();
+  const { data: vendors } = await supabase
+    .from('vendors')
+    .select('id, latitude, longitude, name, tier, slug');
+
+  const mapPins: MapPin[] = (vendors || [])
+    .filter((v: { latitude: number | null; longitude: number | null }) => v.latitude && v.longitude)
+    .map((v: { id: string; latitude: number; longitude: number; name: string; tier: 'free' | 'paid' | 'featured'; slug: string }) => ({
+      id: v.id,
+      latitude: v.latitude,
+      longitude: v.longitude,
+      title: v.name,
+      tier: v.tier,
+      slug: v.slug,
+    }));
+
   const websiteSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
@@ -44,7 +64,10 @@ export default function HomePage() {
           <p className="text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
             Connect with trusted contractors for tennis courts, basketball courts, pickleball courts, and more. Get free quotes today.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
+          <div className="max-w-2xl mx-auto mb-8">
+            <SearchBar size="lg" className="bg-white/10 backdrop-blur-sm rounded-xl p-3" />
+          </div>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/cost-estimator"
               className="inline-flex items-center gap-2 bg-accent text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-accent-hover transition-colors"
@@ -95,7 +118,7 @@ export default function HomePage() {
             <h2 className="text-3xl font-bold text-gray-900">Contractors Nationwide</h2>
             <p className="text-gray-600 mt-2">We have trusted sports surface contractors across the United States.</p>
           </div>
-          <MapComponent className="h-96 md:h-[500px]" />
+          <MapComponent pins={mapPins} className="h-96 md:h-[500px]" />
           <div className="flex items-center justify-center gap-6 mt-4 text-sm text-gray-500">
             <span className="flex items-center gap-2"><span className="w-3 h-3 rounded-full bg-blue-500" /> Free Listings</span>
             <span className="flex items-center gap-2"><span className="w-3 h-3 rounded-full bg-red-500" /> Premium</span>

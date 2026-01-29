@@ -74,6 +74,7 @@ function SearchContent() {
 
   const totalPages = Math.ceil(total / ITEMS_PER_PAGE);
   const activeFilters = [
+    filters.zip && `ZIP: ${filters.zip}`,
     filters.sportType && SPORT_TYPES.find(s => s.value === filters.sportType)?.label,
     filters.serviceType && SERVICE_TYPES.find(s => s.value === filters.serviceType)?.label,
     filters.verified && 'Verified Only',
@@ -138,6 +139,19 @@ function SearchContent() {
         {/* Sidebar Filters */}
         <aside className={`w-64 flex-shrink-0 ${showFilters ? 'block' : 'hidden'} md:block`}>
           <div className="bg-white border rounded-xl p-4 space-y-5 sticky top-20">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">ZIP Code</label>
+              <input
+                type="text"
+                placeholder="Enter ZIP code"
+                value={filters.zip}
+                onChange={(e) => updateFilter('zip', e.target.value)}
+                className="w-full px-3 py-2 border rounded-lg text-sm text-gray-900 placeholder-gray-400"
+                maxLength={5}
+                pattern="[0-9]*"
+              />
+            </div>
+
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Sport Type</label>
               <select

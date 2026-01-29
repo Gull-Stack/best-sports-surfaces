@@ -281,7 +281,7 @@ export default function CostEstimatorPage() {
 
           <div className="flex flex-col sm:flex-row gap-3">
             <Link
-              href={`/search?sport=${sportType}`}
+              href={`/search?sport=${sportType}${state ? `&state=${state}` : ''}`}
               className="flex-1 inline-flex items-center justify-center gap-2 bg-brand text-white px-6 py-3 rounded-lg font-semibold hover:bg-brand-hover transition-colors"
             >
               <Search className="h-5 w-5" /> Get Exact Quotes from Contractors
