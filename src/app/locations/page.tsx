@@ -48,7 +48,7 @@ export default async function LocationsPage() {
                 <li key={city.id}>
                   <Link
                     href={`/locations/${city.slug}`}
-                    className="flex items-center gap-1.5 text-sm text-gray-600 hover:text-green-600 transition-colors"
+                    className="flex items-center gap-1.5 text-sm text-gray-600 hover:text-brand transition-colors"
                   >
                     <MapPin className="h-3.5 w-3.5 flex-shrink-0" />
                     {city.name}, {city.state_code}

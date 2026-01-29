@@ -94,9 +94,9 @@ export default async function CityPage({ params }: Props) {
       <SchemaOrg schema={citySchema} />
 
       {/* Hero */}
-      <section className="bg-gray-900 text-white py-12">
+      <section className="bg-plum text-white py-12">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center gap-2 text-green-400 text-sm mb-2">
+          <div className="flex items-center gap-2 text-parchment text-sm mb-2">
             <Link href="/locations" className="hover:underline">Locations</Link>
             <span>/</span>
             <span>{city.state}</span>
@@ -104,7 +104,7 @@ export default async function CityPage({ params }: Props) {
           <h1 className="text-3xl md:text-4xl font-bold mb-3">
             Sports Surface Contractors in {city.name}, {city.state_code}
           </h1>
-          <p className="text-gray-300 max-w-2xl mb-6">
+          <p className="text-parchment max-w-2xl mb-6">
             Find trusted contractors for tennis courts, basketball courts, pickleball courts, and other sports surfaces in the {city.name} area.
           </p>
           <div className="max-w-xl">
@@ -139,7 +139,7 @@ export default async function CityPage({ params }: Props) {
                 <p className="text-gray-500 mb-4">No contractors listed in {city.name} yet.</p>
                 <Link
                   href="/search"
-                  className="text-green-600 font-medium hover:underline"
+                  className="text-brand font-medium hover:underline"
                 >
                   Search nearby areas &rarr;
                 </Link>
@@ -192,14 +192,14 @@ export default async function CityPage({ params }: Props) {
                 </dl>
               </Card>
 
-              <Card padding="md" className="bg-green-50 border-green-200">
+              <Card padding="md" className="bg-brand-light border-brand-100">
                 <h3 className="font-semibold text-gray-900 mb-2">Get Free Quotes</h3>
                 <p className="text-sm text-gray-600 mb-3">
                   Compare prices from top-rated contractors in {city.name}.
                 </p>
                 <Link
                   href={`/search?zip=&sport=`}
-                  className="block text-center bg-green-600 text-white py-2 rounded-lg text-sm font-semibold hover:bg-green-700"
+                  className="block text-center bg-brand text-white py-2 rounded-lg text-sm font-semibold hover:bg-brand-hover"
                 >
                   Request Quotes <ArrowRight className="inline h-4 w-4 ml-1" />
                 </Link>
@@ -212,7 +212,7 @@ export default async function CityPage({ params }: Props) {
                 </p>
                 <Link
                   href="/cost-estimator"
-                  className="block text-center border border-green-600 text-green-600 py-2 rounded-lg text-sm font-semibold hover:bg-green-50"
+                  className="block text-center border border-brand text-brand py-2 rounded-lg text-sm font-semibold hover:bg-brand-light"
                 >
                   Estimate Costs
                 </Link>

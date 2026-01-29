@@ -44,7 +44,7 @@ export default async function DashboardPage() {
         <Card padding="lg" className="mb-8 bg-blue-50 border-blue-200">
           <h2 className="text-lg font-semibold text-gray-900 mb-2">Complete Your Profile</h2>
           <p className="text-gray-600 mb-4">Set up your business profile to start receiving leads.</p>
-          <Link href="/dashboard/profile" className="inline-flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-green-700">
+          <Link href="/dashboard/profile" className="inline-flex items-center gap-2 bg-brand text-white px-4 py-2 rounded-lg font-semibold hover:bg-brand-hover">
             <Settings className="h-4 w-4" /> Set Up Profile
           </Link>
         </Card>
@@ -72,8 +72,8 @@ export default async function DashboardPage() {
           <Link key={link.href} href={link.href}>
             <Card hover padding="md" className="h-full">
               <div className="flex items-start gap-3">
-                <div className="p-2 bg-green-100 rounded-lg">
-                  <link.icon className="h-5 w-5 text-green-600" />
+                <div className="p-2 bg-brand-light rounded-lg">
+                  <link.icon className="h-5 w-5 text-brand" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-gray-900">{link.label}</h3>

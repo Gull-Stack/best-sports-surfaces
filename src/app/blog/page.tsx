@@ -64,7 +64,7 @@ export default async function BlogPage({
             href={cat === 'All' ? '/blog' : `/blog?category=${encodeURIComponent(cat)}`}
             className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
               activeCategory === cat
-                ? 'bg-green-600 text-white'
+                ? 'bg-brand text-white'
                 : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
             }`}
           >
@@ -97,11 +97,11 @@ export default async function BlogPage({
                     <Badge variant="green">{post.category}</Badge>
                     <span className="text-xs text-gray-400">{formatDate(post.published_at)}</span>
                   </div>
-                  <h2 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-green-600">
+                  <h2 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-brand">
                     {post.title}
                   </h2>
                   <p className="text-sm text-gray-600 line-clamp-3 flex-1">{post.excerpt}</p>
-                  <span className="text-sm text-green-600 font-medium mt-3 inline-block">
+                  <span className="text-sm text-brand font-medium mt-3 inline-block">
                     Read more &rarr;
                   </span>
                 </div>

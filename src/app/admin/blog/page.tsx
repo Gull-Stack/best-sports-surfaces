@@ -67,7 +67,7 @@ export default function AdminBlogPage() {
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-gray-900">Blog Posts ({posts.length})</h1>
         <div className="flex gap-2">
-          <Link href="/admin" className="text-sm text-green-600 hover:underline">&larr; Admin</Link>
+          <Link href="/admin" className="text-sm text-brand hover:underline">&larr; Admin</Link>
           <Button size="sm" onClick={() => setEditing({ title: '', content: '', excerpt: '', category: '', tags: [], published: false })}><Plus className="h-4 w-4 mr-1" /> New Post</Button>
         </div>
       </div>

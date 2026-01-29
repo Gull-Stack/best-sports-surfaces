@@ -1,6 +1,6 @@
 export default function SponsorBar() {
   return (
-    <div className="bg-green-600 text-white text-center py-1.5 text-sm">
+    <div className="bg-brand text-white text-center py-1.5 text-sm">
       <span>Sponsored by </span>
       <a
         href="https://atsports.com"

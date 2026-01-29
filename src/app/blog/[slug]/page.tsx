@@ -82,7 +82,7 @@ export default async function BlogPostPage({ params }: Props) {
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Main Content */}
           <div className="flex-1 max-w-3xl">
-            <Link href="/blog" className="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-green-600 mb-6">
+            <Link href="/blog" className="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-brand mb-6">
               <ArrowLeft className="h-4 w-4" /> Back to Blog
             </Link>
 
@@ -147,7 +147,7 @@ export default async function BlogPostPage({ params }: Props) {
                       <a
                         key={heading.id}
                         href={`#${heading.id}`}
-                        className="block text-sm text-gray-600 hover:text-green-600 py-1"
+                        className="block text-sm text-gray-600 hover:text-brand py-1"
                       >
                         {heading.text}
                       </a>
@@ -163,7 +163,7 @@ export default async function BlogPostPage({ params }: Props) {
                   <div className="space-y-3">
                     {relatedPosts.map((rp) => (
                       <Link key={rp.id} href={`/blog/${rp.slug}`} className="block group">
-                        <h4 className="text-sm font-medium text-gray-800 group-hover:text-green-600 line-clamp-2">
+                        <h4 className="text-sm font-medium text-gray-800 group-hover:text-brand line-clamp-2">
                           {rp.title}
                         </h4>
                         <p className="text-xs text-gray-400 mt-1">{formatDate(rp.published_at)}</p>
@@ -174,12 +174,12 @@ export default async function BlogPostPage({ params }: Props) {
               )}
 
               {/* CTA */}
-              <Card padding="md" className="bg-green-50 border-green-200">
+              <Card padding="md" className="bg-brand-light border-brand-100">
                 <h3 className="font-semibold text-gray-900 mb-2">Need a Contractor?</h3>
                 <p className="text-sm text-gray-600 mb-3">Get free quotes from verified sports surface contractors near you.</p>
                 <Link
                   href="/search"
-                  className="block text-center bg-green-600 text-white py-2 rounded-lg text-sm font-semibold hover:bg-green-700"
+                  className="block text-center bg-brand text-white py-2 rounded-lg text-sm font-semibold hover:bg-brand-hover"
                 >
                   Find Contractors
                 </Link>

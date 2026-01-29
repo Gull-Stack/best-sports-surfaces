@@ -51,7 +51,7 @@ export default function AdminSubscribersPage() {
               <tr key={sub.id} className="border-b hover:bg-gray-50">
                 <td className="p-3 text-gray-900">{sub.email}</td>
                 <td className="p-3 text-gray-600">{new Date(sub.subscribed_at).toLocaleDateString()}</td>
-                <td className="p-3">{sub.is_active ? <span className="text-green-600">Active</span> : <span className="text-gray-400">Inactive</span>}</td>
+                <td className="p-3">{sub.is_active ? <span className="text-brand">Active</span> : <span className="text-gray-400">Inactive</span>}</td>
               </tr>
             ))}
           </tbody>

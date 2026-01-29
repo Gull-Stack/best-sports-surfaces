@@ -25,7 +25,7 @@ export default function VendorCard({ vendor, showDistance, distance }: VendorCar
         <div className="flex items-start justify-between mb-3">
           <div className="flex-1">
             <Link href={`/vendors/${vendor.slug}`} className="group">
-              <h3 className="text-lg font-semibold text-gray-900 group-hover:text-green-600 transition-colors">
+              <h3 className="text-lg font-semibold text-gray-900 group-hover:text-brand transition-colors">
                 {vendor.name}
               </h3>
             </Link>
@@ -61,7 +61,7 @@ export default function VendorCard({ vendor, showDistance, distance }: VendorCar
 
         <div className="flex items-center gap-3">
           {vendor.is_verified && (
-            <span className="flex items-center gap-1 text-xs text-green-600">
+            <span className="flex items-center gap-1 text-xs text-brand">
               <Shield className="h-3.5 w-3.5" /> Verified
             </span>
           )}
@@ -75,7 +75,7 @@ export default function VendorCard({ vendor, showDistance, distance }: VendorCar
         <div className="mt-4 flex items-center gap-2">
           <Link
             href={`/vendors/${vendor.slug}`}
-            className="flex-1 text-center py-2 bg-green-600 text-white text-sm font-semibold rounded-lg hover:bg-green-700 transition-colors"
+            className="flex-1 text-center py-2 bg-brand text-white text-sm font-semibold rounded-lg hover:bg-brand-hover transition-colors"
           >
             {isPaid ? 'View Profile' : 'Get a Free Quote'}
           </Link>

@@ -100,7 +100,7 @@ export default async function VendorPage({ params }: Props) {
             {/* Quick Info */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
               {vendor.is_verified && (
-                <div className="flex items-center gap-2 text-sm text-green-600">
+                <div className="flex items-center gap-2 text-sm text-brand">
                   <Shield className="h-4 w-4" /> Verified
                 </div>
               )}
@@ -126,17 +126,17 @@ export default async function VendorPage({ params }: Props) {
               <Card padding="md" className="mb-6">
                 <div className="flex flex-wrap gap-4">
                   {vendor.phone && (
-                    <a href={`tel:${vendor.phone}`} className="flex items-center gap-2 text-green-600 hover:text-green-700 font-medium">
+                    <a href={`tel:${vendor.phone}`} className="flex items-center gap-2 text-brand hover:text-brand-hover font-medium">
                       <Phone className="h-4 w-4" /> {vendor.phone}
                     </a>
                   )}
                   {vendor.website && (
-                    <a href={vendor.website} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-green-600 hover:text-green-700 font-medium">
+                    <a href={vendor.website} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-brand hover:text-brand-hover font-medium">
                       <Globe className="h-4 w-4" /> Visit Website
                     </a>
                   )}
                   {vendor.email && (
-                    <a href={`mailto:${vendor.email}`} className="flex items-center gap-2 text-green-600 hover:text-green-700 font-medium">
+                    <a href={`mailto:${vendor.email}`} className="flex items-center gap-2 text-brand hover:text-brand-hover font-medium">
                       <Mail className="h-4 w-4" /> Email
                     </a>
                   )}
@@ -212,7 +212,7 @@ export default async function VendorPage({ params }: Props) {
                       {review.title && <h4 className="font-medium text-gray-800 mt-2">{review.title}</h4>}
                       <p className="text-gray-600 text-sm mt-1">{review.content}</p>
                       {review.is_verified && (
-                        <span className="text-xs text-green-600 flex items-center gap-1 mt-2">
+                        <span className="text-xs text-brand flex items-center gap-1 mt-2">
                           <CheckCircle className="h-3 w-3" /> Verified Customer
                         </span>
                       )}
@@ -235,7 +235,7 @@ export default async function VendorPage({ params }: Props) {
                   <p className="text-sm text-gray-600">
                     <strong>Is this your business?</strong> Claim your listing to add direct contact info, photos, and more.
                   </p>
-                  <Link href="/vendor/claim" className="text-green-600 text-sm font-medium hover:underline mt-2 block">
+                  <Link href="/vendor/claim" className="text-brand text-sm font-medium hover:underline mt-2 block">
                     Claim This Listing &rarr;
                   </Link>
                 </Card>

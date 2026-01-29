@@ -106,13 +106,13 @@ function SearchContent() {
           <div className="flex border rounded-lg overflow-hidden">
             <button
               onClick={() => setView('list')}
-              className={`px-3 py-2 text-sm ${view === 'list' ? 'bg-green-600 text-white' : 'bg-white text-gray-600'}`}
+              className={`px-3 py-2 text-sm ${view === 'list' ? 'bg-brand text-white' : 'bg-white text-gray-600'}`}
             >
               <List className="h-4 w-4" />
             </button>
             <button
               onClick={() => setView('map')}
-              className={`px-3 py-2 text-sm ${view === 'map' ? 'bg-green-600 text-white' : 'bg-white text-gray-600'}`}
+              className={`px-3 py-2 text-sm ${view === 'map' ? 'bg-brand text-white' : 'bg-white text-gray-600'}`}
             >
               <MapIcon className="h-4 w-4" />
             </button>
@@ -200,7 +200,7 @@ function SearchContent() {
                   type="checkbox"
                   checked={filters.verified}
                   onChange={(e) => updateFilter('verified', e.target.checked)}
-                  className="rounded border-gray-300 text-green-600 focus:ring-green-500"
+                  className="rounded border-gray-300 text-brand focus:ring-brand"
                 />
                 Verified Only
               </label>
@@ -246,7 +246,7 @@ function SearchContent() {
               <p className="text-gray-600 mb-4">Try adjusting your search filters or expanding your search area.</p>
               <button
                 onClick={() => router.push('/search')}
-                className="text-green-600 font-medium hover:underline"
+                className="text-brand font-medium hover:underline"
               >
                 Clear all filters
               </button>

@@ -57,7 +57,7 @@ export default function InquiryForm({ vendorId, vendorName }: InquiryFormProps) 
   if (submitted) {
     return (
       <div className="text-center py-8">
-        <CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-3" />
+        <CheckCircle className="h-12 w-12 text-brand mx-auto mb-3" />
         <h3 className="text-lg font-semibold text-gray-900">Quote Request Submitted!</h3>
         <p className="text-gray-600 mt-1">
           {vendorName ? `${vendorName} will` : 'A contractor will'} be in touch within 24-48 hours.
@@ -80,7 +80,7 @@ export default function InquiryForm({ vendorId, vendorName }: InquiryFormProps) 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Sport Type</label>
-          <select {...register('sport_type')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500">
+          <select {...register('sport_type')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand">
             <option value="">Select type...</option>
             {SPORT_TYPES.map((s) => (
               <option key={s.value} value={s.value}>{s.label}</option>
@@ -90,7 +90,7 @@ export default function InquiryForm({ vendorId, vendorName }: InquiryFormProps) 
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Service Needed</label>
-          <select {...register('service_type')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500">
+          <select {...register('service_type')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand">
             <option value="">Select service...</option>
             {SERVICE_TYPES.map((s) => (
               <option key={s.value} value={s.value}>{s.label}</option>

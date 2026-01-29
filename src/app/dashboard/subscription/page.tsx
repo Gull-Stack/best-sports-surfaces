@@ -51,9 +51,9 @@ export default function SubscriptionPage() {
       <h1 className="text-2xl font-bold text-gray-900 mb-6">Subscription</h1>
 
       {isPaid ? (
-        <Card padding="lg" className="bg-green-50 border-green-200 mb-6">
+        <Card padding="lg" className="bg-brand-light border-brand-100 mb-6">
           <div className="flex items-center gap-3 mb-4">
-            <Crown className="h-8 w-8 text-green-600" />
+            <Crown className="h-8 w-8 text-brand" />
             <div>
               <h2 className="text-lg font-bold text-gray-900">Premium Plan</h2>
               <p className="text-sm text-gray-600">$99/month</p>
@@ -75,13 +75,13 @@ export default function SubscriptionPage() {
             </ul>
           </Card>
 
-          <Card padding="lg" className="border-green-300 bg-green-50">
+          <Card padding="lg" className="border-brand bg-brand-light">
             <h2 className="text-lg font-bold text-gray-900 mb-1">Premium Plan</h2>
-            <p className="text-2xl font-bold text-green-600 mb-4">$99<span className="text-sm font-normal text-gray-500">/month</span></p>
+            <p className="text-2xl font-bold text-brand mb-4">$99<span className="text-sm font-normal text-gray-500">/month</span></p>
             <ul className="space-y-2 mb-6">
               {VENDOR_TIERS.paid.features.map((f) => (
                 <li key={f} className="flex items-center gap-2 text-sm text-gray-700">
-                  <CheckCircle className="h-4 w-4 text-green-600" /> {f}
+                  <CheckCircle className="h-4 w-4 text-brand" /> {f}
                 </li>
               ))}
             </ul>

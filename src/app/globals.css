@@ -2,26 +2,45 @@
 @import "mapbox-gl/dist/mapbox-gl.css";
 
 @theme inline {
-  --color-background: #ffffff;
+  /* Brand palette */
+  --color-parchment: #ecebe4;
+  --color-brand: #3a5a40;
+  --color-brand-hover: #344e41;
+  --color-brand-light: #e8ede9;
+  --color-brand-100: #c8d9cb;
+  --color-accent: #058ed9;
+  --color-accent-hover: #047bbf;
+  --color-plum: #513b3c;
+  --color-plum-light: #6b5455;
+
+  /* Structural */
+  --color-background: #ecebe4;
   --color-foreground: #171717;
-  --color-green-50: #f0fdf4;
-  --color-green-100: #dcfce7;
-  --color-green-200: #bbf7d0;
-  --color-green-300: #86efac;
-  --color-green-400: #4ade80;
-  --color-green-500: #22c55e;
-  --color-green-600: #16a34a;
-  --color-green-700: #15803d;
-  --color-green-800: #166534;
-  --color-green-900: #14532d;
+
+  /* Green scale remapped to hunter/pine tones */
+  --color-green-50: #e8ede9;
+  --color-green-100: #c8d9cb;
+  --color-green-200: #a8c4ad;
+  --color-green-300: #7da884;
+  --color-green-400: #5a8a62;
+  --color-green-500: #3a5a40;
+  --color-green-600: #3a5a40;
+  --color-green-700: #344e41;
+  --color-green-800: #2d4237;
+  --color-green-900: #1e2e25;
+
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
   --font-mono: "JetBrains Mono", monospace;
 }
 
 body {
-  background: var(--color-background);
+  background-color: var(--color-parchment);
   color: var(--color-foreground);
   font-family: var(--font-sans);
+  background-image:
+    linear-gradient(rgba(58, 90, 64, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(58, 90, 64, 0.06) 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 
 /* Mapbox popup overrides */
@@ -94,16 +113,16 @@ body {
 }
 
 .prose a {
-  color: #16a34a;
+  color: #3a5a40;
   text-decoration: underline;
 }
 
 .prose a:hover {
-  color: #15803d;
+  color: #344e41;
 }
 
 .prose blockquote {
-  border-left: 4px solid #16a34a;
+  border-left: 4px solid #3a5a40;
   padding-left: 1rem;
   margin: 1.5rem 0;
   font-style: italic;

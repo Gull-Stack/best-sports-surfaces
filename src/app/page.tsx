@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { Search, Shield, DollarSign, Users, ArrowRight, CheckCircle } from 'lucide-react';
-import SearchBar from '@/components/ui/SearchBar';
 import Card from '@/components/ui/Card';
 import MapComponent from '@/components/ui/DynamicMap';
 import { SPORT_TYPES, SITE_NAME } from '@/lib/constants';
@@ -45,19 +44,30 @@ export default function HomePage() {
           <p className="text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
             Connect with trusted contractors for tennis courts, basketball courts, pickleball courts, and more. Get free quotes today.
           </p>
-          <div className="bg-white rounded-xl p-4 shadow-2xl max-w-2xl mx-auto">
-            <SearchBar size="lg" />
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
+            <Link
+              href="/cost-estimator"
+              className="inline-flex items-center gap-2 bg-accent text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-accent-hover transition-colors"
+            >
+              Build Your Court <ArrowRight className="h-5 w-5" />
+            </Link>
+            <Link
+              href="/search"
+              className="inline-flex items-center gap-2 border-2 border-white/30 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white/10 transition-colors"
+            >
+              Find Contractors
+            </Link>
           </div>
           <div className="flex items-center justify-center gap-6 mt-6 text-sm text-gray-300">
-            <span className="flex items-center gap-1"><CheckCircle className="h-4 w-4 text-green-400" /> Free Quotes</span>
-            <span className="flex items-center gap-1"><Shield className="h-4 w-4 text-green-400" /> Verified Contractors</span>
-            <span className="flex items-center gap-1"><DollarSign className="h-4 w-4 text-green-400" /> No Obligation</span>
+            <span className="flex items-center gap-1"><CheckCircle className="h-4 w-4 text-parchment" /> Free Quotes</span>
+            <span className="flex items-center gap-1"><Shield className="h-4 w-4 text-parchment" /> Verified Contractors</span>
+            <span className="flex items-center gap-1"><DollarSign className="h-4 w-4 text-parchment" /> No Obligation</span>
           </div>
         </div>
       </section>
 
       {/* Sport Categories */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-10">
             <h2 className="text-3xl font-bold text-gray-900">Browse by Sport Type</h2>
@@ -68,10 +78,10 @@ export default function HomePage() {
               <Link
                 key={sport.value}
                 href={`/search?sport=${sport.value}`}
-                className="bg-white rounded-xl p-4 text-center hover:shadow-md hover:border-green-300 border border-gray-200 transition-all group"
+                className="bg-white rounded-xl p-4 text-center hover:shadow-md hover:border-brand border border-gray-200 transition-all group"
               >
                 <span className="text-3xl block mb-2">{sport.icon}</span>
-                <span className="text-sm font-medium text-gray-700 group-hover:text-green-600">{sport.label}</span>
+                <span className="text-sm font-medium text-gray-700 group-hover:text-brand">{sport.label}</span>
               </Link>
             ))}
           </div>
@@ -95,7 +105,7 @@ export default function HomePage() {
       </section>
 
       {/* How It Works */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-10">
             <h2 className="text-3xl font-bold text-gray-900">How It Works</h2>
@@ -104,10 +114,10 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {howItWorks.map((step, i) => (
               <div key={step.title} className="text-center">
-                <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <step.icon className="h-8 w-8 text-green-600" />
+                <div className="w-16 h-16 bg-brand-light rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <step.icon className="h-8 w-8 text-brand" />
                 </div>
-                <div className="text-sm font-medium text-green-600 mb-1">Step {i + 1}</div>
+                <div className="text-sm font-medium text-brand mb-1">Step {i + 1}</div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">{step.title}</h3>
                 <p className="text-gray-600">{step.description}</p>
               </div>
@@ -119,17 +129,17 @@ export default function HomePage() {
       {/* Cost Estimator CTA */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4">
-          <Card padding="lg" className="bg-gradient-to-r from-green-600 to-green-700 border-none">
+          <Card padding="lg" className="bg-gradient-to-r from-brand to-brand-hover border-none">
             <div className="flex flex-col md:flex-row items-center justify-between gap-6">
               <div className="text-white">
                 <h2 className="text-2xl md:text-3xl font-bold">How Much Does It Cost?</h2>
-                <p className="text-green-100 mt-2 max-w-lg">
+                <p className="text-parchment mt-2 max-w-lg">
                   Use our free cost estimator to get an instant price range for your sports surface project.
                 </p>
               </div>
               <Link
                 href="/cost-estimator"
-                className="inline-flex items-center gap-2 bg-white text-green-700 px-6 py-3 rounded-lg font-semibold hover:bg-green-50 transition-colors flex-shrink-0"
+                className="inline-flex items-center gap-2 bg-white text-brand px-6 py-3 rounded-lg font-semibold hover:bg-brand-light transition-colors flex-shrink-0"
               >
                 Try Cost Estimator <ArrowRight className="h-5 w-5" />
               </Link>
@@ -139,7 +149,7 @@ export default function HomePage() {
       </section>
 
       {/* Contractor CTA */}
-      <section className="py-16 bg-gray-900 text-white">
+      <section className="py-16 bg-plum text-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4">Are You a Sports Surface Contractor?</h2>
           <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
@@ -148,13 +158,13 @@ export default function HomePage() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/auth/signup"
-              className="inline-flex items-center gap-2 bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors"
+              className="inline-flex items-center gap-2 bg-brand text-white px-6 py-3 rounded-lg font-semibold hover:bg-brand-hover transition-colors"
             >
               List Your Business Free <ArrowRight className="h-5 w-5" />
             </Link>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 border border-gray-600 text-gray-300 px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors"
+              className="inline-flex items-center gap-2 border border-parchment/30 text-parchment px-6 py-3 rounded-lg font-semibold hover:bg-plum-light transition-colors"
             >
               Learn More
             </Link>

@@ -26,7 +26,7 @@ export default function SponsoredSidebar({ products }: SponsoredSidebarProps) {
                 className="w-full rounded-lg mb-2 group-hover:opacity-90 transition-opacity"
               />
             )}
-            <h4 className="text-sm font-semibold text-gray-900 group-hover:text-green-600">{product.name}</h4>
+            <h4 className="text-sm font-semibold text-gray-900 group-hover:text-brand">{product.name}</h4>
             <p className="text-xs text-gray-500 mt-0.5">{product.description}</p>
             <p className="text-xs text-gray-400 mt-1">by {product.sponsor_name}</p>
           </a>

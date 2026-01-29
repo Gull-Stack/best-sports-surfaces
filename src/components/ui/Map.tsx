@@ -39,35 +39,60 @@ export default function MapComponent({
 
     mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
-    map.current = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: 'mapbox://styles/mapbox/light-v11',
-      center: [center.lng, center.lat],
-      zoom,
-      interactive,
-    });
+    const initMap = (mapCenter: { lat: number; lng: number }, mapZoom: number) => {
+      if (!mapContainer.current) return;
 
-    if (interactive) {
-      map.current.addControl(new mapboxgl.NavigationControl(), 'top-right');
-    }
+      map.current = new mapboxgl.Map({
+        container: mapContainer.current,
+        style: 'mapbox://styles/mapbox/light-v11',
+        center: [mapCenter.lng, mapCenter.lat],
+        zoom: mapZoom,
+        interactive,
+      });
 
-    pins.forEach((pin) => {
-      const color = pin.tier === 'featured' ? '#f59e0b' : pin.tier === 'paid' ? '#ef4444' : '#3b82f6';
-      const marker = new mapboxgl.Marker({ color })
-        .setLngLat([pin.longitude, pin.latitude])
-        .setPopup(
-          new mapboxgl.Popup({ offset: 25 }).setHTML(
-            `<div class="p-2"><strong>${pin.title}</strong>${
-              pin.slug ? `<br/><a href="/vendors/${pin.slug}" class="text-green-600 text-sm">View Profile</a>` : ''
-            }</div>`
-          )
-        )
-        .addTo(map.current!);
-
-      if (onPinClick) {
-        marker.getElement().addEventListener('click', () => onPinClick(pin.id));
+      if (interactive) {
+        map.current.addControl(new mapboxgl.NavigationControl(), 'top-right');
       }
-    });
+
+      pins.forEach((pin) => {
+        const color = pin.tier === 'featured' ? '#f59e0b' : pin.tier === 'paid' ? '#ef4444' : '#3b82f6';
+        const marker = new mapboxgl.Marker({ color })
+          .setLngLat([pin.longitude, pin.latitude])
+          .setPopup(
+            new mapboxgl.Popup({ offset: 25 }).setHTML(
+              `<div class="p-2"><strong>${pin.title}</strong>${
+                pin.slug ? `<br/><a href="/vendors/${pin.slug}" style="color: #3a5a40;" class="text-sm">View Profile</a>` : ''
+              }</div>`
+            )
+          )
+          .addTo(map.current!);
+
+        if (onPinClick) {
+          marker.getElement().addEventListener('click', () => onPinClick(pin.id));
+        }
+      });
+    };
+
+    const isDefaultCenter =
+      Math.abs(center.lat - US_CENTER.lat) < 0.01 &&
+      Math.abs(center.lng - US_CENTER.lng) < 0.01;
+
+    if (isDefaultCenter && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          initMap(
+            { lat: position.coords.latitude, lng: position.coords.longitude },
+            9
+          );
+        },
+        () => {
+          initMap(center, zoom);
+        },
+        { timeout: 5000 }
+      );
+    } else {
+      initMap(center, zoom);
+    }
 
     return () => {
       map.current?.remove();

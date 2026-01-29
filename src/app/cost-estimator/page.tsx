@@ -91,8 +91,8 @@ export default function CostEstimatorPage() {
   return (
     <div className="max-w-3xl mx-auto px-4 py-12">
       <div className="text-center mb-8">
-        <div className="w-14 h-14 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-          <Calculator className="h-7 w-7 text-green-600" />
+        <div className="w-14 h-14 bg-brand-light rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <Calculator className="h-7 w-7 text-brand" />
         </div>
         <h1 className="text-3xl font-bold text-gray-900">Sports Surface Cost Estimator</h1>
         <p className="text-gray-600 mt-2">Get an instant price range for your project in 5 simple steps.</p>
@@ -102,8 +102,8 @@ export default function CostEstimatorPage() {
       <div className="flex items-center gap-1 mb-8">
         {['Sport', 'Size', 'Surface', 'Extras', 'Results'].map((label, i) => (
           <div key={label} className="flex-1">
-            <div className={`h-2 rounded-full ${i <= step ? 'bg-green-600' : 'bg-gray-200'}`} />
-            <p className={`text-xs mt-1 text-center ${i <= step ? 'text-green-600 font-medium' : 'text-gray-400'}`}>{label}</p>
+            <div className={`h-2 rounded-full ${i <= step ? 'bg-brand' : 'bg-gray-200'}`} />
+            <p className={`text-xs mt-1 text-center ${i <= step ? 'text-brand font-medium' : 'text-gray-400'}`}>{label}</p>
           </div>
         ))}
       </div>
@@ -117,8 +117,8 @@ export default function CostEstimatorPage() {
               <button
                 key={sport.value}
                 onClick={() => handleSportSelect(sport.value)}
-                className={`p-4 rounded-xl border-2 text-center hover:border-green-500 transition-colors ${
-                  sportType === sport.value ? 'border-green-600 bg-green-50' : 'border-gray-200'
+                className={`p-4 rounded-xl border-2 text-center hover:border-brand transition-colors ${
+                  sportType === sport.value ? 'border-brand bg-brand-light' : 'border-gray-200'
                 }`}
               >
                 <span className="text-2xl block mb-1">{sport.icon}</span>
@@ -173,8 +173,8 @@ export default function CostEstimatorPage() {
               <button
                 key={surface.value}
                 onClick={() => setSurfaceType(surface.value)}
-                className={`w-full p-4 rounded-xl border-2 text-left flex items-center justify-between hover:border-green-500 transition-colors ${
-                  surfaceType === surface.value ? 'border-green-600 bg-green-50' : 'border-gray-200'
+                className={`w-full p-4 rounded-xl border-2 text-left flex items-center justify-between hover:border-brand transition-colors ${
+                  surfaceType === surface.value ? 'border-brand bg-brand-light' : 'border-gray-200'
                 }`}
               >
                 <span className="font-medium text-gray-900">{surface.label}</span>
@@ -199,8 +199,8 @@ export default function CostEstimatorPage() {
             {config.extras.map((extra) => (
               <label
                 key={extra.value}
-                className={`flex items-center justify-between p-3 rounded-xl border-2 cursor-pointer hover:border-green-400 transition-colors ${
-                  selectedExtras.includes(extra.value) ? 'border-green-600 bg-green-50' : 'border-gray-200'
+                className={`flex items-center justify-between p-3 rounded-xl border-2 cursor-pointer hover:border-brand transition-colors ${
+                  selectedExtras.includes(extra.value) ? 'border-brand bg-brand-light' : 'border-gray-200'
                 }`}
               >
                 <div className="flex items-center gap-3">
@@ -208,7 +208,7 @@ export default function CostEstimatorPage() {
                     type="checkbox"
                     checked={selectedExtras.includes(extra.value)}
                     onChange={() => toggleExtra(extra.value)}
-                    className="rounded border-gray-300 text-green-600 focus:ring-green-500"
+                    className="rounded border-gray-300 text-brand focus:ring-brand"
                   />
                   <span className="font-medium text-gray-900">{extra.label}</span>
                 </div>
@@ -241,9 +241,9 @@ export default function CostEstimatorPage() {
       {/* Step 4: Results */}
       {step === 4 && estimate && config && (
         <div>
-          <Card padding="lg" className="bg-green-50 border-green-200 mb-6">
+          <Card padding="lg" className="bg-brand-light border-brand-100 mb-6">
             <h2 className="text-xl font-semibold text-gray-900 mb-1">Estimated Cost Range</h2>
-            <p className="text-3xl font-bold text-green-700">
+            <p className="text-3xl font-bold text-brand-hover">
               {formatCurrency(estimate.totalLow)} &ndash; {formatCurrency(estimate.totalHigh)}
             </p>
             <div className="flex gap-2 mt-2">
@@ -282,7 +282,7 @@ export default function CostEstimatorPage() {
           <div className="flex flex-col sm:flex-row gap-3">
             <Link
               href={`/search?sport=${sportType}`}
-              className="flex-1 inline-flex items-center justify-center gap-2 bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors"
+              className="flex-1 inline-flex items-center justify-center gap-2 bg-brand text-white px-6 py-3 rounded-lg font-semibold hover:bg-brand-hover transition-colors"
             >
               <Search className="h-5 w-5" /> Get Exact Quotes from Contractors
             </Link>

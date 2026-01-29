@@ -14,7 +14,7 @@ export default async function AdminVendorsPage() {
     <div className="max-w-7xl mx-auto px-4 py-8">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-gray-900">Vendors ({vendors?.length || 0})</h1>
-        <Link href="/admin" className="text-sm text-green-600 hover:underline">&larr; Back to Admin</Link>
+        <Link href="/admin" className="text-sm text-brand hover:underline">&larr; Back to Admin</Link>
       </div>
 
       <div className="overflow-x-auto">
@@ -33,14 +33,14 @@ export default async function AdminVendorsPage() {
             {vendors?.map((vendor) => (
               <tr key={vendor.id} className="border-b hover:bg-gray-50">
                 <td className="py-3 font-medium text-gray-900">
-                  <Link href={`/vendors/${vendor.slug}`} className="hover:text-green-600">{vendor.name}</Link>
+                  <Link href={`/vendors/${vendor.slug}`} className="hover:text-brand">{vendor.name}</Link>
                 </td>
                 <td className="py-3 text-gray-600">{vendor.city}, {vendor.state}</td>
                 <td className="py-3"><Badge variant={tierColors[vendor.tier as keyof typeof tierColors]}>{vendor.tier}</Badge></td>
                 <td className="py-3"><StarRating rating={vendor.rating} size={12} showValue /></td>
                 <td className="py-3">{vendor.is_verified ? <Badge variant="green">Yes</Badge> : <Badge variant="gray">No</Badge>}</td>
                 <td className="py-3">
-                  <Link href={`/vendors/${vendor.slug}`} className="text-green-600 hover:underline text-xs">View</Link>
+                  <Link href={`/vendors/${vendor.slug}`} className="text-brand hover:underline text-xs">View</Link>
                 </td>
               </tr>
             ))}

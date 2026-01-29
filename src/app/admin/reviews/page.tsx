@@ -51,7 +51,7 @@ export default function AdminReviewsPage() {
           <button
             key={f}
             onClick={() => setFilter(f)}
-            className={`px-4 py-2 rounded-full text-sm font-medium ${filter === f ? 'bg-green-600 text-white' : 'bg-gray-100 text-gray-600'}`}
+            className={`px-4 py-2 rounded-full text-sm font-medium ${filter === f ? 'bg-brand text-white' : 'bg-gray-100 text-gray-600'}`}
           >
             {f.charAt(0).toUpperCase() + f.slice(1)}
           </button>

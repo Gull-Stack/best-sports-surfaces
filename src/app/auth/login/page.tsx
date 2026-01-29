@@ -74,14 +74,14 @@ export default function LoginPage() {
           <Button type="submit" loading={loading} className="w-full">Sign In</Button>
         </form>
         <div className="mt-4 text-center">
-          <button onClick={handleMagicLink} className="text-sm text-green-600 hover:underline" disabled={loading}>
+          <button onClick={handleMagicLink} className="text-sm text-brand hover:underline" disabled={loading}>
             Sign in with Magic Link
           </button>
         </div>
         <div className="mt-4 text-center text-sm text-gray-600">
-          <Link href="/auth/forgot-password" className="text-green-600 hover:underline">Forgot password?</Link>
+          <Link href="/auth/forgot-password" className="text-brand hover:underline">Forgot password?</Link>
           <span className="mx-2">|</span>
-          <Link href="/auth/signup" className="text-green-600 hover:underline">Create account</Link>
+          <Link href="/auth/signup" className="text-brand hover:underline">Create account</Link>
         </div>
       </Card>
     </div>

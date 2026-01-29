@@ -44,7 +44,7 @@ export default function VendorClaimPage() {
   if (submitted) {
     return (
       <div className="max-w-md mx-auto px-4 py-16 text-center">
-        <CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-3" />
+        <CheckCircle className="h-12 w-12 text-brand mx-auto mb-3" />
         <h2 className="text-xl font-bold text-gray-900 mb-2">Claim Submitted!</h2>
         <p className="text-gray-600">We will review your claim and get back to you within 2-3 business days.</p>
       </div>

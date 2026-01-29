@@ -100,8 +100,8 @@ export default function ProfilePage() {
                 onClick={() => toggleArrayItem('sport_types', sport.value)}
                 className={`px-3 py-1.5 rounded-full text-sm font-medium border transition-colors ${
                   (vendor.sport_types || []).includes(sport.value)
-                    ? 'bg-green-600 text-white border-green-600'
-                    : 'bg-white text-gray-600 border-gray-300 hover:border-green-400'
+                    ? 'bg-brand text-white border-brand'
+                    : 'bg-white text-gray-600 border-gray-300 hover:border-brand'
                 }`}
               >
                 {sport.label}
@@ -119,8 +119,8 @@ export default function ProfilePage() {
                 onClick={() => toggleArrayItem('service_types', service.value)}
                 className={`px-3 py-1.5 rounded-full text-sm font-medium border transition-colors ${
                   (vendor.service_types || []).includes(service.value)
-                    ? 'bg-green-600 text-white border-green-600'
-                    : 'bg-white text-gray-600 border-gray-300 hover:border-green-400'
+                    ? 'bg-brand text-white border-brand'
+                    : 'bg-white text-gray-600 border-gray-300 hover:border-brand'
                 }`}
               >
                 {service.label}
@@ -130,7 +130,7 @@ export default function ProfilePage() {
         </Card>
 
         {message && (
-          <p className={`text-sm ${message.startsWith('Error') ? 'text-red-600' : 'text-green-600'}`}>{message}</p>
+          <p className={`text-sm ${message.startsWith('Error') ? 'text-red-600' : 'text-brand'}`}>{message}</p>
         )}
 
         <Button onClick={handleSave} loading={saving} size="lg">Save Profile</Button>
