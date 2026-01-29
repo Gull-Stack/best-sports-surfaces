@@ -144,8 +144,9 @@ function SearchContent() {
               <input
                 type="text"
                 placeholder="Enter ZIP code"
-                value={filters.zip}
-                onChange={(e) => updateFilter('zip', e.target.value)}
+                defaultValue={filters.zip}
+                onBlur={(e) => updateFilter('zip', e.target.value)}
+                onKeyDown={(e) => { if (e.key === 'Enter') updateFilter('zip', (e.target as HTMLInputElement).value); }}
                 className="w-full px-3 py-2 border rounded-lg text-sm text-gray-900 placeholder-gray-400"
                 maxLength={5}
                 pattern="[0-9]*"
