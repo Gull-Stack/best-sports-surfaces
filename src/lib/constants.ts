@@ -26,9 +26,9 @@ export const SERVICE_TYPES = [
 ] as const;
 
 export const VENDOR_TIERS = {
-  free: { name: 'Free', color: 'blue', features: ['Basic listing', 'Lead capture via BSS'] },
-  paid: { name: 'Premium', color: 'green', price: 99, features: ['Direct contact info', 'Full gallery', 'Priority placement', 'Analytics dashboard'] },
-  featured: { name: 'Featured', color: 'amber', features: ['All Premium features', 'Homepage spotlight', 'Top search placement', 'Featured badge'] },
+  free: { name: 'Free', color: 'blue', features: ['Basic listing', 'Leads go through BSS', 'No direct contact info shown'] },
+  paid: { name: 'Premium', color: 'green', price: 99, features: ['Direct phone/email/website on listing', 'Cover photo & gallery', 'Leads sent directly to you', 'Priority search placement', 'Analytics dashboard'] },
+  featured: { name: 'Featured', color: 'amber', features: ['All Premium features', 'Homepage spotlight', 'Top search placement', 'Increased lead volume', 'Custom pricing'] },
 } as const;
 
 export const NAV_LINKS = [
@@ -37,6 +37,7 @@ export const NAV_LINKS = [
   { href: '/cost-estimator', label: 'Cost Estimator' },
   { href: '/blog', label: 'Blog' },
   { href: '/locations', label: 'Locations' },
+  { href: '/pricing', label: 'For Contractors' },
   { href: '/contact', label: 'Contact' },
 ] as const;
 

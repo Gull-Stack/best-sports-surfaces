@@ -20,7 +20,7 @@ export default function Header() {
           </Link>
 
           <nav className="hidden md:flex items-center gap-6">
-            {NAV_LINKS.slice(1, 5).map((link) => (
+            {NAV_LINKS.filter(l => l.href !== '/' && l.href !== '/contact').map((link) => (
               <Link
                 key={link.href}
                 href={link.href}

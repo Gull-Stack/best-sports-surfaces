@@ -22,6 +22,7 @@ const footerLinks = {
     { href: '/terms', label: 'Terms of Service' },
   ],
   'For Contractors': [
+    { href: '/pricing', label: 'Pricing & Plans' },
     { href: '/auth/signup', label: 'List Your Business' },
     { href: '/auth/login', label: 'Contractor Login' },
     { href: '/vendor/claim', label: 'Claim Your Listing' },

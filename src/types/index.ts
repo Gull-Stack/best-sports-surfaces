@@ -29,6 +29,7 @@ export interface Vendor {
   license_number: string | null;
   insurance_verified: boolean;
   logo_url: string | null;
+  cover_image: string | null;
   gallery_urls: string[];
   user_id: string | null;
   stripe_customer_id: string | null;

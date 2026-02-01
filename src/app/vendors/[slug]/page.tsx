@@ -77,10 +77,18 @@ export default async function VendorPage({ params }: Props) {
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Main Content */}
           <div className="flex-1">
+            {/* Cover Image */}
+            {isPaid && vendor.cover_image && (
+              <div className="relative h-48 md:h-64 rounded-xl overflow-hidden mb-6">
+                <img src={vendor.cover_image} alt={`${vendor.name} featured work`} className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+              </div>
+            )}
+
             {/* Header */}
             <div className="flex items-start gap-4 mb-6">
               {vendor.logo_url && (
-                <img src={vendor.logo_url} alt={vendor.name} className="w-20 h-20 rounded-xl object-cover" />
+                <img src={vendor.logo_url} alt={vendor.name} className="w-20 h-20 rounded-xl object-cover ring-2 ring-gray-100" />
               )}
               <div className="flex-1">
                 <div className="flex items-center gap-2 flex-wrap">
