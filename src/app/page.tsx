@@ -167,6 +167,48 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Recommended Products */}
+      <section className="py-16">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold text-text-primary">Recommended Products</h2>
+            <p className="text-text-secondary mt-2">Pro-grade equipment and materials trusted by contractors in our network.</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { name: 'Dominator Nets', brand: 'Dominator', emoji: '🏐', desc: 'Heavy-duty portable pickleball net systems built for serious play.', badge: 'Top Pick' },
+              { name: 'Dominator Hoops', brand: 'Dominator', emoji: '🏀', desc: 'Commercial-grade in-ground basketball systems with tempered glass.', badge: 'Top Pick' },
+              { name: 'Selkirk Pro Net', brand: 'Selkirk', emoji: '🏓', desc: 'Premium pickleball net system from the most trusted name in the sport.', badge: 'Premium' },
+              { name: 'Acrytech Paint', brand: 'Acrytech', emoji: '🎨', desc: 'Professional acrylic sport surface coating — the industry standard.', badge: 'Pro Grade' },
+            ].map((product) => (
+              <Link
+                key={product.name}
+                href="/products"
+                className="bg-surface-card rounded-xl p-5 border border-border hover:border-neon/40 transition-all group"
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <span className="text-3xl">{product.emoji}</span>
+                  <span className="px-2 py-0.5 rounded-full text-xs font-semibold bg-neon/10 text-neon border border-neon/30">
+                    {product.badge}
+                  </span>
+                </div>
+                <h3 className="font-bold text-text-primary group-hover:text-neon transition-colors">{product.name}</h3>
+                <p className="text-xs text-text-muted mb-2">{product.brand}</p>
+                <p className="text-sm text-text-secondary">{product.desc}</p>
+              </Link>
+            ))}
+          </div>
+          <div className="text-center mt-8">
+            <Link
+              href="/products"
+              className="inline-flex items-center gap-2 text-neon font-semibold hover:underline"
+            >
+              View All Products <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Cost Estimator CTA */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4">
