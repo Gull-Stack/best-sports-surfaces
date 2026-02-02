@@ -1,16 +1,19 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import Card from '@/components/ui/Card';
 import { CheckCircle } from 'lucide-react';
 
-export default function VendorClaimPage() {
+function ClaimForm() {
   const router = useRouter();
-  const [form, setForm] = useState({ business_name: '', contact_name: '', contact_email: '', contact_phone: '', vendor_slug: '' });
+  const searchParams = useSearchParams();
+  const prefilledSlug = searchParams.get('slug') || '';
+  const [form, setForm] = useState({ business_name: '', contact_name: '', contact_email: '', contact_phone: '', vendor_slug: prefilledSlug });
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
@@ -67,5 +70,13 @@ export default function VendorClaimPage() {
         </form>
       </Card>
     </div>
+  );
+}
+
+export default function VendorClaimPage() {
+  return (
+    <Suspense fallback={<div className="max-w-md mx-auto px-4 py-12 text-center text-text-secondary">Loading...</div>}>
+      <ClaimForm />
+    </Suspense>
   );
 }

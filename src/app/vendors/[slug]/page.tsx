@@ -245,7 +245,7 @@ export default async function VendorPage({ params }: Props) {
                   <p className="text-sm text-text-secondary">
                     <strong className="text-text-primary">Is this your business?</strong> Claim your listing to add direct contact info, photos, and more.
                   </p>
-                  <Link href="/vendor/claim" className="text-neon text-sm font-medium hover:underline mt-2 block">
+                  <Link href={`/vendor/claim?slug=${vendor.slug}`} className="text-neon text-sm font-medium hover:underline mt-2 block">
                     Claim This Listing &rarr;
                   </Link>
                 </Card>
