@@ -107,6 +107,7 @@ const productCategories = [
         name: 'Coming Soon',
         brand: 'TBD',
         description: 'We\'re evaluating the best LED court lighting systems on the market. Check back soon for our top picks — or contact us if you manufacture court lighting and want to be featured.',
+        url: '',
         badge: 'Coming Soon',
         features: [
           'LED technology',
