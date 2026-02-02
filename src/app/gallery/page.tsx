@@ -5,173 +5,89 @@ import { SITE_NAME } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: 'Project Gallery - Sports Surface Installations',
-  description: 'Browse stunning sports surface installations from top contractors. Pickleball courts, tennis courts, basketball courts, gym floors, running tracks, and more.',
+  description: 'Browse real sports surface installations from top contractors. Pickleball courts, tennis courts, basketball courts, multi-sport courts, and commercial builds by Precision Pro Courts and more.',
 };
 
-// Gallery items — using Unsplash (free commercial use, no attribution required)
-// In production, these would be populated from vendor uploads (paid tier feature)
-const galleryCategories = [
+const galleryImages = [
   {
-    id: 'pickleball',
-    title: 'Pickleball Courts',
-    description: 'Residential & commercial pickleball court installations',
-    images: [
-      {
-        src: 'https://images.unsplash.com/photo-1672573560822-28765e4e30f0?w=800&q=80',
-        alt: 'Professional pickleball court with bright blue surface',
-        type: 'Residential' as const,
-      },
-      {
-        src: 'https://images.unsplash.com/photo-1676399557654-2fa96eab0858?w=800&q=80',
-        alt: 'Outdoor pickleball court with net and paddles',
-        type: 'Residential' as const,
-      },
-      {
-        src: 'https://images.unsplash.com/photo-1687456305690-0644b7652005?w=800&q=80',
-        alt: 'Multi-court pickleball facility',
-        type: 'Municipal' as const,
-      },
-      {
-        src: 'https://images.unsplash.com/photo-1695654400967-0ab11bbfdb41?w=800&q=80',
-        alt: 'Indoor pickleball court with professional lighting',
-        type: 'Commercial' as const,
-      },
-    ],
+    src: '/gallery/precision-pro-courts-1.jpg',
+    alt: 'Aerial view of multi-sport complex with pickleball courts, basketball hoop, and gaga pit',
+    type: 'Commercial' as const,
+    vendor: 'Precision Pro Courts',
+    vendorSlug: 'precision-pro-courts',
+    sport: 'Multi-Sport',
   },
   {
-    id: 'tennis',
-    title: 'Tennis Courts',
-    description: 'Hard courts, clay courts, and grass court installations',
-    images: [
-      {
-        src: 'https://images.unsplash.com/photo-1554068865-24cecd4e34b8?w=800&q=80',
-        alt: 'Beautiful green tennis court aerial view',
-        type: 'Residential' as const,
-      },
-      {
-        src: 'https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?w=800&q=80',
-        alt: 'Professional blue hard court tennis surface',
-        type: 'Commercial' as const,
-      },
-      {
-        src: 'https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?w=800&q=80',
-        alt: 'Clay tennis court with pristine red surface',
-        type: 'Residential' as const,
-      },
-      {
-        src: 'https://images.unsplash.com/photo-1542144582-1ba00ace1038?w=800&q=80',
-        alt: 'Tennis court from above showing clean lines',
-        type: 'Municipal' as const,
-      },
-    ],
+    src: '/gallery/precision-pro-courts-2.jpg',
+    alt: 'Backyard pickleball and basketball court with mountain views',
+    type: 'Residential' as const,
+    vendor: 'Precision Pro Courts',
+    vendorSlug: 'precision-pro-courts',
+    sport: 'Pickleball',
   },
   {
-    id: 'basketball',
-    title: 'Basketball Courts',
-    description: 'Backyard, municipal, and indoor basketball court builds',
-    images: [
-      {
-        src: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?w=800&q=80',
-        alt: 'Indoor basketball court with polished hardwood floor',
-        type: 'Commercial' as const,
-      },
-      {
-        src: 'https://images.unsplash.com/photo-1504450758481-7338eba7524a?w=800&q=80',
-        alt: 'Outdoor basketball court with colorful surface',
-        type: 'Municipal' as const,
-      },
-      {
-        src: 'https://images.unsplash.com/photo-1574623452334-1e0ac2b3ccb4?w=800&q=80',
-        alt: 'Basketball court in urban setting',
-        type: 'Municipal' as const,
-      },
-      {
-        src: 'https://images.unsplash.com/photo-1559692048-79a3f837883d?w=800&q=80',
-        alt: 'Professional gymnasium basketball court',
-        type: 'Commercial' as const,
-      },
-    ],
+    src: '/gallery/precision-pro-courts-3.jpg',
+    alt: 'Basketball and pickleball combination court with professional surfacing',
+    type: 'Residential' as const,
+    vendor: 'Precision Pro Courts',
+    vendorSlug: 'precision-pro-courts',
+    sport: 'Basketball',
   },
   {
-    id: 'gym-flooring',
-    title: 'Gym Flooring',
-    description: 'Gymnasium hardwood, rubber, and multi-purpose sport floors',
-    images: [
-      {
-        src: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80',
-        alt: 'Modern gym with professional rubber flooring',
-        type: 'Commercial' as const,
-      },
-      {
-        src: 'https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800&q=80',
-        alt: 'Gymnasium with polished maple hardwood floor',
-        type: 'Commercial' as const,
-      },
-      {
-        src: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800&q=80',
-        alt: 'Weight room with heavy-duty rubber gym flooring',
-        type: 'Commercial' as const,
-      },
-      {
-        src: 'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=800&q=80',
-        alt: 'CrossFit gym with specialized training floor',
-        type: 'Commercial' as const,
-      },
-    ],
+    src: '/gallery/precision-pro-courts-4.jpg',
+    alt: 'Garage-side pickleball and basketball court in residential setting',
+    type: 'Residential' as const,
+    vendor: 'Precision Pro Courts',
+    vendorSlug: 'precision-pro-courts',
+    sport: 'Pickleball',
   },
   {
-    id: 'track',
-    title: 'Running Tracks',
-    description: 'Synthetic rubber tracks for schools and municipalities',
-    images: [
-      {
-        src: 'https://images.unsplash.com/photo-1461897104016-0b3b00b1bce0?w=800&q=80',
-        alt: 'Professional running track with red synthetic surface',
-        type: 'Municipal' as const,
-      },
-      {
-        src: 'https://images.unsplash.com/photo-1587280501635-68a0e82cd5ff?w=800&q=80',
-        alt: 'Blue athletic track surrounding football field',
-        type: 'Municipal' as const,
-      },
-      {
-        src: 'https://images.unsplash.com/photo-1580058572462-98e2c0e0e2f0?w=800&q=80',
-        alt: 'Track lanes with crisp white lines',
-        type: 'Commercial' as const,
-      },
-      {
-        src: 'https://images.unsplash.com/photo-1474546652694-a33571f85032?w=800&q=80',
-        alt: 'Stadium track with grandstand seating',
-        type: 'Municipal' as const,
-      },
-    ],
+    src: '/gallery/precision-pro-courts-5.jpg',
+    alt: 'Backyard basketball and pickleball court with landscaped yard',
+    type: 'Residential' as const,
+    vendor: 'Precision Pro Courts',
+    vendorSlug: 'precision-pro-courts',
+    sport: 'Multi-Sport',
   },
   {
-    id: 'football-turf',
-    title: 'Football & Soccer Turf',
-    description: 'Artificial turf for football fields, soccer pitches, and multi-use stadiums',
-    images: [
-      {
-        src: 'https://images.unsplash.com/photo-1556056504-5c7696c4c28d?w=800&q=80',
-        alt: 'Football stadium with pristine artificial turf',
-        type: 'Commercial' as const,
-      },
-      {
-        src: 'https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=800&q=80',
-        alt: 'Soccer field with professional artificial grass',
-        type: 'Municipal' as const,
-      },
-      {
-        src: 'https://images.unsplash.com/photo-1518604666860-9ed391f76460?w=800&q=80',
-        alt: 'Multi-use turf field under stadium lights',
-        type: 'Commercial' as const,
-      },
-      {
-        src: 'https://images.unsplash.com/photo-1575361204480-aadea25e6e68?w=800&q=80',
-        alt: 'Football field turf with painted end zone',
-        type: 'Municipal' as const,
-      },
-    ],
+    src: '/gallery/precision-pro-courts-6.jpg',
+    alt: 'Utah Jazz themed basketball court with custom graphics',
+    type: 'Residential' as const,
+    vendor: 'Precision Pro Courts',
+    vendorSlug: 'precision-pro-courts',
+    sport: 'Basketball',
+  },
+  {
+    src: '/gallery/precision-pro-courts-7.jpg',
+    alt: 'Commercial pickleball courts at office complex',
+    type: 'Commercial' as const,
+    vendor: 'Precision Pro Courts',
+    vendorSlug: 'precision-pro-courts',
+    sport: 'Pickleball',
+  },
+  {
+    src: '/gallery/precision-pro-courts-8.jpg',
+    alt: 'Office pickleball courts — corporate recreation facility',
+    type: 'Commercial' as const,
+    vendor: 'Precision Pro Courts',
+    vendorSlug: 'precision-pro-courts',
+    sport: 'Pickleball',
+  },
+  {
+    src: '/gallery/precision-pro-courts-9.jpg',
+    alt: 'Professional court installation in progress by Precision Pro Courts',
+    type: 'Residential' as const,
+    vendor: 'Precision Pro Courts',
+    vendorSlug: 'precision-pro-courts',
+    sport: 'Multi-Sport',
+  },
+  {
+    src: '/gallery/precision-pro-courts-10.jpg',
+    alt: 'Pickleball court with Dominator nets — premium equipment installation',
+    type: 'Residential' as const,
+    vendor: 'Precision Pro Courts',
+    vendorSlug: 'precision-pro-courts',
+    sport: 'Pickleball',
   },
 ];
 
@@ -181,6 +97,8 @@ const typeColors = {
   Commercial: 'bg-amber-500/10 text-amber-400',
 };
 
+const sportFilters = ['All', ...Array.from(new Set(galleryImages.map((img) => img.sport)))];
+
 export default function GalleryPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 py-16">
@@ -188,14 +106,14 @@ export default function GalleryPage() {
       <div className="text-center mb-12">
         <div className="inline-flex items-center gap-2 bg-neon-subtle text-neon px-4 py-1.5 rounded-full text-sm font-medium mb-4">
           <Camera className="h-4 w-4" />
-          Project Showcase
+          Real Projects, Real Contractors
         </div>
         <h1 className="text-3xl md:text-5xl font-bold text-text-primary mb-4">
           Sports Surface <span className="neon-text">Gallery</span>
         </h1>
         <p className="text-lg text-text-secondary max-w-2xl mx-auto">
-          Browse real installations from top contractors across the country. 
-          From backyard pickleball courts to stadium-grade turf fields.
+          Browse real installations from verified contractors. Every photo is from an actual build — 
+          no stock images, no filler.
         </p>
       </div>
 
@@ -219,67 +137,58 @@ export default function GalleryPage() {
         </Link>
       </div>
 
-      {/* Gallery Categories */}
-      <div className="space-y-20">
-        {galleryCategories.map((category) => (
-          <section key={category.id} id={category.id}>
-            <div className="flex items-end justify-between mb-6">
-              <div>
-                <h2 className="text-2xl font-bold text-text-primary">{category.title}</h2>
-                <p className="text-text-muted mt-1">{category.description}</p>
+      {/* Gallery Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {galleryImages.map((image, i) => (
+          <div
+            key={i}
+            className={`group relative rounded-xl overflow-hidden border border-border hover:border-neon/40 transition-all ${
+              i === 0 ? 'sm:col-span-2 sm:row-span-2' : ''
+            }`}
+          >
+            <div className={`${i === 0 ? 'aspect-[4/3]' : 'aspect-[4/3]'} overflow-hidden`}>
+              <img
+                src={image.src}
+                alt={image.alt}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading={i < 3 ? 'eager' : 'lazy'}
+              />
+            </div>
+            {/* Overlay on hover */}
+            <div className="absolute inset-0 bg-gradient-to-t from-surface/90 via-surface/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <span className={`px-2 py-0.5 rounded text-xs font-medium ${typeColors[image.type]}`}>
+                  {image.type}
+                </span>
+                <span className="px-2 py-0.5 rounded text-xs font-medium bg-surface-card text-text-secondary">
+                  {image.sport}
+                </span>
               </div>
+              <p className="text-sm text-text-primary font-medium">{image.alt}</p>
               <Link
-                href={`/search?sport=${category.id}`}
-                className="hidden sm:inline-flex items-center gap-1 text-sm text-neon font-medium hover:underline"
+                href={`/vendors/${image.vendorSlug}`}
+                className="text-xs text-neon mt-1.5 flex items-center gap-1 hover:underline"
               >
-                Find contractors <ArrowRight className="h-3.5 w-3.5" />
+                <Star className="h-3 w-3" /> Built by {image.vendor}
               </Link>
             </div>
-            
-            {/* Masonry-style grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {category.images.map((image, i) => (
-                <div
-                  key={i}
-                  className={`group relative rounded-xl overflow-hidden border border-border hover:border-neon/40 transition-all cursor-pointer ${
-                    i === 0 ? 'sm:col-span-2 sm:row-span-2' : ''
-                  }`}
-                >
-                  <div className={`${i === 0 ? 'aspect-square' : 'aspect-[4/3]'} overflow-hidden`}>
-                    <img
-                      src={image.src}
-                      alt={image.alt}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      loading="lazy"
-                    />
-                  </div>
-                  {/* Overlay on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-surface/90 via-surface/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                    <span className={`self-start px-2 py-0.5 rounded text-xs font-medium mb-2 ${typeColors[image.type]}`}>
-                      {image.type}
-                    </span>
-                    <p className="text-sm text-text-primary font-medium">{image.alt}</p>
-                    {/* In production this would link to the vendor profile */}
-                    <p className="text-xs text-text-muted mt-1 flex items-center gap-1">
-                      <Star className="h-3 w-3 text-neon" /> Premium Vendor Showcase
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <Link
-              href={`/search?sport=${category.id}`}
-              className="sm:hidden inline-flex items-center gap-1 text-sm text-neon font-medium hover:underline mt-4"
-            >
-              Find {category.title.toLowerCase()} contractors <ArrowRight className="h-3.5 w-3.5" />
-            </Link>
-          </section>
+          </div>
         ))}
       </div>
 
+      {/* Featured Vendor Attribution */}
+      <div className="mt-10 text-center">
+        <p className="text-text-muted text-sm">
+          Photos on this page courtesy of{' '}
+          <Link href="/vendors/precision-pro-courts" className="text-neon hover:underline">
+            Precision Pro Courts
+          </Link>
+          {' '}— a premium contractor serving Utah and surrounding states.
+        </p>
+      </div>
+
       {/* Bottom CTA */}
-      <div className="mt-20 text-center bg-surface-card rounded-2xl border border-border p-8 md:p-12">
+      <div className="mt-16 text-center bg-surface-card rounded-2xl border border-border p-8 md:p-12">
         <h2 className="text-2xl font-bold text-text-primary mb-3">
           Ready to Build Your Sports Surface?
         </h2>
