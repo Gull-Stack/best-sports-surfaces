@@ -37,6 +37,7 @@ export const NAV_LINKS = [
   { href: '/search', label: 'Find Contractors' },
   { href: '/gallery', label: 'Gallery' },
   { href: '/cost-estimator', label: 'Cost Estimator' },
+  { href: '/court-designer', label: 'Design Your Court' },
   { href: '/products', label: 'Products' },
   { href: '/locations', label: 'Locations' },
   { href: '/pricing', label: 'For Contractors' },
