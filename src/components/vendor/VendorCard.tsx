@@ -24,12 +24,16 @@ export default function VendorCard({ vendor, showDistance, distance }: VendorCar
             : 'border-border bg-surface-card hover:shadow-sm hover:border-border-hover'
       }`}
     >
-      {/* Featured badge ribbon */}
-      {isFeatured && (
+      {/* Tier badge ribbon */}
+      {isFeatured ? (
         <div className="absolute top-0 right-0 z-10 bg-amber-500 text-surface text-xs font-bold px-3 py-1 rounded-bl-lg flex items-center gap-1">
           <Star className="h-3 w-3 fill-current" /> Featured
         </div>
-      )}
+      ) : isPaid ? (
+        <div className="absolute top-0 right-0 z-10 bg-neon text-surface text-xs font-bold px-3 py-1 rounded-bl-lg flex items-center gap-1">
+          <Shield className="h-3 w-3" /> Recommended
+        </div>
+      ) : null}
 
       {/* Cover image for paid vendors */}
       {isPaid && vendor.cover_image && (

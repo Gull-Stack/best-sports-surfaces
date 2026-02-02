@@ -65,65 +65,7 @@ VALUES (
   '{}'
 );
 
-INSERT INTO vendors (name, slug, description, short_description, phone, email, website, address, city, state, zip, latitude, longitude, sport_types, service_types, service_area_miles, tier, is_verified, is_featured, rating, review_count, years_in_business, license_number, insurance_verified, logo_url, gallery_urls)
-VALUES (
-  'Parkin Tennis Courts',
-  'parkin-tennis-courts',
-  'Parkin Tennis Courts is a tennis, basketball and pickleball court builder specializing in post-tension concrete courts. One of only a small handful of contractors in the western United States certified to perform post-tension work. They handle all excavation, concrete, fencing, landscaping, and construction — a full general contracting firm that specializes in high quality courts.',
-  'Utah''s certified post-tension concrete court specialist for tennis, basketball, and pickleball.',
-  '',
-  '',
-  'https://www.parkintennis.com',
-  '',
-  'Salt Lake City',
-  'UT',
-  '84101',
-  40.7608,
-  -111.8910,
-  '{tennis,pickleball,basketball}',
-  '{new-construction,resurfacing,repair,fencing,design}',
-  150,
-  'free',
-  false,
-  false,
-  0,
-  0,
-  47,
-  NULL,
-  false,
-  NULL,
-  '{}'
-);
 
-INSERT INTO vendors (name, slug, description, short_description, phone, email, website, address, city, state, zip, latitude, longitude, sport_types, service_types, service_area_miles, tier, is_verified, is_featured, rating, review_count, years_in_business, license_number, insurance_verified, logo_url, gallery_urls)
-VALUES (
-  'Ace Courts',
-  'ace-courts-utah',
-  'For 30 years, Ace Courts has been Utah''s trusted name in court construction. They proudly serve the entire state, from Cache Valley and Garden City to St. George, Cedar City, Salt Lake City, Heber City, Park City, Layton, Alpine, and beyond. They build top-quality pickleball, basketball, and tennis courts with a commitment to exceptional craftsmanship.',
-  'Utah''s trusted court builder for 30 years. Pickleball, basketball, and tennis statewide.',
-  '',
-  '',
-  'https://www.acecourtsutah.com',
-  '',
-  'Provo',
-  'UT',
-  '84601',
-  40.2338,
-  -111.6585,
-  '{pickleball,basketball,tennis,multi-sport}',
-  '{new-construction,resurfacing,repair}',
-  200,
-  'free',
-  false,
-  false,
-  0,
-  0,
-  30,
-  NULL,
-  false,
-  NULL,
-  '{}'
-);
 
 INSERT INTO vendors (name, slug, description, short_description, phone, email, website, address, city, state, zip, latitude, longitude, sport_types, service_types, service_area_miles, tier, is_verified, is_featured, rating, review_count, years_in_business, license_number, insurance_verified, logo_url, gallery_urls)
 VALUES (

@@ -8,7 +8,7 @@ interface VendorBadgeProps {
 
 const tierConfig = {
   free: { label: 'Basic Listing', icon: null, className: 'bg-surface-hover text-text-muted' },
-  paid: { label: 'Premium', icon: Shield, className: 'bg-neon-subtle text-neon' },
+  paid: { label: 'Recommended', icon: Shield, className: 'bg-neon-subtle text-neon' },
   featured: { label: 'Featured', icon: Award, className: 'bg-amber-500/15 text-amber-400' },
 };
 
