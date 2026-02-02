@@ -116,8 +116,8 @@ export default async function HomePage() {
             <MapComponent pins={mapPins} className="h-96 md:h-[500px]" />
           </div>
           <div className="flex items-center justify-center gap-6 mt-4 text-sm text-text-muted">
-            <span className="flex items-center gap-2"><span className="w-3 h-3 rounded-full bg-accent" /> Free Listings</span>
-            <span className="flex items-center gap-2"><span className="w-3 h-3 rounded-full bg-neon" /> Premium</span>
+            <span className="flex items-center gap-2"><span className="w-3 h-3 rounded-full bg-blue-500" /> Free Listings</span>
+            <span className="flex items-center gap-2"><span className="w-3 h-3 rounded-full bg-neon" /> Recommended</span>
             <span className="flex items-center gap-2"><span className="w-3 h-3 rounded-full bg-amber-500" /> Featured</span>
           </div>
         </div>
