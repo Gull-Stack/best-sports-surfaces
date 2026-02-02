@@ -13,6 +13,7 @@ export const SPORT_TYPES = [
   { value: 'multi-sport', label: 'Multi-Sport Courts', icon: '🏅' },
   { value: 'volleyball', label: 'Volleyball Courts', icon: '🏐' },
   { value: 'gym-flooring', label: 'Gym Flooring', icon: '🏋️' },
+  { value: 'padel', label: 'Padel Courts', icon: '🎾' },
 ] as const;
 
 export const SERVICE_TYPES = [
