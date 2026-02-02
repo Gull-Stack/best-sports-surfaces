@@ -4,13 +4,13 @@ import { z } from 'zod';
 
 const inquirySchema = z.object({
   vendor_id: z.string().uuid().optional(),
-  name: z.string().min(2),
+  name: z.string().min(1),
   email: z.string().email(),
   phone: z.string().optional(),
-  zip: z.string().min(5).max(5),
-  sport_type: z.string(),
-  service_type: z.string(),
-  message: z.string().min(10),
+  zip: z.string().optional(),
+  sport_type: z.string().optional(),
+  service_type: z.string().optional(),
+  message: z.string().optional(),
 });
 
 export async function POST(request: NextRequest) {

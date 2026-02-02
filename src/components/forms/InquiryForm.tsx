@@ -11,13 +11,13 @@ import Textarea from '@/components/ui/Textarea';
 import { CheckCircle } from 'lucide-react';
 
 const inquirySchema = z.object({
-  name: z.string().min(2, 'Name is required'),
+  name: z.string().min(1, 'Name is required'),
   email: z.string().email('Valid email is required'),
   phone: z.string().optional(),
-  zip: z.string().min(5, 'ZIP code is required').max(5),
-  sport_type: z.string().min(1, 'Select a sport type'),
-  service_type: z.string().min(1, 'Select a service type'),
-  message: z.string().min(10, 'Please provide some details about your project'),
+  zip: z.string().optional(),
+  sport_type: z.string().optional(),
+  service_type: z.string().optional(),
+  message: z.string().optional(),
 });
 
 type InquiryFormData = z.infer<typeof inquirySchema>;
