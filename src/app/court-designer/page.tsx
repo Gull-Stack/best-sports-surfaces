@@ -159,41 +159,63 @@ function BasketballLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineCo
   const hl = (courtL * s) / 2;
   const sw = 1.5;
 
-  // Key dimensions (NBA-ish)
-  const keyW = 12 * s; // 12' wide lane
-  const keyL = 19 * s; // 19' from baseline (free throw line)
-  const ftRadius = 6 * s; // free throw circle radius
-  const threeR = 23.75 * s; // 3-pt arc radius
-  const threeCorner = 3 * s; // 3' from sideline
-  const hoopDist = 5.25 * s; // hoop 5.25' from baseline
-  const hoopR = 0.75 * s;
+  // Key dimensions (NBA)
+  const keyW = 16 * s;     // 16' wide lane (NBA)
+  const keyL = 19 * s;     // 19' from baseline to free throw line
+  const ftRadius = 6 * s;  // free throw circle 6' radius
+  const threeR = 23.75 * s; // 3-pt arc radius from center of hoop
+  const cornerDist = 3 * s; // corner 3 is 3' from sideline
+  const hoopDist = 5.25 * s; // center of hoop 5.25' from baseline
+  const hoopR = 0.75 * s;   // hoop rim radius
   const backboardW = 6 * s;
   const centerR = 6 * s;
+  const restrictedR = 4 * s; // restricted area arc 4' radius
 
-  const drawHoop = (baseY: number, dir: number) => (
-    <g>
-      {/* Key / lane */}
-      <rect x={cx - keyW / 2} y={baseY} width={keyW} height={keyL * dir} />
-      {/* Free throw line already part of key rect top */}
-      {/* Free throw circle */}
-      <circle cx={cx} cy={baseY + keyL * dir} r={ftRadius} />
-      {/* Backboard */}
-      <line x1={cx - backboardW / 2} y1={baseY + hoopDist * dir} x2={cx + backboardW / 2} y2={baseY + hoopDist * dir} strokeWidth={2} />
-      {/* Hoop */}
-      <circle cx={cx} cy={baseY + hoopDist * dir + hoopR * dir * 2} r={hoopR} />
-      {/* 3-point arc */}
-      <path d={(() => {
-        const hoopY = baseY + hoopDist * dir;
-        const startX = cx - (courtW / 2 - 3) * s;
-        const endX = cx + (courtW / 2 - 3) * s;
-        // corner lines
-        const cornerEndY = baseY + Math.sqrt(Math.max(0, threeR * threeR - ((courtW / 2 - 3) * s) ** 2)) * dir;
-        // arc
-        const sweep = dir > 0 ? 1 : 0;
-        return `M ${startX} ${baseY} L ${startX} ${cornerEndY} A ${threeR} ${threeR} 0 0 ${sweep} ${endX} ${cornerEndY} L ${endX} ${baseY}`;
-      })()} />
-    </g>
-  );
+  const drawEnd = (baselineY: number, dir: number) => {
+    const hoopY = baselineY + hoopDist * dir;
+    const ftY = baselineY + keyL * dir;
+    const cornerX_L = cx - hw + cornerDist;
+    const cornerX_R = cx + hw - cornerDist;
+    // How far the corner 3 line extends before the arc begins
+    const cornerLineHalf = (courtW / 2 - 3) * s;
+    const arcStartDx = cornerLineHalf;
+    const arcStartDy = Math.sqrt(Math.max(0, threeR * threeR - arcStartDx * arcStartDx));
+
+    return (
+      <g>
+        {/* Key / lane */}
+        <rect
+          x={cx - keyW / 2}
+          y={dir > 0 ? baselineY : baselineY - keyL}
+          width={keyW}
+          height={keyL}
+        />
+        {/* Free throw circle */}
+        <circle cx={cx} cy={ftY} r={ftRadius} />
+        {/* Backboard */}
+        <line x1={cx - backboardW / 2} y1={baselineY + 4 * s * dir} x2={cx + backboardW / 2} y2={baselineY + 4 * s * dir} strokeWidth={2.5} />
+        {/* Hoop */}
+        <circle cx={cx} cy={hoopY} r={hoopR} strokeWidth={1.5} />
+        {/* Restricted area arc */}
+        {dir > 0 ? (
+          <path d={`M ${cx - restrictedR} ${baselineY} A ${restrictedR} ${restrictedR} 0 0 1 ${cx + restrictedR} ${baselineY}`} />
+        ) : (
+          <path d={`M ${cx - restrictedR} ${baselineY} A ${restrictedR} ${restrictedR} 0 0 0 ${cx + restrictedR} ${baselineY}`} />
+        )}
+        {/* 3-point line */}
+        {(() => {
+          const leftX = cx - arcStartDx;
+          const rightX = cx + arcStartDx;
+          const arcY = baselineY + arcStartDy * dir;
+          const sweep = dir > 0 ? 1 : 0;
+          const largeArc = 0;
+          return (
+            <path d={`M ${leftX} ${baselineY} L ${leftX} ${arcY} A ${threeR} ${threeR} 0 ${largeArc} ${sweep} ${rightX} ${arcY} L ${rightX} ${baselineY}`} />
+          );
+        })()}
+      </g>
+    );
+  };
 
   return (
     <g stroke={lineColor} strokeWidth={sw} fill="none">
@@ -205,20 +227,20 @@ function BasketballLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineCo
           <line x1={cx - hw} y1={cy} x2={cx + hw} y2={cy} />
           {/* Center circle */}
           <circle cx={cx} cy={cy} r={centerR} />
-          {/* Top hoop */}
-          {drawHoop(cy - hl, 1)}
-          {/* Bottom hoop */}
-          {drawHoop(cy + hl, -1)}
+          {/* Top end (baseline at top) */}
+          {drawEnd(cy - hl, 1)}
+          {/* Bottom end (baseline at bottom) */}
+          {drawEnd(cy + hl, -1)}
         </>
       )}
       {isHalf && (
         <>
-          {/* Baseline at bottom, half-court line at top */}
+          {/* Half-court line at top */}
           <line x1={cx - hw} y1={cy - hl} x2={cx + hw} y2={cy - hl} strokeWidth={2} />
           {/* Center circle (half) */}
           <path d={`M ${cx - centerR} ${cy - hl} A ${centerR} ${centerR} 0 0 1 ${cx + centerR} ${cy - hl}`} />
-          {/* Hoop at bottom */}
-          {drawHoop(cy + hl, -1)}
+          {/* Hoop end at bottom */}
+          {drawEnd(cy + hl, -1)}
         </>
       )}
     </g>
@@ -323,12 +345,15 @@ export default function CourtDesignerPage() {
   const fencingCost = fencing ? Math.round((width + length) * 2 * 45) : 0;
   const lightingCost = lighting ? 12000 : 0;
 
-  // SVG dimensions
-  const SVG_W = 600;
-  const SVG_H = 440;
-  const { s, offX, offY } = useMemo(() => scaleFactory(width, length, SVG_W, SVG_H), [width, length]);
+  // SVG dimensions — landscape orientation
+  const SVG_W = 700;
+  const SVG_H = 400;
+  // Swap width/length for landscape rendering (length = longer side goes horizontal)
+  const renderW = Math.max(width, length);
+  const renderH = Math.min(width, length);
+  const { s, offX, offY } = useMemo(() => scaleFactory(renderW, renderH, SVG_W, SVG_H), [renderW, renderH]);
 
-  const lineProps = { s, offX, offY, courtW: config.courtW, courtL: config.courtL, totalW: width, totalL: length, lineColor };
+  const lineProps = { s, offX, offY, courtW: config.courtW, courtL: config.courtL, totalW: renderW, totalL: renderH, lineColor };
 
   const handleDownload = useCallback(async () => {
     const svgEl = svgRef.current;
@@ -476,9 +501,10 @@ export default function CourtDesignerPage() {
                   </div>
                 </div>
               ))}
-              <p className="text-[10px] text-text-muted mt-2">
-                Colors by <Link href="/acrytech" className="text-neon hover:underline">Acrytech</Link> — Official Surface of the PPA Tour
-              </p>
+              <Link href="/acrytech" className="mt-3 flex items-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
+                <img src="/logos/acrytech-logo-white.png" alt="Acrytech" className="h-4 w-auto" />
+                <span className="text-[10px] text-text-muted">Official Surface of the PPA Tour</span>
+              </Link>
             </section>
 
             {/* Extras */}
@@ -532,16 +558,16 @@ export default function CourtDesignerPage() {
                   <rect
                     x={offX}
                     y={offY}
-                    width={width * s}
-                    height={length * s}
+                    width={renderW * s}
+                    height={renderH * s}
                     fill={surroundColor}
                     rx={3}
                   />
 
                   {/* Playing area */}
                   <rect
-                    x={offX + ((width - config.courtW) * s) / 2}
-                    y={offY + ((length - config.courtL) * s) / 2}
+                    x={offX + ((renderW - config.courtW) * s) / 2}
+                    y={offY + ((renderH - config.courtL) * s) / 2}
                     width={config.courtW * s}
                     height={config.courtL * s}
                     fill={playColor}
@@ -555,16 +581,16 @@ export default function CourtDesignerPage() {
                   {sport === 'multi-sport' && <MultiSportLines {...lineProps} />}
 
                   {/* Extras */}
-                  {fencing && <FencingOverlay s={s} offX={offX} offY={offY} totalW={width} totalL={length} />}
-                  {lighting && <LightingOverlay s={s} offX={offX} offY={offY} totalW={width} totalL={length} />}
-                  {netHoop && <NetOverlay s={s} offX={offX} offY={offY} totalW={width} totalL={length} sport={sport} />}
+                  {fencing && <FencingOverlay s={s} offX={offX} offY={offY} totalW={renderW} totalL={renderH} />}
+                  {lighting && <LightingOverlay s={s} offX={offX} offY={offY} totalW={renderW} totalL={renderH} />}
+                  {netHoop && <NetOverlay s={s} offX={offX} offY={offY} totalW={renderW} totalL={renderH} sport={sport} />}
 
                   {/* Dimension labels */}
-                  <text x={offX + (width * s) / 2} y={offY + length * s + 16} textAnchor="middle" fill="#666" fontSize="11" fontFamily="monospace">
-                    {width}&apos;
+                  <text x={offX + (renderW * s) / 2} y={offY + renderH * s + 16} textAnchor="middle" fill="#666" fontSize="11" fontFamily="monospace">
+                    {renderW}&apos;
                   </text>
-                  <text x={offX - 10} y={offY + (length * s) / 2} textAnchor="middle" fill="#666" fontSize="11" fontFamily="monospace" transform={`rotate(-90, ${offX - 10}, ${offY + (length * s) / 2})`}>
-                    {length}&apos;
+                  <text x={offX - 10} y={offY + (renderH * s) / 2} textAnchor="middle" fill="#666" fontSize="11" fontFamily="monospace" transform={`rotate(-90, ${offX - 10}, ${offY + (renderH * s) / 2})`}>
+                    {renderH}&apos;
                   </text>
                 </svg>
               </div>
