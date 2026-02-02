@@ -33,10 +33,48 @@ const SPORTS: Record<Sport, CourtConfig> = {
 };
 
 const PALETTES: Palette[] = [
-  { name: 'Classic Blue/Green', play: '#2d6a4f', surround: '#1b4332', line: '#ffffff' },
-  { name: 'US Open Blue',      play: '#1a66b3', surround: '#0d3b66', line: '#ffffff' },
-  { name: 'Clay Red',          play: '#c1440e', surround: '#8b3a0e', line: '#ffffff' },
-  { name: 'Custom',            play: '#2d6a4f', surround: '#1b4332', line: '#ffffff' },
+  { name: 'Competition Blue/Green', play: '#1a66b3', surround: '#2d6a4f', line: '#ffffff' },
+  { name: 'US Open Blue',           play: '#3a7fd5', surround: '#1a4f8b', line: '#ffffff' },
+  { name: 'Classic Red/Green',      play: '#c1440e', surround: '#2d6a4f', line: '#ffffff' },
+  { name: 'Frost Blue/Gray',        play: '#6ba3d6', surround: '#6b7b8d', line: '#ffffff' },
+  { name: 'Forest/Sandstone',       play: '#1b4332', surround: '#c2a97e', line: '#ffffff' },
+  { name: 'Custom',                 play: '#2d6a4f', surround: '#1b4332', line: '#ffffff' },
+];
+
+/* ─── Acrytech Color Swatches ─── */
+const ACRYTECH_COLORS = [
+  { name: 'Competition Green', hex: '#2d6a4f' },
+  { name: 'Performance Green', hex: '#3a8f5c' },
+  { name: 'Field Green',       hex: '#4a7c3f' },
+  { name: 'Forest Green',      hex: '#1b4332' },
+  { name: 'Irish Green',       hex: '#009a44' },
+  { name: 'Kiwi',              hex: '#7ab648' },
+  { name: 'Lime',              hex: '#a4d65e' },
+  { name: 'Sea Green',         hex: '#00a78e' },
+  { name: 'Light Blue',        hex: '#6ba3d6' },
+  { name: 'Standard Blue',     hex: '#1a66b3' },
+  { name: 'Competition Blue',  hex: '#0d4f8b' },
+  { name: 'Frost Blue',        hex: '#a0c4e8' },
+  { name: 'Sky Blue',          hex: '#5bb7e8' },
+  { name: 'Caribbean Blue',    hex: '#00a3b4' },
+  { name: 'Nautical Navy',     hex: '#1c2951' },
+  { name: 'Sandstone',         hex: '#c2a97e' },
+  { name: 'Beige',             hex: '#d4c5a9' },
+  { name: 'Terracotta',        hex: '#c1440e' },
+  { name: 'Orange',            hex: '#e87722' },
+  { name: 'Bright Orange',     hex: '#ff6900' },
+  { name: 'Classic Red',       hex: '#b22234' },
+  { name: 'Crimson',           hex: '#9b1b30' },
+  { name: 'Bright Red',        hex: '#e03c31' },
+  { name: 'Coral',             hex: '#ef6c5b' },
+  { name: 'Passion Pink',      hex: '#e84393' },
+  { name: 'Bright Yellow',     hex: '#ffd700' },
+  { name: 'Slate',             hex: '#6b7b8d' },
+  { name: 'Gray',              hex: '#8e9196' },
+  { name: 'Black',             hex: '#1a1a1a' },
+  { name: 'Pro Purple',        hex: '#6b3fa0' },
+  { name: 'Ultra Violet',      hex: '#5f2580' },
+  { name: 'Viva Violet',       hex: '#803ca0' },
 ];
 
 /* ─── SVG Drawing Helpers ─── */
@@ -405,23 +443,42 @@ export default function CourtDesignerPage() {
               </div>
               {/* Color pickers */}
               {[
-                { label: 'Playing Area', value: playColor, set: (v: string) => { setPlayColor(v); setPaletteIdx(3); } },
-                { label: 'Surround', value: surroundColor, set: (v: string) => { setSurroundColor(v); setPaletteIdx(3); } },
-                { label: 'Lines', value: lineColor, set: (v: string) => { setLineColor(v); setPaletteIdx(3); } },
+                { label: 'Playing Area', value: playColor, set: (v: string) => { setPlayColor(v); setPaletteIdx(PALETTES.length - 1); } },
+                { label: 'Surround', value: surroundColor, set: (v: string) => { setSurroundColor(v); setPaletteIdx(PALETTES.length - 1); } },
+                { label: 'Lines', value: lineColor, set: (v: string) => { setLineColor(v); setPaletteIdx(PALETTES.length - 1); } },
               ].map((c) => (
-                <div key={c.label} className="mb-3 flex items-center justify-between">
-                  <span className="text-sm text-text-secondary">{c.label}</span>
-                  <div className="flex items-center gap-2">
-                    <input
-                      type="color"
-                      value={c.value}
-                      onChange={(e) => c.set(e.target.value)}
-                      className="h-8 w-8 cursor-pointer rounded border border-border bg-transparent"
-                    />
-                    <span className="w-16 font-mono text-xs text-text-secondary">{c.value}</span>
+                <div key={c.label} className="mb-3">
+                  <div className="flex items-center justify-between mb-1.5">
+                    <span className="text-sm text-text-secondary">{c.label}</span>
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="color"
+                        value={c.value}
+                        onChange={(e) => c.set(e.target.value)}
+                        className="h-8 w-8 cursor-pointer rounded border border-border bg-transparent"
+                      />
+                      <span className="w-16 font-mono text-xs text-text-secondary">{c.value}</span>
+                    </div>
+                  </div>
+                  {/* Acrytech color swatches */}
+                  <div className="flex flex-wrap gap-1">
+                    {ACRYTECH_COLORS.map((ac) => (
+                      <button
+                        key={ac.name}
+                        title={ac.name}
+                        onClick={() => c.set(ac.hex)}
+                        className={`h-5 w-5 rounded-sm border transition-all hover:scale-110 ${
+                          c.value === ac.hex ? 'border-neon ring-1 ring-neon' : 'border-border/50'
+                        }`}
+                        style={{ backgroundColor: ac.hex }}
+                      />
+                    ))}
                   </div>
                 </div>
               ))}
+              <p className="text-[10px] text-text-muted mt-2">
+                Colors by <Link href="/acrytech" className="text-neon hover:underline">Acrytech</Link> — Official Surface of the PPA Tour
+              </p>
             </section>
 
             {/* Extras */}
