@@ -176,9 +176,8 @@ export default async function HomePage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { name: 'Dominator Nets', brand: 'Dominator', emoji: '🏐', desc: 'Heavy-duty portable pickleball net systems built for serious play.', badge: 'Top Pick' },
-              { name: 'Dominator Hoops', brand: 'Dominator', emoji: '🏀', desc: 'Commercial-grade in-ground basketball systems with tempered glass.', badge: 'Top Pick' },
-              { name: 'Selkirk Pro Net', brand: 'Selkirk', emoji: '🏓', desc: 'Premium pickleball net system from the most trusted name in the sport.', badge: 'Premium' },
+              { name: 'Dominator Hoops', brand: 'Dominator', emoji: '🏀', desc: 'The best in-ground basketball system on the market. Tempered glass, commercial-grade.', badge: 'Top Pick' },
+              { name: 'Selkirk Pro Net', brand: 'Selkirk', emoji: '🏓', desc: 'Premium aluminum pickleball net system from the most trusted name in the sport.', badge: 'Premium' },
               { name: 'Acrytech Paint', brand: 'Acrytech', emoji: '🎨', desc: 'Professional acrylic sport surface coating — the industry standard.', badge: 'Pro Grade' },
             ].map((product) => (
               <Link
