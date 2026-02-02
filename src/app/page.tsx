@@ -9,6 +9,8 @@ import { createClient } from '@/lib/supabase/server';
 import { formatDate } from '@/lib/utils';
 import type { MapPin } from '@/components/ui/Map';
 
+export const revalidate = 3600; // refresh vendor data every hour
+
 const howItWorks = [
   { icon: Search, title: 'Search', description: 'Enter your ZIP code and sport type to find local contractors.' },
   { icon: Users, title: 'Compare', description: 'Browse profiles, read reviews, and compare quotes.' },
