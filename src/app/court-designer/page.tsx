@@ -187,67 +187,67 @@ function PickleballLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineCo
 
 /* ─── Basketball Court Lines ─── */
 function BasketballLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineColor, isHalf, rotated }: any) {
+  // courtW = horizontal dimension as rendered, courtL = vertical dimension as rendered
+  // For landscape basketball: courtW=94 (horiz), courtL=50 (vert)
+  // Baselines are on the SHORT sides (left/right in landscape), hoops near baselines
+  // "shortSide" = the 50' dimension, "longSide" = the 94' dimension
   const cx = offX + (totalW * s) / 2;
   const cy = offY + (totalL * s) / 2;
   const hw = (courtW * s) / 2;
   const hl = (courtL * s) / 2;
   const sw = 1.5;
 
-  // NBA dimensions (original orientation: 50' wide, 94' long)
-  const keyHalfW = 8 * s;    // 16' wide lane / 2
-  const keyDepth = 19 * s;   // 19' from baseline
-  const ftR = 6 * s;         // free throw circle radius
-  const threeR = 23.75 * s;  // 3-pt arc radius
-  const hoopDist = 5.25 * s; // hoop from baseline
-  const hoopR = 0.75 * s;
-  const bbW = 3 * s;         // backboard half-width
-  const centerR = 6 * s;
-  const restrictedR = 4 * s;
-  // Corner 3: 22' from basket center but constrained to court width
-  // In original: court is 50' wide, so corner 3 is at 3' from each sideline = 22' from center
-  const courtHalfShort = rotated ? (courtL * s) / 2 : (courtW * s) / 2; // half of the 50' side
-  const corner3Offset = courtHalfShort - 3 * s; // distance from center to corner 3 line
+  // Figure out which axis is the long one (94') and which is short (50')
+  const isHorizontalLong = courtW > courtL;
 
-  if (rotated) {
-    // Landscape: 94' horizontal (courtW), 50' vertical (courtL)
-    // Baselines are LEFT and RIGHT, hoops on left/right ends
-    // Key is horizontal, net/hoop at left and right
+  // NBA dimensions in feet
+  const KEY_W = 16;       // lane width
+  const KEY_DEPTH = 19;   // baseline to free throw line  
+  const FT_R = 6;         // free throw circle radius
+  const THREE_R = 23.75;  // 3-point arc radius from hoop center
+  const HOOP_DIST = 5.25; // hoop center from baseline
+  const HOOP_R = 0.75;    // hoop rim radius
+  const BB_W = 3;         // backboard half-width
+  const CENTER_R = 6;     // center circle radius
+  const RESTRICTED_R = 4; // restricted area radius
+  const CORNER_3 = 3;     // corner 3 distance from sideline
 
-    const drawEndH = (baselineX: number, dir: number) => {
-      const hoopX = baselineX + hoopDist * dir;
-      const ftX = baselineX + keyDepth * dir;
-      const arcDx = corner3Offset;
-      const arcDy = Math.sqrt(Math.max(0, threeR * threeR - arcDx * arcDx));
+  // The "short" dimension (50')
+  const shortDim = isHorizontalLong ? courtL : courtW;
+  const corner3Dist = (shortDim / 2 - CORNER_3) * s;
+
+  if (isHorizontalLong) {
+    // LANDSCAPE: long side (94') is horizontal, short side (50') is vertical
+    // Baselines are LEFT (cx-hw) and RIGHT (cx+hw), hoops near baselines
+
+    const drawEnd = (baseX: number, dir: number) => {
+      // dir: +1 = hoop on right side of baseX, -1 = hoop on left side
+      const hoopX = baseX + HOOP_DIST * s * dir;
+      const ftX = baseX + KEY_DEPTH * s * dir;
+      const keyX = dir > 0 ? baseX : baseX - KEY_DEPTH * s;
+      const arcDy = corner3Dist;
+      const arcDx = Math.sqrt(Math.max(0, (THREE_R * s) ** 2 - arcDy ** 2));
 
       return (
         <g>
-          {/* Key / lane (horizontal) */}
-          <rect
-            x={dir > 0 ? baselineX : baselineX - keyDepth}
-            y={cy - keyHalfW}
-            width={keyDepth}
-            height={keyHalfW * 2}
-          />
+          {/* Key / lane */}
+          <rect x={keyX} y={cy - (KEY_W / 2) * s} width={KEY_DEPTH * s} height={KEY_W * s} />
           {/* Free throw circle */}
-          <circle cx={ftX} cy={cy} r={ftR} />
-          {/* Backboard (vertical line) */}
-          <line x1={baselineX + 4 * s * dir} y1={cy - bbW} x2={baselineX + 4 * s * dir} y2={cy + bbW} strokeWidth={2.5} />
-          {/* Hoop */}
-          <circle cx={hoopX} cy={cy} r={hoopR} strokeWidth={1.5} />
+          <circle cx={ftX} cy={cy} r={FT_R * s} />
+          {/* Backboard */}
+          <line x1={baseX + 4 * s * dir} y1={cy - BB_W * s} x2={baseX + 4 * s * dir} y2={cy + BB_W * s} strokeWidth={2.5} />
+          {/* Hoop rim */}
+          <circle cx={hoopX} cy={cy} r={HOOP_R * s} strokeWidth={1.5} />
           {/* Restricted area arc */}
-          {dir > 0 ? (
-            <path d={`M ${baselineX} ${cy - restrictedR} A ${restrictedR} ${restrictedR} 0 0 1 ${baselineX} ${cy + restrictedR}`} />
-          ) : (
-            <path d={`M ${baselineX} ${cy - restrictedR} A ${restrictedR} ${restrictedR} 0 0 0 ${baselineX} ${cy + restrictedR}`} />
-          )}
-          {/* 3-point line */}
+          <path d={`M ${baseX} ${cy - RESTRICTED_R * s} A ${RESTRICTED_R * s} ${RESTRICTED_R * s} 0 0 ${dir > 0 ? 1 : 0} ${baseX} ${cy + RESTRICTED_R * s}`} />
+          {/* 3-point line: corner segments + arc */}
           {(() => {
-            const topY = cy - arcDx;
-            const botY = cy + arcDx;
-            const arcX = baselineX + arcDy * dir;
+            const topY = cy - arcDy;
+            const botY = cy + arcDy;
+            const arcX = baseX + arcDx * dir;
             const sweep = dir > 0 ? 1 : 0;
             return (
-              <path d={`M ${baselineX} ${topY} L ${arcX} ${topY} A ${threeR} ${threeR} 0 0 ${sweep} ${arcX} ${botY} L ${baselineX} ${botY}`} />
+              <path d={`M ${baseX} ${topY} L ${arcX} ${topY} A ${THREE_R * s} ${THREE_R * s} 0 0 ${sweep} ${arcX} ${botY} L ${baseX} ${botY}`} />
             );
           })()}
         </g>
@@ -259,54 +259,48 @@ function BasketballLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineCo
         <rect x={cx - hw} y={cy - hl} width={hw * 2} height={hl * 2} />
         {!isHalf && (
           <>
-            {/* Half court line (vertical) */}
             <line x1={cx} y1={cy - hl} x2={cx} y2={cy + hl} />
-            <circle cx={cx} cy={cy} r={centerR} />
-            {/* Left end */}
-            {drawEndH(cx - hw, 1)}
-            {/* Right end */}
-            {drawEndH(cx + hw, -1)}
+            <circle cx={cx} cy={cy} r={CENTER_R * s} />
+            {drawEnd(cx - hw, 1)}
+            {drawEnd(cx + hw, -1)}
           </>
         )}
         {isHalf && (
           <>
             <line x1={cx - hw} y1={cy - hl} x2={cx - hw} y2={cy + hl} strokeWidth={2} />
-            <path d={`M ${cx - hw} ${cy - centerR} A ${centerR} ${centerR} 0 0 1 ${cx - hw} ${cy + centerR}`} />
-            {drawEndH(cx + hw, -1)}
+            <path d={`M ${cx - hw} ${cy - CENTER_R * s} A ${CENTER_R * s} ${CENTER_R * s} 0 0 1 ${cx - hw} ${cy + CENTER_R * s}`} />
+            {drawEnd(cx + hw, -1)}
           </>
         )}
       </g>
     );
   }
 
-  // Portrait mode (original)
-  const drawEndV = (baselineY: number, dir: number) => {
-    const arcDx = corner3Offset;
-    const arcDy = Math.sqrt(Math.max(0, threeR * threeR - arcDx * arcDx));
+  // PORTRAIT: long side (94') is vertical, short side (50') is horizontal
+  // Baselines are TOP (cy-hl) and BOTTOM (cy+hl)
+  const corner3DistV = ((courtW / 2) - CORNER_3) * s;
+
+  const drawEndV = (baseY: number, dir: number) => {
+    const hoopY = baseY + HOOP_DIST * s * dir;
+    const ftY = baseY + KEY_DEPTH * s * dir;
+    const keyY = dir > 0 ? baseY : baseY - KEY_DEPTH * s;
+    const arcDx = corner3DistV;
+    const arcDy = Math.sqrt(Math.max(0, (THREE_R * s) ** 2 - arcDx ** 2));
 
     return (
       <g>
-        <rect
-          x={cx - keyHalfW}
-          y={dir > 0 ? baselineY : baselineY - keyDepth}
-          width={keyHalfW * 2}
-          height={keyDepth}
-        />
-        <circle cx={cx} cy={baselineY + keyDepth * dir} r={ftR} />
-        <line x1={cx - bbW} y1={baselineY + 4 * s * dir} x2={cx + bbW} y2={baselineY + 4 * s * dir} strokeWidth={2.5} />
-        <circle cx={cx} cy={baselineY + hoopDist * dir} r={hoopR} strokeWidth={1.5} />
-        {dir > 0 ? (
-          <path d={`M ${cx - restrictedR} ${baselineY} A ${restrictedR} ${restrictedR} 0 0 1 ${cx + restrictedR} ${baselineY}`} />
-        ) : (
-          <path d={`M ${cx - restrictedR} ${baselineY} A ${restrictedR} ${restrictedR} 0 0 0 ${cx + restrictedR} ${baselineY}`} />
-        )}
+        <rect x={cx - (KEY_W / 2) * s} y={keyY} width={KEY_W * s} height={KEY_DEPTH * s} />
+        <circle cx={cx} cy={ftY} r={FT_R * s} />
+        <line x1={cx - BB_W * s} y1={baseY + 4 * s * dir} x2={cx + BB_W * s} y2={baseY + 4 * s * dir} strokeWidth={2.5} />
+        <circle cx={cx} cy={hoopY} r={HOOP_R * s} strokeWidth={1.5} />
+        <path d={`M ${cx - RESTRICTED_R * s} ${baseY} A ${RESTRICTED_R * s} ${RESTRICTED_R * s} 0 0 ${dir > 0 ? 1 : 0} ${cx + RESTRICTED_R * s} ${baseY}`} />
         {(() => {
           const leftX = cx - arcDx;
           const rightX = cx + arcDx;
-          const arcY = baselineY + arcDy * dir;
+          const arcY = baseY + arcDy * dir;
           const sweep = dir > 0 ? 1 : 0;
           return (
-            <path d={`M ${leftX} ${baselineY} L ${leftX} ${arcY} A ${threeR} ${threeR} 0 0 ${sweep} ${rightX} ${arcY} L ${rightX} ${baselineY}`} />
+            <path d={`M ${leftX} ${baseY} L ${leftX} ${arcY} A ${THREE_R * s} ${THREE_R * s} 0 0 ${sweep} ${rightX} ${arcY} L ${rightX} ${baseY}`} />
           );
         })()}
       </g>
@@ -319,7 +313,7 @@ function BasketballLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineCo
       {!isHalf && (
         <>
           <line x1={cx - hw} y1={cy} x2={cx + hw} y2={cy} />
-          <circle cx={cx} cy={cy} r={centerR} />
+          <circle cx={cx} cy={cy} r={CENTER_R * s} />
           {drawEndV(cy - hl, 1)}
           {drawEndV(cy + hl, -1)}
         </>
@@ -327,7 +321,7 @@ function BasketballLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineCo
       {isHalf && (
         <>
           <line x1={cx - hw} y1={cy - hl} x2={cx + hw} y2={cy - hl} strokeWidth={2} />
-          <path d={`M ${cx - centerR} ${cy - hl} A ${centerR} ${centerR} 0 0 1 ${cx + centerR} ${cy - hl}`} />
+          <path d={`M ${cx - CENTER_R * s} ${cy - hl} A ${CENTER_R * s} ${CENTER_R * s} 0 0 1 ${cx + CENTER_R * s} ${cy - hl}`} />
           {drawEndV(cy + hl, -1)}
         </>
       )}
