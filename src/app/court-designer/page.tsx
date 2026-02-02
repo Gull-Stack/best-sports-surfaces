@@ -97,30 +97,50 @@ function GridPattern() {
 }
 
 /* ─── Tennis Court Lines ─── */
-function TennisLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineColor }: any) {
+function TennisLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineColor, rotated }: any) {
   const cx = offX + (totalW * s) / 2;
   const cy = offY + (totalL * s) / 2;
+  // Original tennis: 36' wide (doubles), 78' long, 27' wide (singles), 21' service depth
+  // courtW/courtL are already swapped if rotated
   const hw = (courtW * s) / 2;
   const hl = (courtL * s) / 2;
-  const singlesHW = (27 * s) / 2; // singles court is 27' wide
-  const serviceDepth = 21 * s; // service line 21' from net
+  // Singles and service use original dimensions mapped to correct axis
+  const singlesHalf = rotated ? (27 * s) / 2 : (27 * s) / 2; // singles lines parallel to length
+  const serviceDist = 21 * s; // service line distance from net
   const sw = 1.5;
+
+  if (rotated) {
+    // Landscape: length is horizontal (78'), width is vertical (36')
+    // Net is vertical at center, service lines are vertical
+    return (
+      <g stroke={lineColor} strokeWidth={sw} fill="none">
+        <rect x={cx - hw} y={cy - hl} width={hw * 2} height={hl * 2} />
+        {/* Singles sidelines (horizontal lines, 27' apart centered) */}
+        <line x1={cx - hw} y1={cy - singlesHalf} x2={cx + hw} y2={cy - singlesHalf} />
+        <line x1={cx - hw} y1={cy + singlesHalf} x2={cx + hw} y2={cy + singlesHalf} />
+        {/* Net (vertical at center) */}
+        <line x1={cx} y1={cy - hl} x2={cx} y2={cy + hl} strokeWidth={2.5} />
+        {/* Service lines (vertical) */}
+        <line x1={cx - serviceDist} y1={cy - singlesHalf} x2={cx - serviceDist} y2={cy + singlesHalf} />
+        <line x1={cx + serviceDist} y1={cy - singlesHalf} x2={cx + serviceDist} y2={cy + singlesHalf} />
+        {/* Center service line */}
+        <line x1={cx - serviceDist} y1={cy} x2={cx + serviceDist} y2={cy} />
+        {/* Center marks */}
+        <line x1={cx - hw} y1={cy} x2={cx - hw + 4} y2={cy} />
+        <line x1={cx + hw} y1={cy} x2={cx + hw - 4} y2={cy} />
+      </g>
+    );
+  }
 
   return (
     <g stroke={lineColor} strokeWidth={sw} fill="none">
-      {/* Court outline (doubles) */}
       <rect x={cx - hw} y={cy - hl} width={hw * 2} height={hl * 2} />
-      {/* Singles sidelines */}
-      <line x1={cx - singlesHW} y1={cy - hl} x2={cx - singlesHW} y2={cy + hl} />
-      <line x1={cx + singlesHW} y1={cy - hl} x2={cx + singlesHW} y2={cy + hl} />
-      {/* Net */}
+      <line x1={cx - singlesHalf} y1={cy - hl} x2={cx - singlesHalf} y2={cy + hl} />
+      <line x1={cx + singlesHalf} y1={cy - hl} x2={cx + singlesHalf} y2={cy + hl} />
       <line x1={cx - hw} y1={cy} x2={cx + hw} y2={cy} strokeWidth={2.5} />
-      {/* Service lines */}
-      <line x1={cx - singlesHW} y1={cy - serviceDepth} x2={cx + singlesHW} y2={cy - serviceDepth} />
-      <line x1={cx - singlesHW} y1={cy + serviceDepth} x2={cx + singlesHW} y2={cy + serviceDepth} />
-      {/* Center service line */}
-      <line x1={cx} y1={cy - serviceDepth} x2={cx} y2={cy + serviceDepth} />
-      {/* Center marks */}
+      <line x1={cx - singlesHalf} y1={cy - serviceDist} x2={cx + singlesHalf} y2={cy - serviceDist} />
+      <line x1={cx - singlesHalf} y1={cy + serviceDist} x2={cx + singlesHalf} y2={cy + serviceDist} />
+      <line x1={cx} y1={cy - serviceDist} x2={cx} y2={cy + serviceDist} />
       <line x1={cx} y1={cy - hl} x2={cx} y2={cy - hl + 4} />
       <line x1={cx} y1={cy + hl} x2={cx} y2={cy + hl - 4} />
     </g>
@@ -128,7 +148,7 @@ function TennisLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineColor 
 }
 
 /* ─── Pickleball Court Lines ─── */
-function PickleballLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineColor }: any) {
+function PickleballLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineColor, rotated }: any) {
   const cx = offX + (totalW * s) / 2;
   const cy = offY + (totalL * s) / 2;
   const hw = (courtW * s) / 2;
@@ -136,15 +156,29 @@ function PickleballLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineCo
   const kitchen = 7 * s;
   const sw = 1.5;
 
+  if (rotated) {
+    // Landscape: length horizontal (44'), width vertical (20')
+    return (
+      <g stroke={lineColor} strokeWidth={sw} fill="none">
+        <rect x={cx - hw} y={cy - hl} width={hw * 2} height={hl * 2} />
+        {/* Net (vertical at center) */}
+        <line x1={cx} y1={cy - hl} x2={cx} y2={cy + hl} strokeWidth={2.5} />
+        {/* Kitchen / non-volley zone (vertical lines) */}
+        <line x1={cx - kitchen} y1={cy - hl} x2={cx - kitchen} y2={cy + hl} strokeDasharray="4 2" />
+        <line x1={cx + kitchen} y1={cy - hl} x2={cx + kitchen} y2={cy + hl} strokeDasharray="4 2" />
+        {/* Center line (horizontal, each half) */}
+        <line x1={cx - hw} y1={cy} x2={cx - kitchen} y2={cy} />
+        <line x1={cx + hw} y1={cy} x2={cx + kitchen} y2={cy} />
+      </g>
+    );
+  }
+
   return (
     <g stroke={lineColor} strokeWidth={sw} fill="none">
       <rect x={cx - hw} y={cy - hl} width={hw * 2} height={hl * 2} />
-      {/* Net */}
       <line x1={cx - hw} y1={cy} x2={cx + hw} y2={cy} strokeWidth={2.5} />
-      {/* Kitchen / non-volley zone */}
       <line x1={cx - hw} y1={cy - kitchen} x2={cx + hw} y2={cy - kitchen} strokeDasharray="4 2" />
       <line x1={cx - hw} y1={cy + kitchen} x2={cx + hw} y2={cy + kitchen} strokeDasharray="4 2" />
-      {/* Center line (each half) */}
       <line x1={cx} y1={cy - hl} x2={cx} y2={cy - kitchen} />
       <line x1={cx} y1={cy + hl} x2={cx} y2={cy + kitchen} />
     </g>
@@ -152,65 +186,127 @@ function PickleballLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineCo
 }
 
 /* ─── Basketball Court Lines ─── */
-function BasketballLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineColor, isHalf }: any) {
+function BasketballLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineColor, isHalf, rotated }: any) {
   const cx = offX + (totalW * s) / 2;
   const cy = offY + (totalL * s) / 2;
   const hw = (courtW * s) / 2;
   const hl = (courtL * s) / 2;
   const sw = 1.5;
 
-  // Key dimensions (NBA)
-  const keyW = 16 * s;     // 16' wide lane (NBA)
-  const keyL = 19 * s;     // 19' from baseline to free throw line
-  const ftRadius = 6 * s;  // free throw circle 6' radius
-  const threeR = 23.75 * s; // 3-pt arc radius from center of hoop
-  const cornerDist = 3 * s; // corner 3 is 3' from sideline
-  const hoopDist = 5.25 * s; // center of hoop 5.25' from baseline
-  const hoopR = 0.75 * s;   // hoop rim radius
-  const backboardW = 6 * s;
+  // NBA dimensions (original orientation: 50' wide, 94' long)
+  const keyHalfW = 8 * s;    // 16' wide lane / 2
+  const keyDepth = 19 * s;   // 19' from baseline
+  const ftR = 6 * s;         // free throw circle radius
+  const threeR = 23.75 * s;  // 3-pt arc radius
+  const hoopDist = 5.25 * s; // hoop from baseline
+  const hoopR = 0.75 * s;
+  const bbW = 3 * s;         // backboard half-width
   const centerR = 6 * s;
-  const restrictedR = 4 * s; // restricted area arc 4' radius
+  const restrictedR = 4 * s;
+  // Corner 3: 22' from basket center but constrained to court width
+  // In original: court is 50' wide, so corner 3 is at 3' from each sideline = 22' from center
+  const courtHalfShort = rotated ? (courtL * s) / 2 : (courtW * s) / 2; // half of the 50' side
+  const corner3Offset = courtHalfShort - 3 * s; // distance from center to corner 3 line
 
-  const drawEnd = (baselineY: number, dir: number) => {
-    const hoopY = baselineY + hoopDist * dir;
-    const ftY = baselineY + keyL * dir;
-    const cornerX_L = cx - hw + cornerDist;
-    const cornerX_R = cx + hw - cornerDist;
-    // How far the corner 3 line extends before the arc begins
-    const cornerLineHalf = (courtW / 2 - 3) * s;
-    const arcStartDx = cornerLineHalf;
-    const arcStartDy = Math.sqrt(Math.max(0, threeR * threeR - arcStartDx * arcStartDx));
+  if (rotated) {
+    // Landscape: 94' horizontal (courtW), 50' vertical (courtL)
+    // Baselines are LEFT and RIGHT, hoops on left/right ends
+    // Key is horizontal, net/hoop at left and right
+
+    const drawEndH = (baselineX: number, dir: number) => {
+      const hoopX = baselineX + hoopDist * dir;
+      const ftX = baselineX + keyDepth * dir;
+      const arcDx = corner3Offset;
+      const arcDy = Math.sqrt(Math.max(0, threeR * threeR - arcDx * arcDx));
+
+      return (
+        <g>
+          {/* Key / lane (horizontal) */}
+          <rect
+            x={dir > 0 ? baselineX : baselineX - keyDepth}
+            y={cy - keyHalfW}
+            width={keyDepth}
+            height={keyHalfW * 2}
+          />
+          {/* Free throw circle */}
+          <circle cx={ftX} cy={cy} r={ftR} />
+          {/* Backboard (vertical line) */}
+          <line x1={baselineX + 4 * s * dir} y1={cy - bbW} x2={baselineX + 4 * s * dir} y2={cy + bbW} strokeWidth={2.5} />
+          {/* Hoop */}
+          <circle cx={hoopX} cy={cy} r={hoopR} strokeWidth={1.5} />
+          {/* Restricted area arc */}
+          {dir > 0 ? (
+            <path d={`M ${baselineX} ${cy - restrictedR} A ${restrictedR} ${restrictedR} 0 0 1 ${baselineX} ${cy + restrictedR}`} />
+          ) : (
+            <path d={`M ${baselineX} ${cy - restrictedR} A ${restrictedR} ${restrictedR} 0 0 0 ${baselineX} ${cy + restrictedR}`} />
+          )}
+          {/* 3-point line */}
+          {(() => {
+            const topY = cy - arcDx;
+            const botY = cy + arcDx;
+            const arcX = baselineX + arcDy * dir;
+            const sweep = dir > 0 ? 1 : 0;
+            return (
+              <path d={`M ${baselineX} ${topY} L ${arcX} ${topY} A ${threeR} ${threeR} 0 0 ${sweep} ${arcX} ${botY} L ${baselineX} ${botY}`} />
+            );
+          })()}
+        </g>
+      );
+    };
+
+    return (
+      <g stroke={lineColor} strokeWidth={sw} fill="none">
+        <rect x={cx - hw} y={cy - hl} width={hw * 2} height={hl * 2} />
+        {!isHalf && (
+          <>
+            {/* Half court line (vertical) */}
+            <line x1={cx} y1={cy - hl} x2={cx} y2={cy + hl} />
+            <circle cx={cx} cy={cy} r={centerR} />
+            {/* Left end */}
+            {drawEndH(cx - hw, 1)}
+            {/* Right end */}
+            {drawEndH(cx + hw, -1)}
+          </>
+        )}
+        {isHalf && (
+          <>
+            <line x1={cx - hw} y1={cy - hl} x2={cx - hw} y2={cy + hl} strokeWidth={2} />
+            <path d={`M ${cx - hw} ${cy - centerR} A ${centerR} ${centerR} 0 0 1 ${cx - hw} ${cy + centerR}`} />
+            {drawEndH(cx + hw, -1)}
+          </>
+        )}
+      </g>
+    );
+  }
+
+  // Portrait mode (original)
+  const drawEndV = (baselineY: number, dir: number) => {
+    const arcDx = corner3Offset;
+    const arcDy = Math.sqrt(Math.max(0, threeR * threeR - arcDx * arcDx));
 
     return (
       <g>
-        {/* Key / lane */}
         <rect
-          x={cx - keyW / 2}
-          y={dir > 0 ? baselineY : baselineY - keyL}
-          width={keyW}
-          height={keyL}
+          x={cx - keyHalfW}
+          y={dir > 0 ? baselineY : baselineY - keyDepth}
+          width={keyHalfW * 2}
+          height={keyDepth}
         />
-        {/* Free throw circle */}
-        <circle cx={cx} cy={ftY} r={ftRadius} />
-        {/* Backboard */}
-        <line x1={cx - backboardW / 2} y1={baselineY + 4 * s * dir} x2={cx + backboardW / 2} y2={baselineY + 4 * s * dir} strokeWidth={2.5} />
-        {/* Hoop */}
-        <circle cx={cx} cy={hoopY} r={hoopR} strokeWidth={1.5} />
-        {/* Restricted area arc */}
+        <circle cx={cx} cy={baselineY + keyDepth * dir} r={ftR} />
+        <line x1={cx - bbW} y1={baselineY + 4 * s * dir} x2={cx + bbW} y2={baselineY + 4 * s * dir} strokeWidth={2.5} />
+        <circle cx={cx} cy={baselineY + hoopDist * dir} r={hoopR} strokeWidth={1.5} />
         {dir > 0 ? (
           <path d={`M ${cx - restrictedR} ${baselineY} A ${restrictedR} ${restrictedR} 0 0 1 ${cx + restrictedR} ${baselineY}`} />
         ) : (
           <path d={`M ${cx - restrictedR} ${baselineY} A ${restrictedR} ${restrictedR} 0 0 0 ${cx + restrictedR} ${baselineY}`} />
         )}
-        {/* 3-point line */}
         {(() => {
-          const leftX = cx - arcStartDx;
-          const rightX = cx + arcStartDx;
-          const arcY = baselineY + arcStartDy * dir;
+          const leftX = cx - arcDx;
+          const rightX = cx + arcDx;
+          const arcY = baselineY + arcDy * dir;
           const sweep = dir > 0 ? 1 : 0;
-          const largeArc = 0;
           return (
-            <path d={`M ${leftX} ${baselineY} L ${leftX} ${arcY} A ${threeR} ${threeR} 0 ${largeArc} ${sweep} ${rightX} ${arcY} L ${rightX} ${baselineY}`} />
+            <path d={`M ${leftX} ${baselineY} L ${leftX} ${arcY} A ${threeR} ${threeR} 0 0 ${sweep} ${rightX} ${arcY} L ${rightX} ${baselineY}`} />
           );
         })()}
       </g>
@@ -219,28 +315,20 @@ function BasketballLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineCo
 
   return (
     <g stroke={lineColor} strokeWidth={sw} fill="none">
-      {/* Court outline */}
       <rect x={cx - hw} y={cy - hl} width={hw * 2} height={hl * 2} />
       {!isHalf && (
         <>
-          {/* Half court line */}
           <line x1={cx - hw} y1={cy} x2={cx + hw} y2={cy} />
-          {/* Center circle */}
           <circle cx={cx} cy={cy} r={centerR} />
-          {/* Top end (baseline at top) */}
-          {drawEnd(cy - hl, 1)}
-          {/* Bottom end (baseline at bottom) */}
-          {drawEnd(cy + hl, -1)}
+          {drawEndV(cy - hl, 1)}
+          {drawEndV(cy + hl, -1)}
         </>
       )}
       {isHalf && (
         <>
-          {/* Half-court line at top */}
           <line x1={cx - hw} y1={cy - hl} x2={cx + hw} y2={cy - hl} strokeWidth={2} />
-          {/* Center circle (half) */}
           <path d={`M ${cx - centerR} ${cy - hl} A ${centerR} ${centerR} 0 0 1 ${cx + centerR} ${cy - hl}`} />
-          {/* Hoop end at bottom */}
-          {drawEnd(cy + hl, -1)}
+          {drawEndV(cy + hl, -1)}
         </>
       )}
     </g>
@@ -249,10 +337,14 @@ function BasketballLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineCo
 
 /* ─── Multi-Sport Lines (Tennis + Pickleball overlay) ─── */
 function MultiSportLines(props: any) {
+  const tW = props.rotated ? 78 : 36;
+  const tL = props.rotated ? 36 : 78;
+  const pW = props.rotated ? 44 : 20;
+  const pL = props.rotated ? 20 : 44;
   return (
     <>
-      <TennisLines {...props} courtW={36} courtL={78} />
-      <PickleballLines {...props} courtW={20} courtL={44} />
+      <TennisLines {...props} courtW={tW} courtL={tL} />
+      <PickleballLines {...props} courtW={pW} courtL={pL} />
     </>
   );
 }
@@ -348,12 +440,16 @@ export default function CourtDesignerPage() {
   // SVG dimensions — landscape orientation
   const SVG_W = 700;
   const SVG_H = 400;
-  // Swap width/length for landscape rendering (length = longer side goes horizontal)
-  const renderW = Math.max(width, length);
-  const renderH = Math.min(width, length);
+  // Landscape: always render longer side horizontally
+  const isRotated = length > width;
+  const renderW = isRotated ? length : width;
+  const renderH = isRotated ? width : length;
   const { s, offX, offY } = useMemo(() => scaleFactory(renderW, renderH, SVG_W, SVG_H), [renderW, renderH]);
 
-  const lineProps = { s, offX, offY, courtW: config.courtW, courtL: config.courtL, totalW: renderW, totalL: renderH, lineColor };
+  // When rotated, swap court dimensions too so lines draw horizontally
+  const renderCourtW = isRotated ? config.courtL : config.courtW;
+  const renderCourtL = isRotated ? config.courtW : config.courtL;
+  const lineProps = { s, offX, offY, courtW: renderCourtW, courtL: renderCourtL, totalW: renderW, totalL: renderH, lineColor, rotated: isRotated };
 
   const handleDownload = useCallback(async () => {
     const svgEl = svgRef.current;
@@ -566,18 +662,18 @@ export default function CourtDesignerPage() {
 
                   {/* Playing area */}
                   <rect
-                    x={offX + ((renderW - config.courtW) * s) / 2}
-                    y={offY + ((renderH - config.courtL) * s) / 2}
-                    width={config.courtW * s}
-                    height={config.courtL * s}
+                    x={offX + ((renderW - renderCourtW) * s) / 2}
+                    y={offY + ((renderH - renderCourtL) * s) / 2}
+                    width={renderCourtW * s}
+                    height={renderCourtL * s}
                     fill={playColor}
                   />
 
                   {/* Court lines */}
                   {sport === 'tennis' && <TennisLines {...lineProps} />}
                   {sport === 'pickleball' && <PickleballLines {...lineProps} />}
-                  {sport === 'basketball' && <BasketballLines {...lineProps} isHalf={false} />}
-                  {sport === 'basketball-half' && <BasketballLines {...lineProps} isHalf={true} />}
+                  {sport === 'basketball' && <BasketballLines {...lineProps} isHalf={false} rotated={isRotated} />}
+                  {sport === 'basketball-half' && <BasketballLines {...lineProps} isHalf={true} rotated={isRotated} />}
                   {sport === 'multi-sport' && <MultiSportLines {...lineProps} />}
 
                   {/* Extras */}
