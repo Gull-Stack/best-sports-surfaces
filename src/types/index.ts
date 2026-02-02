@@ -1,5 +1,5 @@
 export type VendorTier = 'free' | 'paid' | 'featured';
-export type SportType = 'tennis' | 'basketball' | 'pickleball' | 'soccer' | 'football' | 'baseball' | 'track' | 'multi-sport' | 'volleyball' | 'gym-flooring';
+export type SportType = 'tennis' | 'basketball' | 'pickleball' | 'soccer' | 'football' | 'baseball' | 'track' | 'multi-sport' | 'volleyball' | 'gym-flooring' | 'padel';
 export type ServiceType = 'new-construction' | 'resurfacing' | 'repair' | 'maintenance' | 'lighting' | 'fencing' | 'design';
 
 export interface Vendor {
