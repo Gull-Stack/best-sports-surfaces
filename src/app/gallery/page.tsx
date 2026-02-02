@@ -5,10 +5,16 @@ import { SITE_NAME } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: 'Project Gallery - Sports Surface Installations',
-  description: 'Browse real sports surface installations from top contractors. Pickleball courts, tennis courts, basketball courts, multi-sport courts, and commercial builds by Precision Pro Courts and more.',
+  description: 'Browse real sports surface installations from top contractors. Pickleball courts, tennis courts, basketball courts, multi-sport courts, and commercial builds.',
 };
 
 const galleryImages = [
+  {
+    src: '/gallery/pickleball-action-1.jpg',
+    alt: 'Professional PPA Tour pickleball match with packed stadium crowds',
+    type: 'Tournament' as const,
+    sport: 'Pickleball',
+  },
   {
     src: '/gallery/precision-pro-courts-1.jpg',
     alt: 'Aerial view of multi-sport complex with pickleball courts, basketball hoop, and gaga pit',
@@ -18,9 +24,43 @@ const galleryImages = [
     sport: 'Multi-Sport',
   },
   {
+    src: '/gallery/just-courts-2.jpg',
+    alt: 'Aerial view of tennis and pickleball court facility',
+    type: 'Commercial' as const,
+    sport: 'Tennis',
+  },
+  {
+    src: '/gallery/precision-pro-courts-6.jpg',
+    alt: 'Utah Jazz themed basketball court with custom graphics',
+    type: 'Residential' as const,
+    vendor: 'Precision Pro Courts',
+    vendorSlug: 'precision-pro-courts',
+    sport: 'Basketball',
+  },
+  {
+    src: '/gallery/just-courts-3.jpg',
+    alt: 'Aerial view of The Masters tournament pickleball courts',
+    type: 'Tournament' as const,
+    sport: 'Pickleball',
+  },
+  {
     src: '/gallery/precision-pro-courts-2.jpg',
     alt: 'Backyard pickleball and basketball court with mountain views',
     type: 'Residential' as const,
+    vendor: 'Precision Pro Courts',
+    vendorSlug: 'precision-pro-courts',
+    sport: 'Pickleball',
+  },
+  {
+    src: '/gallery/just-courts-1.jpg',
+    alt: 'Indoor PICKLR facility with multiple courts and active players',
+    type: 'Commercial' as const,
+    sport: 'Pickleball',
+  },
+  {
+    src: '/gallery/precision-pro-courts-7.jpg',
+    alt: 'Commercial pickleball courts at office complex',
+    type: 'Commercial' as const,
     vendor: 'Precision Pro Courts',
     vendorSlug: 'precision-pro-courts',
     sport: 'Pickleball',
@@ -34,36 +74,12 @@ const galleryImages = [
     sport: 'Basketball',
   },
   {
-    src: '/gallery/precision-pro-courts-4.jpg',
-    alt: 'Garage-side pickleball and basketball court in residential setting',
-    type: 'Residential' as const,
-    vendor: 'Precision Pro Courts',
-    vendorSlug: 'precision-pro-courts',
-    sport: 'Pickleball',
-  },
-  {
     src: '/gallery/precision-pro-courts-5.jpg',
     alt: 'Backyard basketball and pickleball court with landscaped yard',
     type: 'Residential' as const,
     vendor: 'Precision Pro Courts',
     vendorSlug: 'precision-pro-courts',
     sport: 'Multi-Sport',
-  },
-  {
-    src: '/gallery/precision-pro-courts-6.jpg',
-    alt: 'Utah Jazz themed basketball court with custom graphics',
-    type: 'Residential' as const,
-    vendor: 'Precision Pro Courts',
-    vendorSlug: 'precision-pro-courts',
-    sport: 'Basketball',
-  },
-  {
-    src: '/gallery/precision-pro-courts-7.jpg',
-    alt: 'Commercial pickleball courts at office complex',
-    type: 'Commercial' as const,
-    vendor: 'Precision Pro Courts',
-    vendorSlug: 'precision-pro-courts',
-    sport: 'Pickleball',
   },
   {
     src: '/gallery/precision-pro-courts-8.jpg',
@@ -74,8 +90,16 @@ const galleryImages = [
     sport: 'Pickleball',
   },
   {
+    src: '/gallery/precision-pro-courts-4.jpg',
+    alt: 'Garage-side pickleball and basketball court in residential setting',
+    type: 'Residential' as const,
+    vendor: 'Precision Pro Courts',
+    vendorSlug: 'precision-pro-courts',
+    sport: 'Pickleball',
+  },
+  {
     src: '/gallery/precision-pro-courts-9.jpg',
-    alt: 'Professional court installation in progress by Precision Pro Courts',
+    alt: 'Professional court installation by Precision Pro Courts',
     type: 'Residential' as const,
     vendor: 'Precision Pro Courts',
     vendorSlug: 'precision-pro-courts',
@@ -91,13 +115,12 @@ const galleryImages = [
   },
 ];
 
-const typeColors = {
+const typeColors: Record<string, string> = {
   Residential: 'bg-neon-subtle text-neon',
   Municipal: 'bg-accent/10 text-accent',
   Commercial: 'bg-amber-500/10 text-amber-400',
+  Tournament: 'bg-purple-500/10 text-purple-400',
 };
-
-const sportFilters = ['All', ...Array.from(new Set(galleryImages.map((img) => img.sport)))];
 
 export default function GalleryPage() {
   return (
@@ -112,8 +135,8 @@ export default function GalleryPage() {
           Sports Surface <span className="neon-text">Gallery</span>
         </h1>
         <p className="text-lg text-text-secondary max-w-2xl mx-auto">
-          Browse real installations from verified contractors. Every photo is from an actual build — 
-          no stock images, no filler.
+          Browse real installations from verified contractors and tournament venues. 
+          Every photo is from an actual build — no stock images, no filler.
         </p>
       </div>
 
@@ -143,15 +166,15 @@ export default function GalleryPage() {
           <div
             key={i}
             className={`group relative rounded-xl overflow-hidden border border-border hover:border-neon/40 transition-all ${
-              i === 0 ? 'sm:col-span-2 sm:row-span-2' : ''
+              i === 0 || i === 4 ? 'sm:col-span-2' : ''
             }`}
           >
-            <div className={`${i === 0 ? 'aspect-[4/3]' : 'aspect-[4/3]'} overflow-hidden`}>
+            <div className={`${i === 0 || i === 4 ? 'aspect-[2/1]' : 'aspect-[4/3]'} overflow-hidden`}>
               <img
                 src={image.src}
                 alt={image.alt}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                loading={i < 3 ? 'eager' : 'lazy'}
+                loading={i < 4 ? 'eager' : 'lazy'}
               />
             </div>
             {/* Overlay on hover */}
@@ -165,25 +188,27 @@ export default function GalleryPage() {
                 </span>
               </div>
               <p className="text-sm text-text-primary font-medium">{image.alt}</p>
-              <Link
-                href={`/vendors/${image.vendorSlug}`}
-                className="text-xs text-neon mt-1.5 flex items-center gap-1 hover:underline"
-              >
-                <Star className="h-3 w-3" /> Built by {image.vendor}
-              </Link>
+              {'vendor' in image && image.vendor && image.vendorSlug && (
+                <Link
+                  href={`/vendors/${image.vendorSlug}`}
+                  className="text-xs text-neon mt-1.5 flex items-center gap-1 hover:underline"
+                >
+                  <Star className="h-3 w-3" /> Built by {image.vendor}
+                </Link>
+              )}
             </div>
           </div>
         ))}
       </div>
 
-      {/* Featured Vendor Attribution */}
+      {/* Attribution */}
       <div className="mt-10 text-center">
         <p className="text-text-muted text-sm">
-          Photos on this page courtesy of{' '}
+          Photos courtesy of{' '}
           <Link href="/vendors/precision-pro-courts" className="text-neon hover:underline">
             Precision Pro Courts
           </Link>
-          {' '}— a premium contractor serving Utah and surrounding states.
+          {' '}and Just Courts.
         </p>
       </div>
 
