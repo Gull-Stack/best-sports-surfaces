@@ -37,7 +37,6 @@ export const NAV_LINKS = [
   { href: '/gallery', label: 'Gallery' },
   { href: '/cost-estimator', label: 'Cost Estimator' },
   { href: '/products', label: 'Products' },
-  { href: '/blog', label: 'Blog' },
   { href: '/locations', label: 'Locations' },
   { href: '/pricing', label: 'For Contractors' },
   { href: '/contact', label: 'Contact' },
