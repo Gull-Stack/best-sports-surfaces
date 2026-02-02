@@ -556,7 +556,12 @@ export default function CourtDesignerPage() {
 
             {/* Color Customization */}
             <section className="rounded-xl border border-border bg-surface-card p-5">
-              <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-text-secondary">Colors</h2>
+              <div className="mb-3 flex items-center gap-2">
+                <h2 className="text-sm font-semibold uppercase tracking-wider text-text-secondary">Colors</h2>
+                <Link href="/acrytech" className="opacity-70 hover:opacity-100 transition-opacity">
+                  <img src="/logos/acrytech-logo-white.png" alt="Acrytech" className="h-4 w-auto" />
+                </Link>
+              </div>
               {/* Palettes */}
               <div className="mb-4 flex flex-wrap gap-2">
                 {PALETTES.map((p, i) => (
@@ -608,10 +613,6 @@ export default function CourtDesignerPage() {
                   </div>
                 </div>
               ))}
-              <Link href="/acrytech" className="mt-3 flex items-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
-                <img src="/logos/acrytech-logo-white.png" alt="Acrytech" className="h-4 w-auto" />
-                <span className="text-[10px] text-text-muted">Official Surface of the PPA Tour</span>
-              </Link>
             </section>
 
             {/* Extras */}
