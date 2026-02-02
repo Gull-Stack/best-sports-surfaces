@@ -557,9 +557,9 @@ export default function CourtDesignerPage() {
             {/* Color Customization */}
             <section className="rounded-xl border border-border bg-surface-card p-5">
               <div className="mb-3 flex items-center gap-2">
-                <h2 className="text-sm font-semibold uppercase tracking-wider text-text-secondary">Colors</h2>
+                <h2 className="text-sm font-semibold uppercase tracking-wider text-text-secondary">Colors <span className="lowercase font-normal">by</span></h2>
                 <Link href="/acrytech" className="opacity-70 hover:opacity-100 transition-opacity">
-                  <img src="/logos/acrytech-logo-white.png" alt="Acrytech" className="h-4 w-auto" />
+                  <img src="/logos/acrytech-logo-white.png" alt="Acrytech" className="h-5 w-auto" />
                 </Link>
               </div>
               {/* Palettes */}
