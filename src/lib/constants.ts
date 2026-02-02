@@ -34,6 +34,7 @@ export const VENDOR_TIERS = {
 export const NAV_LINKS = [
   { href: '/', label: 'Home' },
   { href: '/search', label: 'Find Contractors' },
+  { href: '/gallery', label: 'Gallery' },
   { href: '/cost-estimator', label: 'Cost Estimator' },
   { href: '/blog', label: 'Blog' },
   { href: '/locations', label: 'Locations' },
