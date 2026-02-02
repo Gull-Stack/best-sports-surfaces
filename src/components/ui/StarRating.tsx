@@ -15,15 +15,15 @@ export default function StarRating({ rating, size = 16, showValue = false, count
     } else if (rating >= i - 0.5) {
       stars.push(<StarHalf key={i} className="text-amber-400 fill-amber-400" size={size} />);
     } else {
-      stars.push(<Star key={i} className="text-gray-300" size={size} />);
+      stars.push(<Star key={i} className="text-text-muted/30" size={size} />);
     }
   }
 
   return (
     <div className="flex items-center gap-1">
       <div className="flex">{stars}</div>
-      {showValue && <span className="text-sm font-medium text-gray-700 ml-1">{rating.toFixed(1)}</span>}
-      {count !== undefined && <span className="text-sm text-gray-500">({count})</span>}
+      {showValue && <span className="text-sm font-medium text-text-secondary ml-1">{rating.toFixed(1)}</span>}
+      {count !== undefined && <span className="text-sm text-text-muted">({count})</span>}
     </div>
   );
 }

@@ -33,8 +33,8 @@ export default async function LocationsPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
       <div className="text-center mb-10">
-        <h1 className="text-3xl font-bold text-gray-900">Sports Surface Contractors by City</h1>
-        <p className="text-gray-600 mt-2 max-w-xl mx-auto">
+        <h1 className="text-3xl font-bold text-text-primary">Sports Surface Contractors by City</h1>
+        <p className="text-text-secondary mt-2 max-w-xl mx-auto">
           Browse sports surface contractors in {cities.length} cities across the United States.
         </p>
       </div>
@@ -42,18 +42,18 @@ export default async function LocationsPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {states.map((state) => (
           <div key={state}>
-            <h2 className="text-lg font-bold text-gray-900 mb-3 border-b pb-2">{state}</h2>
+            <h2 className="text-lg font-bold text-text-primary mb-3 border-b pb-2">{state}</h2>
             <ul className="space-y-1.5">
               {citiesByState[state].map((city) => (
                 <li key={city.id}>
                   <Link
                     href={`/locations/${city.slug}`}
-                    className="flex items-center gap-1.5 text-sm text-gray-600 hover:text-brand transition-colors"
+                    className="flex items-center gap-1.5 text-sm text-text-secondary hover:text-neon transition-colors"
                   >
                     <MapPin className="h-3.5 w-3.5 flex-shrink-0" />
                     {city.name}, {city.state_code}
                     {city.population > 0 && (
-                      <span className="text-gray-400 text-xs ml-auto">
+                      <span className="text-text-muted text-xs ml-auto">
                         Pop. {(city.population / 1000).toFixed(0)}K
                       </span>
                     )}
@@ -67,7 +67,7 @@ export default async function LocationsPage() {
 
       {cities.length === 0 && (
         <div className="text-center py-16">
-          <p className="text-gray-500">No cities available yet. Check back soon!</p>
+          <p className="text-text-muted">No cities available yet. Check back soon!</p>
         </div>
       )}
     </div>

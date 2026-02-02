@@ -82,7 +82,7 @@ export default async function BlogPostPage({ params }: Props) {
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Main Content */}
           <div className="flex-1 max-w-3xl">
-            <Link href="/blog" className="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-brand mb-6">
+            <Link href="/blog" className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-neon mb-6">
               <ArrowLeft className="h-4 w-4" /> Back to Blog
             </Link>
 
@@ -99,9 +99,9 @@ export default async function BlogPostPage({ params }: Props) {
               ))}
             </div>
 
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{post.title}</h1>
+            <h1 className="text-3xl md:text-4xl font-bold text-text-primary mb-4">{post.title}</h1>
 
-            <div className="flex items-center gap-4 text-sm text-gray-500 mb-8 pb-6 border-b">
+            <div className="flex items-center gap-4 text-sm text-text-muted mb-8 pb-6 border-b">
               <span className="flex items-center gap-1"><User className="h-4 w-4" /> {post.author}</span>
               <span className="flex items-center gap-1"><Calendar className="h-4 w-4" /> {formatDate(post.published_at)}</span>
               <span className="flex items-center gap-1"><Clock className="h-4 w-4" /> {readTime} min read</span>
@@ -111,25 +111,25 @@ export default async function BlogPostPage({ params }: Props) {
 
             {/* Share */}
             <div className="mt-8 pt-6 border-t">
-              <h3 className="text-sm font-semibold text-gray-700 mb-3">Share this article</h3>
+              <h3 className="text-sm font-semibold text-text-secondary mb-3">Share this article</h3>
               <div className="flex gap-2">
                 <a
                   href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(`https://bestsportssurfaces.com/blog/${post.slug}`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 bg-gray-100 rounded-lg hover:bg-gray-200"
+                  className="p-2 bg-surface-hover rounded-lg hover:bg-gray-200"
                   aria-label="Share on Twitter"
                 >
-                  <Twitter className="h-4 w-4 text-gray-600" />
+                  <Twitter className="h-4 w-4 text-text-secondary" />
                 </a>
                 <a
                   href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`https://bestsportssurfaces.com/blog/${post.slug}`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 bg-gray-100 rounded-lg hover:bg-gray-200"
+                  className="p-2 bg-surface-hover rounded-lg hover:bg-gray-200"
                   aria-label="Share on Facebook"
                 >
-                  <Facebook className="h-4 w-4 text-gray-600" />
+                  <Facebook className="h-4 w-4 text-text-secondary" />
                 </a>
               </div>
             </div>
@@ -141,13 +141,13 @@ export default async function BlogPostPage({ params }: Props) {
               {/* Table of Contents */}
               {headings.length > 0 && (
                 <Card padding="md">
-                  <h3 className="font-semibold text-gray-900 mb-3">Table of Contents</h3>
+                  <h3 className="font-semibold text-text-primary mb-3">Table of Contents</h3>
                   <nav className="space-y-1">
                     {headings.map((heading) => (
                       <a
                         key={heading.id}
                         href={`#${heading.id}`}
-                        className="block text-sm text-gray-600 hover:text-brand py-1"
+                        className="block text-sm text-text-secondary hover:text-neon py-1"
                       >
                         {heading.text}
                       </a>
@@ -159,14 +159,14 @@ export default async function BlogPostPage({ params }: Props) {
               {/* Related Posts */}
               {relatedPosts.length > 0 && (
                 <Card padding="md">
-                  <h3 className="font-semibold text-gray-900 mb-3">Related Articles</h3>
+                  <h3 className="font-semibold text-text-primary mb-3">Related Articles</h3>
                   <div className="space-y-3">
                     {relatedPosts.map((rp) => (
                       <Link key={rp.id} href={`/blog/${rp.slug}`} className="block group">
-                        <h4 className="text-sm font-medium text-gray-800 group-hover:text-brand line-clamp-2">
+                        <h4 className="text-sm font-medium text-text-primary group-hover:text-neon line-clamp-2">
                           {rp.title}
                         </h4>
-                        <p className="text-xs text-gray-400 mt-1">{formatDate(rp.published_at)}</p>
+                        <p className="text-xs text-text-muted mt-1">{formatDate(rp.published_at)}</p>
                       </Link>
                     ))}
                   </div>
@@ -174,12 +174,12 @@ export default async function BlogPostPage({ params }: Props) {
               )}
 
               {/* CTA */}
-              <Card padding="md" className="bg-brand-light border-brand-100">
-                <h3 className="font-semibold text-gray-900 mb-2">Need a Contractor?</h3>
-                <p className="text-sm text-gray-600 mb-3">Get free quotes from verified sports surface contractors near you.</p>
+              <Card padding="md" className="bg-neon-subtle border-neon-100">
+                <h3 className="font-semibold text-text-primary mb-2">Need a Contractor?</h3>
+                <p className="text-sm text-text-secondary mb-3">Get free quotes from verified sports surface contractors near you.</p>
                 <Link
                   href="/search"
-                  className="block text-center bg-brand text-white py-2 rounded-lg text-sm font-semibold hover:bg-brand-hover"
+                  className="block text-center bg-neon text-white py-2 rounded-lg text-sm font-semibold hover:bg-neon-hover"
                 >
                   Find Contractors
                 </Link>

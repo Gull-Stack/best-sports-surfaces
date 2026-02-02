@@ -31,17 +31,17 @@ export default async function AdminPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold text-gray-900 mb-8">Admin Dashboard</h1>
+      <h1 className="text-2xl font-bold text-text-primary mb-8">Admin Dashboard</h1>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
         {stats.map((stat) => (
           <Link key={stat.label} href={stat.href}>
             <Card hover padding="md">
               <div className="flex items-center gap-3">
-                <stat.icon className="h-5 w-5 text-brand" />
+                <stat.icon className="h-5 w-5 text-neon" />
                 <div>
-                  <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
-                  <p className="text-sm text-gray-500">{stat.label}</p>
+                  <p className="text-2xl font-bold text-text-primary">{stat.value}</p>
+                  <p className="text-sm text-text-muted">{stat.label}</p>
                 </div>
               </div>
             </Card>
@@ -50,12 +50,12 @@ export default async function AdminPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Link href="/admin/vendors"><Card hover padding="md"><h3 className="font-semibold">Manage Vendors</h3><p className="text-sm text-gray-500">Add, edit, and manage vendor listings</p></Card></Link>
-        <Link href="/admin/blog"><Card hover padding="md"><h3 className="font-semibold">Manage Blog</h3><p className="text-sm text-gray-500">Create and edit blog posts</p></Card></Link>
-        <Link href="/admin/reviews"><Card hover padding="md"><h3 className="font-semibold">Moderate Reviews</h3><p className="text-sm text-gray-500">Approve or reject customer reviews</p></Card></Link>
-        <Link href="/admin/claims"><Card hover padding="md"><h3 className="font-semibold">Vendor Claims</h3><p className="text-sm text-gray-500">Review and approve listing claims</p></Card></Link>
-        <Link href="/admin/inquiries"><Card hover padding="md"><h3 className="font-semibold">View Inquiries</h3><p className="text-sm text-gray-500">Browse all lead submissions</p></Card></Link>
-        <Link href="/admin/subscribers"><Card hover padding="md"><h3 className="font-semibold">Newsletter</h3><p className="text-sm text-gray-500">View and export subscribers</p></Card></Link>
+        <Link href="/admin/vendors"><Card hover padding="md"><h3 className="font-semibold">Manage Vendors</h3><p className="text-sm text-text-muted">Add, edit, and manage vendor listings</p></Card></Link>
+        <Link href="/admin/blog"><Card hover padding="md"><h3 className="font-semibold">Manage Blog</h3><p className="text-sm text-text-muted">Create and edit blog posts</p></Card></Link>
+        <Link href="/admin/reviews"><Card hover padding="md"><h3 className="font-semibold">Moderate Reviews</h3><p className="text-sm text-text-muted">Approve or reject customer reviews</p></Card></Link>
+        <Link href="/admin/claims"><Card hover padding="md"><h3 className="font-semibold">Vendor Claims</h3><p className="text-sm text-text-muted">Review and approve listing claims</p></Card></Link>
+        <Link href="/admin/inquiries"><Card hover padding="md"><h3 className="font-semibold">View Inquiries</h3><p className="text-sm text-text-muted">Browse all lead submissions</p></Card></Link>
+        <Link href="/admin/subscribers"><Card hover padding="md"><h3 className="font-semibold">Newsletter</h3><p className="text-sm text-text-muted">View and export subscribers</p></Card></Link>
       </div>
     </div>
   );

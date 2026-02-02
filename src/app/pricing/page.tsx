@@ -14,12 +14,12 @@ const tiers = [
     period: 'forever',
     description: 'Get found by potential customers. Leads go through BestSportsSurfaces.com.',
     icon: Shield,
-    iconColor: 'text-gray-500',
-    borderColor: 'border-gray-200',
-    bgColor: 'bg-white',
+    iconColor: 'text-text-muted',
+    borderColor: 'border-border',
+    bgColor: 'bg-surface-card',
     ctaText: 'Claim Your Listing',
     ctaHref: '/vendor/claim',
-    ctaStyle: 'bg-gray-100 text-gray-700 hover:bg-gray-200',
+    ctaStyle: 'bg-surface-hover text-text-secondary hover:bg-border hover:text-text-primary',
     features: [
       { text: 'Basic business listing', included: true },
       { text: 'City & state shown', included: true },
@@ -40,13 +40,13 @@ const tiers = [
     period: '/month',
     description: 'Your contact info front and center. Leads come directly to your inbox.',
     icon: Zap,
-    iconColor: 'text-brand',
-    borderColor: 'border-brand/40',
-    bgColor: 'bg-white',
+    iconColor: 'text-neon',
+    borderColor: 'border-neon/40',
+    bgColor: 'bg-surface-card',
     popular: true,
     ctaText: 'Get Started',
     ctaHref: '/auth/signup?plan=paid',
-    ctaStyle: 'bg-brand text-white hover:bg-brand-hover',
+    ctaStyle: 'bg-neon text-surface hover:bg-neon-hover',
     features: [
       { text: 'Everything in Free', included: true },
       { text: 'Direct phone/email on listing', included: true },
@@ -67,12 +67,12 @@ const tiers = [
     period: 'pricing',
     description: 'Maximum visibility. More leads in your area. White-glove partnership.',
     icon: Star,
-    iconColor: 'text-amber-500',
-    borderColor: 'border-amber-400',
-    bgColor: 'bg-amber-50/50',
+    iconColor: 'text-amber-400',
+    borderColor: 'border-amber-500/40',
+    bgColor: 'bg-surface-card',
     ctaText: 'Contact Us',
     ctaHref: '/contact?subject=featured-vendor',
-    ctaStyle: 'bg-amber-500 text-white hover:bg-amber-600',
+    ctaStyle: 'bg-amber-500 text-surface hover:bg-amber-600',
     features: [
       { text: 'Everything in Premium', included: true },
       { text: 'Featured homepage placement', included: true },
@@ -94,10 +94,10 @@ export default function PricingPage() {
     <div className="max-w-6xl mx-auto px-4 py-16">
       {/* Header */}
       <div className="text-center mb-12">
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-          Grow Your Business with BestSportsSurfaces.com
+        <h1 className="text-3xl md:text-4xl font-bold text-text-primary mb-4">
+          Grow Your Business with <span className="neon-text">BestSportsSurfaces.com</span>
         </h1>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+        <p className="text-lg text-text-secondary max-w-2xl mx-auto">
           Thousands of homeowners and facilities search for sports surface contractors every month. 
           Get in front of them.
         </p>
@@ -111,28 +111,28 @@ export default function PricingPage() {
             <div
               key={tier.name}
               className={`relative rounded-2xl border-2 ${tier.borderColor} ${tier.bgColor} p-8 flex flex-col ${
-                tier.popular ? 'shadow-xl scale-105 z-10' : 'shadow-sm'
+                tier.popular ? 'shadow-xl shadow-neon/10 scale-105 z-10 neon-glow' : 'shadow-sm'
               }`}
             >
               {tier.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-brand text-white text-sm font-bold px-4 py-1 rounded-full">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-neon text-surface text-sm font-bold px-4 py-1 rounded-full">
                   Most Popular
                 </div>
               )}
 
               <div className="flex items-center gap-3 mb-4">
-                <div className={`p-2 rounded-lg ${tier.popular ? 'bg-brand/10' : tier.name === 'Featured' ? 'bg-amber-100' : 'bg-gray-100'}`}>
+                <div className={`p-2 rounded-lg ${tier.popular ? 'bg-neon-subtle' : tier.name === 'Featured' ? 'bg-amber-500/10' : 'bg-surface-hover'}`}>
                   <Icon className={`h-6 w-6 ${tier.iconColor}`} />
                 </div>
-                <h2 className="text-xl font-bold text-gray-900">{tier.name}</h2>
+                <h2 className="text-xl font-bold text-text-primary">{tier.name}</h2>
               </div>
 
               <div className="mb-4">
-                <span className="text-4xl font-bold text-gray-900">{tier.price}</span>
-                <span className="text-gray-500 ml-1">{tier.period}</span>
+                <span className="text-4xl font-bold text-text-primary">{tier.price}</span>
+                <span className="text-text-muted ml-1">{tier.period}</span>
               </div>
 
-              <p className="text-gray-600 mb-6">{tier.description}</p>
+              <p className="text-text-secondary mb-6">{tier.description}</p>
 
               <Link
                 href={tier.ctaHref}
@@ -145,11 +145,11 @@ export default function PricingPage() {
                 {tier.features.map((feature) => (
                   <li key={feature.text} className="flex items-start gap-2">
                     {feature.included ? (
-                      <Check className="h-5 w-5 text-brand flex-shrink-0 mt-0.5" />
+                      <Check className="h-5 w-5 text-neon flex-shrink-0 mt-0.5" />
                     ) : (
-                      <X className="h-5 w-5 text-gray-300 flex-shrink-0 mt-0.5" />
+                      <X className="h-5 w-5 text-text-muted/30 flex-shrink-0 mt-0.5" />
                     )}
-                    <span className={feature.included ? 'text-gray-700' : 'text-gray-400'}>
+                    <span className={feature.included ? 'text-text-secondary' : 'text-text-muted/50'}>
                       {feature.text}
                     </span>
                   </li>
@@ -161,24 +161,24 @@ export default function PricingPage() {
       </div>
 
       {/* Bottom CTA */}
-      <div className="text-center bg-white rounded-2xl border border-gray-200 p-8 md:p-12">
-        <h2 className="text-2xl font-bold text-gray-900 mb-3">
+      <div className="text-center bg-surface-card rounded-2xl border border-border p-8 md:p-12">
+        <h2 className="text-2xl font-bold text-text-primary mb-3">
           Already listed? Claim your page.
         </h2>
-        <p className="text-gray-600 mb-6 max-w-xl mx-auto">
+        <p className="text-text-secondary mb-6 max-w-xl mx-auto">
           We may have already created a listing for your business. Search for it, claim it, 
           and upgrade to start getting leads directly.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link
             href="/search"
-            className="px-6 py-3 bg-brand text-white font-semibold rounded-lg hover:bg-brand-hover transition-colors"
+            className="px-6 py-3 bg-neon text-surface font-semibold rounded-lg hover:bg-neon-hover transition-colors"
           >
             Search for Your Business
           </Link>
           <Link
             href="/vendor/claim"
-            className="px-6 py-3 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-colors"
+            className="px-6 py-3 border border-border text-text-secondary font-semibold rounded-lg hover:border-neon/50 hover:text-neon transition-colors"
           >
             Claim Your Listing
           </Link>

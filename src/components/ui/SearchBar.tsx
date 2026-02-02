@@ -32,7 +32,7 @@ export default function SearchBar({ size = 'sm', className = '' }: SearchBarProp
         placeholder="Enter ZIP code"
         value={zip}
         onChange={(e) => setZip(e.target.value)}
-        className={`flex-1 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand ${
+        className={`flex-1 bg-surface-raised border border-border rounded-lg text-text-primary placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-neon ${
           isLarge ? 'px-4 py-3 text-lg' : 'px-3 py-2'
         }`}
         maxLength={5}
@@ -41,7 +41,7 @@ export default function SearchBar({ size = 'sm', className = '' }: SearchBarProp
       <select
         value={sportType}
         onChange={(e) => setSportType(e.target.value)}
-        className={`flex-1 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand ${
+        className={`flex-1 bg-surface-raised border border-border rounded-lg text-text-primary focus:outline-none focus:ring-2 focus:ring-neon ${
           isLarge ? 'px-4 py-3 text-lg' : 'px-3 py-2'
         }`}
       >
@@ -52,7 +52,7 @@ export default function SearchBar({ size = 'sm', className = '' }: SearchBarProp
       </select>
       <button
         type="submit"
-        className={`bg-brand text-white rounded-lg hover:bg-brand-hover transition-colors flex items-center justify-center gap-2 font-semibold ${
+        className={`bg-neon text-surface rounded-lg hover:bg-neon-hover transition-colors flex items-center justify-center gap-2 font-semibold ${
           isLarge ? 'px-8 py-3 text-lg' : 'px-4 py-2'
         }`}
       >

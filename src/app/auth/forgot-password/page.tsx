@@ -33,21 +33,21 @@ export default function ForgotPasswordPage() {
       <Card padding="lg" className="max-w-md w-full">
         {sent ? (
           <div className="text-center">
-            <h2 className="text-xl font-bold text-gray-900 mb-2">Check Your Email</h2>
-            <p className="text-gray-600">If an account exists for <strong>{email}</strong>, you will receive a password reset link.</p>
+            <h2 className="text-xl font-bold text-text-primary mb-2">Check Your Email</h2>
+            <p className="text-text-secondary">If an account exists for <strong>{email}</strong>, you will receive a password reset link.</p>
           </div>
         ) : (
           <>
-            <h1 className="text-2xl font-bold text-gray-900 mb-6 text-center">Reset Password</h1>
+            <h1 className="text-2xl font-bold text-text-primary mb-6 text-center">Reset Password</h1>
             <form onSubmit={handleSubmit} className="space-y-4">
               <Input label="Email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required placeholder="you@example.com" />
-              {error && <p className="text-sm text-red-600">{error}</p>}
+              {error && <p className="text-sm text-red-400">{error}</p>}
               <Button type="submit" loading={loading} className="w-full">Send Reset Link</Button>
             </form>
           </>
         )}
-        <p className="mt-4 text-center text-sm text-gray-600">
-          <Link href="/auth/login" className="text-brand hover:underline">Back to Sign In</Link>
+        <p className="mt-4 text-center text-sm text-text-secondary">
+          <Link href="/auth/login" className="text-neon hover:underline">Back to Sign In</Link>
         </p>
       </Card>
     </div>

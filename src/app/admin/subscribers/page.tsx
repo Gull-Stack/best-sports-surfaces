@@ -33,25 +33,25 @@ export default function AdminSubscribersPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">Newsletter Subscribers ({subscribers.length})</h1>
+        <h1 className="text-2xl font-bold text-text-primary">Newsletter Subscribers ({subscribers.length})</h1>
         <Button onClick={exportCsv} variant="outline" size="sm"><Download className="h-4 w-4 mr-1" /> Export CSV</Button>
       </div>
 
       <Card padding="none">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b bg-gray-50">
-              <th className="p-3 text-left font-semibold text-gray-600">Email</th>
-              <th className="p-3 text-left font-semibold text-gray-600">Subscribed</th>
-              <th className="p-3 text-left font-semibold text-gray-600">Status</th>
+            <tr className="border-b bg-surface-raised">
+              <th className="p-3 text-left font-semibold text-text-secondary">Email</th>
+              <th className="p-3 text-left font-semibold text-text-secondary">Subscribed</th>
+              <th className="p-3 text-left font-semibold text-text-secondary">Status</th>
             </tr>
           </thead>
           <tbody>
             {subscribers.map((sub) => (
-              <tr key={sub.id} className="border-b hover:bg-gray-50">
-                <td className="p-3 text-gray-900">{sub.email}</td>
-                <td className="p-3 text-gray-600">{new Date(sub.subscribed_at).toLocaleDateString()}</td>
-                <td className="p-3">{sub.is_active ? <span className="text-brand">Active</span> : <span className="text-gray-400">Inactive</span>}</td>
+              <tr key={sub.id} className="border-b hover:bg-surface-raised">
+                <td className="p-3 text-text-primary">{sub.email}</td>
+                <td className="p-3 text-text-secondary">{new Date(sub.subscribed_at).toLocaleDateString()}</td>
+                <td className="p-3">{sub.is_active ? <span className="text-neon">Active</span> : <span className="text-text-muted">Inactive</span>}</td>
               </tr>
             ))}
           </tbody>

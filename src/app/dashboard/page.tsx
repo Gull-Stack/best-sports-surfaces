@@ -34,17 +34,17 @@ export default async function DashboardPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
-        <p className="text-gray-600 mt-1">
+        <h1 className="text-2xl font-bold text-text-primary">Dashboard</h1>
+        <p className="text-text-secondary mt-1">
           Welcome back{data?.vendor ? `, ${data.vendor.name}` : ''}!
         </p>
       </div>
 
       {!data?.vendor && (
         <Card padding="lg" className="mb-8 bg-blue-50 border-blue-200">
-          <h2 className="text-lg font-semibold text-gray-900 mb-2">Complete Your Profile</h2>
-          <p className="text-gray-600 mb-4">Set up your business profile to start receiving leads.</p>
-          <Link href="/dashboard/profile" className="inline-flex items-center gap-2 bg-brand text-white px-4 py-2 rounded-lg font-semibold hover:bg-brand-hover">
+          <h2 className="text-lg font-semibold text-text-primary mb-2">Complete Your Profile</h2>
+          <p className="text-text-secondary mb-4">Set up your business profile to start receiving leads.</p>
+          <Link href="/dashboard/profile" className="inline-flex items-center gap-2 bg-neon text-white px-4 py-2 rounded-lg font-semibold hover:bg-neon-hover">
             <Settings className="h-4 w-4" /> Set Up Profile
           </Link>
         </Card>
@@ -53,16 +53,16 @@ export default async function DashboardPage() {
       {data?.vendor && (
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
           <Card padding="md">
-            <p className="text-sm text-gray-500">Profile Views</p>
-            <p className="text-2xl font-bold text-gray-900">{data.viewCount}</p>
+            <p className="text-sm text-text-muted">Profile Views</p>
+            <p className="text-2xl font-bold text-text-primary">{data.viewCount}</p>
           </Card>
           <Card padding="md">
-            <p className="text-sm text-gray-500">Quote Requests</p>
-            <p className="text-2xl font-bold text-gray-900">{data.inquiryCount}</p>
+            <p className="text-sm text-text-muted">Quote Requests</p>
+            <p className="text-2xl font-bold text-text-primary">{data.inquiryCount}</p>
           </Card>
           <Card padding="md">
-            <p className="text-sm text-gray-500">Rating</p>
-            <p className="text-2xl font-bold text-gray-900">{data.vendor.rating.toFixed(1)} / 5.0</p>
+            <p className="text-sm text-text-muted">Rating</p>
+            <p className="text-2xl font-bold text-text-primary">{data.vendor.rating.toFixed(1)} / 5.0</p>
           </Card>
         </div>
       )}
@@ -72,12 +72,12 @@ export default async function DashboardPage() {
           <Link key={link.href} href={link.href}>
             <Card hover padding="md" className="h-full">
               <div className="flex items-start gap-3">
-                <div className="p-2 bg-brand-light rounded-lg">
-                  <link.icon className="h-5 w-5 text-brand" />
+                <div className="p-2 bg-neon-subtle rounded-lg">
+                  <link.icon className="h-5 w-5 text-neon" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900">{link.label}</h3>
-                  <p className="text-sm text-gray-500 mt-0.5">{link.description}</p>
+                  <h3 className="font-semibold text-text-primary">{link.label}</h3>
+                  <p className="text-sm text-text-muted mt-0.5">{link.description}</p>
                 </div>
               </div>
             </Card>

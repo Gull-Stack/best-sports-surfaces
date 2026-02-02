@@ -29,12 +29,12 @@ export default function Modal({ isOpen, onClose, title, children }: ModalProps) 
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50"
       onClick={(e) => e.target === overlayRef.current && onClose()}
     >
-      <div className="bg-white rounded-xl shadow-xl max-w-lg w-full max-h-[90vh] overflow-y-auto" role="dialog" aria-modal="true">
+      <div className="bg-surface-card rounded-xl shadow-xl max-w-lg w-full max-h-[90vh] overflow-y-auto" role="dialog" aria-modal="true">
         {title && (
           <div className="flex items-center justify-between p-4 border-b">
-            <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
-            <button onClick={onClose} className="p-1 hover:bg-gray-100 rounded-lg" aria-label="Close">
-              <X className="h-5 w-5 text-gray-500" />
+            <h2 className="text-lg font-semibold text-text-primary">{title}</h2>
+            <button onClick={onClose} className="p-1 hover:bg-surface-hover rounded-lg" aria-label="Close">
+              <X className="h-5 w-5 text-text-muted" />
             </button>
           </div>
         )}

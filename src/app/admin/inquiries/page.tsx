@@ -36,7 +36,7 @@ export default function AdminInquiriesPage() {
   return (
     <div className="max-w-5xl mx-auto px-4 py-8">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">All Inquiries ({inquiries.length})</h1>
+        <h1 className="text-2xl font-bold text-text-primary">All Inquiries ({inquiries.length})</h1>
         <Button onClick={exportCsv} variant="outline" size="sm"><Download className="h-4 w-4 mr-1" /> Export CSV</Button>
       </div>
 
@@ -45,16 +45,16 @@ export default function AdminInquiriesPage() {
           <Card key={inq.id} padding="md">
             <div className="flex items-start justify-between">
               <div>
-                <h3 className="font-semibold text-gray-900">{inq.name}</h3>
-                <p className="text-xs text-gray-500">{inq.email} | {inq.phone} | ZIP: {inq.zip}</p>
-                <p className="text-xs text-gray-400 mt-0.5">Vendor: {inq.vendors?.name || 'General'}</p>
+                <h3 className="font-semibold text-text-primary">{inq.name}</h3>
+                <p className="text-xs text-text-muted">{inq.email} | {inq.phone} | ZIP: {inq.zip}</p>
+                <p className="text-xs text-text-muted mt-0.5">Vendor: {inq.vendors?.name || 'General'}</p>
               </div>
               <div className="text-right">
                 <Badge variant={statusColors[inq.status] || 'gray'}>{inq.status}</Badge>
-                <p className="text-xs text-gray-400 mt-1">{new Date(inq.created_at).toLocaleDateString()}</p>
+                <p className="text-xs text-text-muted mt-1">{new Date(inq.created_at).toLocaleDateString()}</p>
               </div>
             </div>
-            <p className="text-sm text-gray-600 mt-2">{inq.message}</p>
+            <p className="text-sm text-text-secondary mt-2">{inq.message}</p>
           </Card>
         ))}
       </div>

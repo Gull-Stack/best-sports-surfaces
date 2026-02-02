@@ -5,12 +5,12 @@ interface BadgeProps {
 }
 
 const colors = {
-  default: 'bg-gray-100 text-gray-800',
-  green: 'bg-brand-light text-brand-hover',
-  blue: 'bg-blue-100 text-blue-800',
-  amber: 'bg-amber-100 text-amber-800',
-  red: 'bg-red-100 text-red-800',
-  gray: 'bg-gray-100 text-gray-600',
+  default: 'bg-surface-hover text-text-secondary',
+  green: 'bg-neon-subtle text-neon',
+  blue: 'bg-accent/10 text-accent',
+  amber: 'bg-amber-500/10 text-amber-400',
+  red: 'bg-red-500/10 text-red-400',
+  gray: 'bg-surface-hover text-text-muted',
 };
 
 export default function Badge({ variant = 'default', children, className = '' }: BadgeProps) {

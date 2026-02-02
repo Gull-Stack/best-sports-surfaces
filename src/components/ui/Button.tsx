@@ -7,10 +7,10 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variants = {
-  primary: 'bg-brand text-white hover:bg-brand-hover focus:ring-brand',
+  primary: 'bg-neon text-surface hover:bg-neon-hover focus:ring-neon',
   secondary: 'bg-accent text-white hover:bg-accent-hover focus:ring-accent',
-  outline: 'border-2 border-brand text-brand hover:bg-brand-light focus:ring-brand',
-  ghost: 'text-gray-600 hover:bg-gray-100 focus:ring-gray-500',
+  outline: 'border-2 border-neon text-neon hover:bg-neon-subtle focus:ring-neon',
+  ghost: 'text-text-secondary hover:bg-surface-hover focus:ring-text-muted',
 };
 
 const sizes = {
@@ -24,7 +24,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <button
         ref={ref}
-        className={`inline-flex items-center justify-center font-semibold rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed ${variants[variant]} ${sizes[size]} ${className}`}
+        className={`inline-flex items-center justify-center font-semibold rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-surface disabled:opacity-50 disabled:cursor-not-allowed ${variants[variant]} ${sizes[size]} ${className}`}
         disabled={disabled || loading}
         {...props}
       >

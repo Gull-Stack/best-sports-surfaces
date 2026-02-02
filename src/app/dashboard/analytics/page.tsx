@@ -36,19 +36,19 @@ export default async function DashboardAnalyticsPage() {
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">Analytics</h1>
+      <h1 className="text-2xl font-bold text-text-primary mb-6">Analytics</h1>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {statCards.map((stat) => (
           <Card key={stat.label} padding="md">
-            <stat.icon className="h-5 w-5 text-gray-400 mb-2" />
-            <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
-            <p className="text-sm text-gray-500">{stat.label}</p>
+            <stat.icon className="h-5 w-5 text-text-muted mb-2" />
+            <p className="text-2xl font-bold text-text-primary">{stat.value}</p>
+            <p className="text-sm text-text-muted">{stat.label}</p>
           </Card>
         ))}
       </div>
       {vendor?.id && (
-        <Card padding="md" className="mt-8 bg-gray-50">
-          <p className="text-sm text-gray-600">
+        <Card padding="md" className="mt-8 bg-surface-raised">
+          <p className="text-sm text-text-secondary">
             Detailed analytics with charts and date ranges are available on the Premium plan.
           </p>
         </Card>

@@ -41,7 +41,7 @@ export default function AdminBlogPage() {
   if (editing) {
     return (
       <div className="max-w-3xl mx-auto px-4 py-8">
-        <h1 className="text-2xl font-bold text-gray-900 mb-6">{editing.id ? 'Edit' : 'New'} Blog Post</h1>
+        <h1 className="text-2xl font-bold text-text-primary mb-6">{editing.id ? 'Edit' : 'New'} Blog Post</h1>
         <div className="space-y-4">
           <Input label="Title" value={editing.title || ''} onChange={(e) => setEditing({ ...editing, title: e.target.value })} />
           <Input label="Category" value={editing.category || ''} onChange={(e) => setEditing({ ...editing, category: e.target.value })} placeholder="e.g. Tennis, Basketball, Cost Guides" />
@@ -65,9 +65,9 @@ export default function AdminBlogPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">Blog Posts ({posts.length})</h1>
+        <h1 className="text-2xl font-bold text-text-primary">Blog Posts ({posts.length})</h1>
         <div className="flex gap-2">
-          <Link href="/admin" className="text-sm text-brand hover:underline">&larr; Admin</Link>
+          <Link href="/admin" className="text-sm text-neon hover:underline">&larr; Admin</Link>
           <Button size="sm" onClick={() => setEditing({ title: '', content: '', excerpt: '', category: '', tags: [], published: false })}><Plus className="h-4 w-4 mr-1" /> New Post</Button>
         </div>
       </div>
@@ -77,15 +77,15 @@ export default function AdminBlogPage() {
           <Card key={post.id} padding="md">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="font-semibold text-gray-900">{post.title}</h3>
+                <h3 className="font-semibold text-text-primary">{post.title}</h3>
                 <div className="flex gap-2 mt-1">
                   <Badge variant={post.published ? 'green' : 'gray'}>{post.published ? 'Published' : 'Draft'}</Badge>
                   {post.category && <Badge variant="blue">{post.category}</Badge>}
                 </div>
               </div>
               <div className="flex gap-2">
-                <button onClick={() => setEditing(post)} className="p-1.5 hover:bg-gray-100 rounded"><Edit2 className="h-4 w-4" /></button>
-                {post.published && <Link href={`/blog/${post.slug}`} className="p-1.5 hover:bg-gray-100 rounded"><Eye className="h-4 w-4" /></Link>}
+                <button onClick={() => setEditing(post)} className="p-1.5 hover:bg-surface-hover rounded"><Edit2 className="h-4 w-4" /></button>
+                {post.published && <Link href={`/blog/${post.slug}`} className="p-1.5 hover:bg-surface-hover rounded"><Eye className="h-4 w-4" /></Link>}
               </div>
             </div>
           </Card>

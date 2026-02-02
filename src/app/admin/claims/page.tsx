@@ -31,15 +31,15 @@ export default function AdminClaimsPage() {
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">Vendor Claims</h1>
+      <h1 className="text-2xl font-bold text-text-primary mb-6">Vendor Claims</h1>
       <div className="space-y-4">
         {claims.map((claim) => (
           <Card key={claim.id} padding="md">
             <div className="flex items-start justify-between mb-2">
               <div>
-                <h3 className="font-semibold text-gray-900">{claim.business_name}</h3>
-                <p className="text-sm text-gray-500">Claiming: {claim.vendors?.name || 'Unknown'}</p>
-                <p className="text-xs text-gray-400">{claim.contact_name} | {claim.contact_email} | {claim.contact_phone}</p>
+                <h3 className="font-semibold text-text-primary">{claim.business_name}</h3>
+                <p className="text-sm text-text-muted">Claiming: {claim.vendors?.name || 'Unknown'}</p>
+                <p className="text-xs text-text-muted">{claim.contact_name} | {claim.contact_email} | {claim.contact_phone}</p>
               </div>
               <Badge variant={claim.status === 'approved' ? 'green' : claim.status === 'rejected' ? 'red' : 'amber'}>{claim.status}</Badge>
             </div>
@@ -51,7 +51,7 @@ export default function AdminClaimsPage() {
             )}
           </Card>
         ))}
-        {claims.length === 0 && <p className="text-gray-500 text-center py-8">No claims found.</p>}
+        {claims.length === 0 && <p className="text-text-muted text-center py-8">No claims found.</p>}
       </div>
     </div>
   );

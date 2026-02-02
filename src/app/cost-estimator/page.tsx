@@ -91,19 +91,19 @@ export default function CostEstimatorPage() {
   return (
     <div className="max-w-3xl mx-auto px-4 py-12">
       <div className="text-center mb-8">
-        <div className="w-14 h-14 bg-brand-light rounded-2xl flex items-center justify-center mx-auto mb-4">
-          <Calculator className="h-7 w-7 text-brand" />
+        <div className="w-14 h-14 bg-neon-subtle rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <Calculator className="h-7 w-7 text-neon" />
         </div>
-        <h1 className="text-3xl font-bold text-gray-900">Sports Surface Cost Estimator</h1>
-        <p className="text-gray-600 mt-2">Get an instant price range for your project in 5 simple steps.</p>
+        <h1 className="text-3xl font-bold text-text-primary">Sports Surface Cost Estimator</h1>
+        <p className="text-text-secondary mt-2">Get an instant price range for your project in 5 simple steps.</p>
       </div>
 
       {/* Progress bar */}
       <div className="flex items-center gap-1 mb-8">
         {['Sport', 'Size', 'Surface', 'Extras', 'Results'].map((label, i) => (
           <div key={label} className="flex-1">
-            <div className={`h-2 rounded-full ${i <= step ? 'bg-brand' : 'bg-gray-200'}`} />
-            <p className={`text-xs mt-1 text-center ${i <= step ? 'text-brand font-medium' : 'text-gray-400'}`}>{label}</p>
+            <div className={`h-2 rounded-full ${i <= step ? 'bg-neon' : 'bg-gray-200'}`} />
+            <p className={`text-xs mt-1 text-center ${i <= step ? 'text-neon font-medium' : 'text-text-muted'}`}>{label}</p>
           </div>
         ))}
       </div>
@@ -111,18 +111,18 @@ export default function CostEstimatorPage() {
       {/* Step 0: Sport Type */}
       {step === 0 && (
         <div>
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">What type of sports surface do you need?</h2>
+          <h2 className="text-xl font-semibold text-text-primary mb-4">What type of sports surface do you need?</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {SPORT_TYPES.map((sport) => (
               <button
                 key={sport.value}
                 onClick={() => handleSportSelect(sport.value)}
-                className={`p-4 rounded-xl border-2 text-center hover:border-brand transition-colors ${
-                  sportType === sport.value ? 'border-brand bg-brand-light' : 'border-gray-200'
+                className={`p-4 rounded-xl border-2 text-center hover:border-neon transition-colors ${
+                  sportType === sport.value ? 'border-neon bg-neon-subtle' : 'border-border'
                 }`}
               >
                 <span className="text-2xl block mb-1">{sport.icon}</span>
-                <span className="text-sm font-medium text-gray-700">{sport.label}</span>
+                <span className="text-sm font-medium text-text-secondary">{sport.label}</span>
               </button>
             ))}
           </div>
@@ -132,31 +132,31 @@ export default function CostEstimatorPage() {
       {/* Step 1: Dimensions */}
       {step === 1 && config && (
         <div>
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">What are the dimensions?</h2>
-          <p className="text-sm text-gray-500 mb-4">Standard {config.label} dimensions are pre-filled. Adjust as needed.</p>
+          <h2 className="text-xl font-semibold text-text-primary mb-4">What are the dimensions?</h2>
+          <p className="text-sm text-text-muted mb-4">Standard {config.label} dimensions are pre-filled. Adjust as needed.</p>
           <div className="grid grid-cols-2 gap-4 mb-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Width (feet)</label>
+              <label className="block text-sm font-medium text-text-secondary mb-1">Width (feet)</label>
               <input
                 type="number"
                 value={width}
                 onChange={(e) => setWidth(Number(e.target.value))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-gray-900"
+                className="w-full px-3 py-2 border border-border rounded-lg text-text-primary"
                 min={1}
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Length (feet)</label>
+              <label className="block text-sm font-medium text-text-secondary mb-1">Length (feet)</label>
               <input
                 type="number"
                 value={length}
                 onChange={(e) => setLength(Number(e.target.value))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-gray-900"
+                className="w-full px-3 py-2 border border-border rounded-lg text-text-primary"
                 min={1}
               />
             </div>
           </div>
-          <p className="text-sm text-gray-500">Total area: <strong>{(width * length).toLocaleString()} sq ft</strong></p>
+          <p className="text-sm text-text-muted">Total area: <strong>{(width * length).toLocaleString()} sq ft</strong></p>
           <div className="flex gap-3 mt-6">
             <Button variant="outline" onClick={() => setStep(0)}><ArrowLeft className="h-4 w-4 mr-1" /> Back</Button>
             <Button onClick={() => setStep(2)} disabled={!width || !length}>Next <ArrowRight className="h-4 w-4 ml-1" /></Button>
@@ -167,18 +167,18 @@ export default function CostEstimatorPage() {
       {/* Step 2: Surface Type */}
       {step === 2 && config && (
         <div>
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Choose a surface type</h2>
+          <h2 className="text-xl font-semibold text-text-primary mb-4">Choose a surface type</h2>
           <div className="space-y-3">
             {config.surfaces.map((surface) => (
               <button
                 key={surface.value}
                 onClick={() => setSurfaceType(surface.value)}
-                className={`w-full p-4 rounded-xl border-2 text-left flex items-center justify-between hover:border-brand transition-colors ${
-                  surfaceType === surface.value ? 'border-brand bg-brand-light' : 'border-gray-200'
+                className={`w-full p-4 rounded-xl border-2 text-left flex items-center justify-between hover:border-neon transition-colors ${
+                  surfaceType === surface.value ? 'border-neon bg-neon-subtle' : 'border-border'
                 }`}
               >
-                <span className="font-medium text-gray-900">{surface.label}</span>
-                <span className="text-sm text-gray-500">
+                <span className="font-medium text-text-primary">{surface.label}</span>
+                <span className="text-sm text-text-muted">
                   {formatCurrency(surface.costPerSqFt[0])} - {formatCurrency(surface.costPerSqFt[1])} / sq ft
                 </span>
               </button>
@@ -194,13 +194,13 @@ export default function CostEstimatorPage() {
       {/* Step 3: Extras & Location */}
       {step === 3 && config && (
         <div>
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Add extras & select location</h2>
+          <h2 className="text-xl font-semibold text-text-primary mb-4">Add extras & select location</h2>
           <div className="space-y-3 mb-6">
             {config.extras.map((extra) => (
               <label
                 key={extra.value}
-                className={`flex items-center justify-between p-3 rounded-xl border-2 cursor-pointer hover:border-brand transition-colors ${
-                  selectedExtras.includes(extra.value) ? 'border-brand bg-brand-light' : 'border-gray-200'
+                className={`flex items-center justify-between p-3 rounded-xl border-2 cursor-pointer hover:border-neon transition-colors ${
+                  selectedExtras.includes(extra.value) ? 'border-neon bg-neon-subtle' : 'border-border'
                 }`}
               >
                 <div className="flex items-center gap-3">
@@ -208,22 +208,22 @@ export default function CostEstimatorPage() {
                     type="checkbox"
                     checked={selectedExtras.includes(extra.value)}
                     onChange={() => toggleExtra(extra.value)}
-                    className="rounded border-gray-300 text-brand focus:ring-brand"
+                    className="rounded border-border text-neon focus:ring-neon"
                   />
-                  <span className="font-medium text-gray-900">{extra.label}</span>
+                  <span className="font-medium text-text-primary">{extra.label}</span>
                 </div>
-                <span className="text-sm text-gray-500">
+                <span className="text-sm text-text-muted">
                   {formatCurrency(extra.cost[0])} - {formatCurrency(extra.cost[1])}
                 </span>
               </label>
             ))}
           </div>
           <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700 mb-1">State (for regional pricing)</label>
+            <label className="block text-sm font-medium text-text-secondary mb-1">State (for regional pricing)</label>
             <select
               value={state}
               onChange={(e) => setState(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-gray-900"
+              className="w-full px-3 py-2 border border-border rounded-lg text-text-primary"
             >
               <option value="">Select state (optional)</option>
               {US_STATES.map((s) => (
@@ -241,9 +241,9 @@ export default function CostEstimatorPage() {
       {/* Step 4: Results */}
       {step === 4 && estimate && config && (
         <div>
-          <Card padding="lg" className="bg-brand-light border-brand-100 mb-6">
-            <h2 className="text-xl font-semibold text-gray-900 mb-1">Estimated Cost Range</h2>
-            <p className="text-3xl font-bold text-brand-hover">
+          <Card padding="lg" className="bg-neon-subtle border-neon-100 mb-6">
+            <h2 className="text-xl font-semibold text-text-primary mb-1">Estimated Cost Range</h2>
+            <p className="text-3xl font-bold text-neon-hover">
               {formatCurrency(estimate.totalLow)} &ndash; {formatCurrency(estimate.totalHigh)}
             </p>
             <div className="flex gap-2 mt-2">
@@ -254,25 +254,25 @@ export default function CostEstimatorPage() {
           </Card>
 
           <Card padding="md" className="mb-6">
-            <h3 className="font-semibold text-gray-900 mb-3">Cost Breakdown</h3>
+            <h3 className="font-semibold text-text-primary mb-3">Cost Breakdown</h3>
             <div className="space-y-2">
               {estimate.breakdown.map((item) => (
-                <div key={item.item} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
-                  <span className="text-gray-700">{item.item}</span>
-                  <span className="text-sm font-medium text-gray-900">
+                <div key={item.item} className="flex items-center justify-between py-2 border-b border-border last:border-0">
+                  <span className="text-text-secondary">{item.item}</span>
+                  <span className="text-sm font-medium text-text-primary">
                     {formatCurrency(item.low)} &ndash; {formatCurrency(item.high)}
                   </span>
                 </div>
               ))}
-              <div className="flex items-center justify-between pt-2 font-bold text-gray-900">
+              <div className="flex items-center justify-between pt-2 font-bold text-text-primary">
                 <span>Total Estimate</span>
                 <span>{formatCurrency(estimate.totalLow)} &ndash; {formatCurrency(estimate.totalHigh)}</span>
               </div>
             </div>
           </Card>
 
-          <Card padding="md" className="bg-gray-50 mb-6">
-            <p className="text-sm text-gray-600">
+          <Card padding="md" className="bg-surface-raised mb-6">
+            <p className="text-sm text-text-secondary">
               <strong>Note:</strong> These are rough estimates based on national averages and regional adjustments.
               Actual costs vary based on site conditions, material choices, labor rates, and other factors.
               Get exact quotes from local contractors for accurate pricing.
@@ -282,7 +282,7 @@ export default function CostEstimatorPage() {
           <div className="flex flex-col sm:flex-row gap-3">
             <Link
               href={`/search?sport=${sportType}${state ? `&state=${state}` : ''}`}
-              className="flex-1 inline-flex items-center justify-center gap-2 bg-brand text-white px-6 py-3 rounded-lg font-semibold hover:bg-brand-hover transition-colors"
+              className="flex-1 inline-flex items-center justify-center gap-2 bg-neon text-white px-6 py-3 rounded-lg font-semibold hover:bg-neon-hover transition-colors"
             >
               <Search className="h-5 w-5" /> Get Exact Quotes from Contractors
             </Link>

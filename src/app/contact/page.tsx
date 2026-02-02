@@ -12,8 +12,8 @@ export default function ContactPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
       <div className="text-center mb-12">
-        <h1 className="text-3xl font-bold text-gray-900">Contact Us</h1>
-        <p className="text-gray-600 mt-2 max-w-xl mx-auto">
+        <h1 className="text-3xl font-bold text-text-primary">Contact Us</h1>
+        <p className="text-text-secondary mt-2 max-w-xl mx-auto">
           Have a question or need help? We&apos;d love to hear from you.
         </p>
       </div>
@@ -27,28 +27,28 @@ export default function ContactPage() {
         <div className="space-y-4">
           <Card padding="md">
             <div className="flex items-start gap-3">
-              <Mail className="h-5 w-5 text-brand mt-0.5" />
+              <Mail className="h-5 w-5 text-neon mt-0.5" />
               <div>
-                <h3 className="font-semibold text-gray-900">Email</h3>
-                <p className="text-sm text-gray-600">info@bestsportssurfaces.com</p>
+                <h3 className="font-semibold text-text-primary">Email</h3>
+                <p className="text-sm text-text-secondary">info@bestsportssurfaces.com</p>
               </div>
             </div>
           </Card>
           <Card padding="md">
             <div className="flex items-start gap-3">
-              <Phone className="h-5 w-5 text-brand mt-0.5" />
+              <Phone className="h-5 w-5 text-neon mt-0.5" />
               <div>
-                <h3 className="font-semibold text-gray-900">Phone</h3>
-                <p className="text-sm text-gray-600">(555) 123-4567</p>
+                <h3 className="font-semibold text-text-primary">Phone</h3>
+                <p className="text-sm text-text-secondary">(555) 123-4567</p>
               </div>
             </div>
           </Card>
           <Card padding="md">
             <div className="flex items-start gap-3">
-              <MapPin className="h-5 w-5 text-brand mt-0.5" />
+              <MapPin className="h-5 w-5 text-neon mt-0.5" />
               <div>
-                <h3 className="font-semibold text-gray-900">Address</h3>
-                <p className="text-sm text-gray-600">Austin, TX 78701</p>
+                <h3 className="font-semibold text-text-primary">Address</h3>
+                <p className="text-sm text-text-secondary">Austin, TX 78701</p>
               </div>
             </div>
           </Card>

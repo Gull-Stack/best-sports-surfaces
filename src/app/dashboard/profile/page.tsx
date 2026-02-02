@@ -65,7 +65,7 @@ export default function ProfilePage() {
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">Edit Business Profile</h1>
+      <h1 className="text-2xl font-bold text-text-primary mb-6">Edit Business Profile</h1>
 
       <div className="space-y-6">
         <Card padding="lg">
@@ -100,8 +100,8 @@ export default function ProfilePage() {
                 onClick={() => toggleArrayItem('sport_types', sport.value)}
                 className={`px-3 py-1.5 rounded-full text-sm font-medium border transition-colors ${
                   (vendor.sport_types || []).includes(sport.value)
-                    ? 'bg-brand text-white border-brand'
-                    : 'bg-white text-gray-600 border-gray-300 hover:border-brand'
+                    ? 'bg-neon text-white border-neon'
+                    : 'bg-surface-card text-text-secondary border-border hover:border-neon'
                 }`}
               >
                 {sport.label}
@@ -119,8 +119,8 @@ export default function ProfilePage() {
                 onClick={() => toggleArrayItem('service_types', service.value)}
                 className={`px-3 py-1.5 rounded-full text-sm font-medium border transition-colors ${
                   (vendor.service_types || []).includes(service.value)
-                    ? 'bg-brand text-white border-brand'
-                    : 'bg-white text-gray-600 border-gray-300 hover:border-brand'
+                    ? 'bg-neon text-white border-neon'
+                    : 'bg-surface-card text-text-secondary border-border hover:border-neon'
                 }`}
               >
                 {service.label}
@@ -130,7 +130,7 @@ export default function ProfilePage() {
         </Card>
 
         {message && (
-          <p className={`text-sm ${message.startsWith('Error') ? 'text-red-600' : 'text-brand'}`}>{message}</p>
+          <p className={`text-sm ${message.startsWith('Error') ? 'text-red-400' : 'text-neon'}`}>{message}</p>
         )}
 
         <Button onClick={handleSave} loading={saving} size="lg">Save Profile</Button>

@@ -57,9 +57,9 @@ export default function InquiryForm({ vendorId, vendorName }: InquiryFormProps) 
   if (submitted) {
     return (
       <div className="text-center py-8">
-        <CheckCircle className="h-12 w-12 text-brand mx-auto mb-3" />
-        <h3 className="text-lg font-semibold text-gray-900">Quote Request Submitted!</h3>
-        <p className="text-gray-600 mt-1">
+        <CheckCircle className="h-12 w-12 text-neon mx-auto mb-3" />
+        <h3 className="text-lg font-semibold text-text-primary">Quote Request Submitted!</h3>
+        <p className="text-text-secondary mt-1">
           {vendorName ? `${vendorName} will` : 'A contractor will'} be in touch within 24-48 hours.
         </p>
       </div>
@@ -68,7 +68,7 @@ export default function InquiryForm({ vendorId, vendorName }: InquiryFormProps) 
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-      <h3 className="text-lg font-semibold text-gray-900">
+      <h3 className="text-lg font-semibold text-text-primary">
         {vendorName ? `Request a Quote from ${vendorName}` : 'Get a Free Quote'}
       </h3>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -79,32 +79,32 @@ export default function InquiryForm({ vendorId, vendorName }: InquiryFormProps) 
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Sport Type</label>
-          <select {...register('sport_type')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand">
+          <label className="block text-sm font-medium text-text-secondary mb-1">Sport Type</label>
+          <select {...register('sport_type')} className="w-full px-3 py-2 border border-border rounded-lg text-text-primary focus:outline-none focus:ring-2 focus:ring-neon">
             <option value="">Select type...</option>
             {SPORT_TYPES.map((s) => (
               <option key={s.value} value={s.value}>{s.label}</option>
             ))}
           </select>
-          {errors.sport_type && <p className="mt-1 text-sm text-red-600">{errors.sport_type.message}</p>}
+          {errors.sport_type && <p className="mt-1 text-sm text-red-400">{errors.sport_type.message}</p>}
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Service Needed</label>
-          <select {...register('service_type')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand">
+          <label className="block text-sm font-medium text-text-secondary mb-1">Service Needed</label>
+          <select {...register('service_type')} className="w-full px-3 py-2 border border-border rounded-lg text-text-primary focus:outline-none focus:ring-2 focus:ring-neon">
             <option value="">Select service...</option>
             {SERVICE_TYPES.map((s) => (
               <option key={s.value} value={s.value}>{s.label}</option>
             ))}
           </select>
-          {errors.service_type && <p className="mt-1 text-sm text-red-600">{errors.service_type.message}</p>}
+          {errors.service_type && <p className="mt-1 text-sm text-red-400">{errors.service_type.message}</p>}
         </div>
       </div>
       <Textarea label="Project Details" {...register('message')} error={errors.message?.message} placeholder="Tell us about your project: dimensions, current condition, timeline..." />
-      {submitError && <p className="text-sm text-red-600">{submitError}</p>}
+      {submitError && <p className="text-sm text-red-400">{submitError}</p>}
       <Button type="submit" loading={isSubmitting} className="w-full" size="lg">
         Submit Quote Request
       </Button>
-      <p className="text-xs text-gray-500 text-center">Free, no-obligation quote. We respect your privacy.</p>
+      <p className="text-xs text-text-muted text-center">Free, no-obligation quote. We respect your privacy.</p>
     </form>
   );
 }

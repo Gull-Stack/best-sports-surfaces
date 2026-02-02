@@ -44,14 +44,14 @@ export default function AdminReviewsPage() {
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">Moderate Reviews</h1>
+      <h1 className="text-2xl font-bold text-text-primary mb-6">Moderate Reviews</h1>
 
       <div className="flex gap-2 mb-6">
         {(['pending', 'approved', 'all'] as const).map((f) => (
           <button
             key={f}
             onClick={() => setFilter(f)}
-            className={`px-4 py-2 rounded-full text-sm font-medium ${filter === f ? 'bg-brand text-white' : 'bg-gray-100 text-gray-600'}`}
+            className={`px-4 py-2 rounded-full text-sm font-medium ${filter === f ? 'bg-neon text-white' : 'bg-surface-hover text-text-secondary'}`}
           >
             {f.charAt(0).toUpperCase() + f.slice(1)}
           </button>
@@ -63,16 +63,16 @@ export default function AdminReviewsPage() {
           <Card key={review.id} padding="md">
             <div className="flex items-start justify-between mb-2">
               <div>
-                <h3 className="font-semibold text-gray-900">{review.author_name}</h3>
-                <p className="text-xs text-gray-500">for {review.vendors?.name || 'Unknown Vendor'}</p>
+                <h3 className="font-semibold text-text-primary">{review.author_name}</h3>
+                <p className="text-xs text-text-muted">for {review.vendors?.name || 'Unknown Vendor'}</p>
               </div>
               <Badge variant={review.is_approved ? 'green' : 'amber'}>
                 {review.is_approved ? 'Approved' : 'Pending'}
               </Badge>
             </div>
             <StarRating rating={review.rating} size={14} />
-            {review.title && <h4 className="font-medium text-gray-800 mt-2">{review.title}</h4>}
-            <p className="text-sm text-gray-600 mt-1">{review.content}</p>
+            {review.title && <h4 className="font-medium text-text-primary mt-2">{review.title}</h4>}
+            <p className="text-sm text-text-secondary mt-1">{review.content}</p>
             {!review.is_approved && (
               <div className="flex gap-2 mt-3">
                 <Button size="sm" onClick={() => handleAction(review.id, true)}>Approve</Button>
@@ -81,7 +81,7 @@ export default function AdminReviewsPage() {
             )}
           </Card>
         ))}
-        {reviews.length === 0 && <p className="text-gray-500 text-center py-8">No reviews found.</p>}
+        {reviews.length === 0 && <p className="text-text-muted text-center py-8">No reviews found.</p>}
       </div>
     </div>
   );

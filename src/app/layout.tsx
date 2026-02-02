@@ -55,7 +55,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={geist.className}>
-      <body className="min-h-screen flex flex-col">
+      <body className="min-h-screen flex flex-col bg-surface text-text-primary">
         <SponsorBar />
         <Header />
         <main className="flex-1">{children}</main>

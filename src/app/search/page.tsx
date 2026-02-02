@@ -94,26 +94,26 @@ function SearchContent() {
     <div className="max-w-7xl mx-auto px-4 py-8">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Find Sports Surface Contractors</h1>
-          <p className="text-gray-600 mt-1">{total} contractors found</p>
+          <h1 className="text-2xl font-bold text-text-primary">Find Sports Surface Contractors</h1>
+          <p className="text-text-secondary mt-1">{total} contractors found</p>
         </div>
         <div className="flex items-center gap-2">
           <button
             onClick={() => setShowFilters(!showFilters)}
-            className="md:hidden flex items-center gap-1 px-3 py-2 border rounded-lg text-sm"
+            className="md:hidden flex items-center gap-1 px-3 py-2 border border-border rounded-lg text-sm text-text-secondary"
           >
             <SlidersHorizontal className="h-4 w-4" /> Filters
           </button>
-          <div className="flex border rounded-lg overflow-hidden">
+          <div className="flex border border-border rounded-lg overflow-hidden">
             <button
               onClick={() => setView('list')}
-              className={`px-3 py-2 text-sm ${view === 'list' ? 'bg-brand text-white' : 'bg-white text-gray-600'}`}
+              className={`px-3 py-2 text-sm ${view === 'list' ? 'bg-neon text-surface' : 'bg-surface-card text-text-secondary'}`}
             >
               <List className="h-4 w-4" />
             </button>
             <button
               onClick={() => setView('map')}
-              className={`px-3 py-2 text-sm ${view === 'map' ? 'bg-brand text-white' : 'bg-white text-gray-600'}`}
+              className={`px-3 py-2 text-sm ${view === 'map' ? 'bg-neon text-surface' : 'bg-surface-card text-text-secondary'}`}
             >
               <MapIcon className="h-4 w-4" />
             </button>
@@ -128,7 +128,7 @@ function SearchContent() {
           ))}
           <button
             onClick={() => router.push('/search')}
-            className="text-sm text-gray-500 hover:text-gray-700 flex items-center gap-1"
+            className="text-sm text-text-muted hover:text-text-primary flex items-center gap-1"
           >
             <X className="h-3 w-3" /> Clear all
           </button>
@@ -138,27 +138,27 @@ function SearchContent() {
       <div className="flex gap-8">
         {/* Sidebar Filters */}
         <aside className={`w-64 flex-shrink-0 ${showFilters ? 'block' : 'hidden'} md:block`}>
-          <div className="bg-white border rounded-xl p-4 space-y-5 sticky top-20">
+          <div className="bg-surface-card border border-border rounded-xl p-4 space-y-5 sticky top-20">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">ZIP Code</label>
+              <label className="block text-sm font-medium text-text-secondary mb-1">ZIP Code</label>
               <input
                 type="text"
                 placeholder="Enter ZIP code"
                 defaultValue={filters.zip}
                 onBlur={(e) => updateFilter('zip', e.target.value)}
                 onKeyDown={(e) => { if (e.key === 'Enter') updateFilter('zip', (e.target as HTMLInputElement).value); }}
-                className="w-full px-3 py-2 border rounded-lg text-sm text-gray-900 placeholder-gray-400"
+                className="w-full px-3 py-2 border border-border rounded-lg text-sm text-text-primary placeholder-text-muted bg-surface-raised"
                 maxLength={5}
                 pattern="[0-9]*"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Sport Type</label>
+              <label className="block text-sm font-medium text-text-secondary mb-1">Sport Type</label>
               <select
                 value={filters.sportType}
                 onChange={(e) => updateFilter('sport', e.target.value)}
-                className="w-full px-3 py-2 border rounded-lg text-sm text-gray-900"
+                className="w-full px-3 py-2 border border-border rounded-lg text-sm text-text-primary bg-surface-raised"
               >
                 <option value="">All Sports</option>
                 {SPORT_TYPES.map(s => (
@@ -168,11 +168,11 @@ function SearchContent() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Service Type</label>
+              <label className="block text-sm font-medium text-text-secondary mb-1">Service Type</label>
               <select
                 value={filters.serviceType}
                 onChange={(e) => updateFilter('service', e.target.value)}
-                className="w-full px-3 py-2 border rounded-lg text-sm text-gray-900"
+                className="w-full px-3 py-2 border border-border rounded-lg text-sm text-text-primary bg-surface-raised"
               >
                 <option value="">All Services</option>
                 {SERVICE_TYPES.map(s => (
@@ -182,11 +182,11 @@ function SearchContent() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Distance (miles)</label>
+              <label className="block text-sm font-medium text-text-secondary mb-1">Distance (miles)</label>
               <select
                 value={filters.radius}
                 onChange={(e) => updateFilter('radius', e.target.value)}
-                className="w-full px-3 py-2 border rounded-lg text-sm text-gray-900"
+                className="w-full px-3 py-2 border border-border rounded-lg text-sm text-text-primary bg-surface-raised"
               >
                 <option value="25">25 miles</option>
                 <option value="50">50 miles</option>
@@ -196,11 +196,11 @@ function SearchContent() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Minimum Rating</label>
+              <label className="block text-sm font-medium text-text-secondary mb-1">Minimum Rating</label>
               <select
                 value={filters.minRating}
                 onChange={(e) => updateFilter('rating', e.target.value)}
-                className="w-full px-3 py-2 border rounded-lg text-sm text-gray-900"
+                className="w-full px-3 py-2 border border-border rounded-lg text-sm text-text-primary bg-surface-raised"
               >
                 <option value="0">Any Rating</option>
                 <option value="3">3+ Stars</option>
@@ -210,23 +210,23 @@ function SearchContent() {
             </div>
 
             <div>
-              <label className="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
+              <label className="flex items-center gap-2 text-sm text-text-secondary cursor-pointer">
                 <input
                   type="checkbox"
                   checked={filters.verified}
                   onChange={(e) => updateFilter('verified', e.target.checked)}
-                  className="rounded border-gray-300 text-brand focus:ring-brand"
+                  className="rounded border-border text-neon focus:ring-neon bg-surface-raised"
                 />
                 Verified Only
               </label>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Sort By</label>
+              <label className="block text-sm font-medium text-text-secondary mb-1">Sort By</label>
               <select
                 value={filters.sort}
                 onChange={(e) => updateFilter('sort', e.target.value)}
-                className="w-full px-3 py-2 border rounded-lg text-sm text-gray-900"
+                className="w-full px-3 py-2 border border-border rounded-lg text-sm text-text-primary bg-surface-raised"
               >
                 <option value="relevance">Relevance</option>
                 <option value="rating">Highest Rated</option>

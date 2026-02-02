@@ -45,8 +45,8 @@ export default function SignupPage() {
     return (
       <div className="min-h-[60vh] flex items-center justify-center px-4">
         <Card padding="lg" className="max-w-md w-full text-center">
-          <h2 className="text-xl font-bold text-gray-900 mb-2">Check Your Email</h2>
-          <p className="text-gray-600">We sent a confirmation link to <strong>{email}</strong>. Please confirm your email to continue.</p>
+          <h2 className="text-xl font-bold text-text-primary mb-2">Check Your Email</h2>
+          <p className="text-text-secondary">We sent a confirmation link to <strong>{email}</strong>. Please confirm your email to continue.</p>
         </Card>
       </div>
     );
@@ -55,17 +55,17 @@ export default function SignupPage() {
   return (
     <div className="min-h-[60vh] flex items-center justify-center px-4 py-12">
       <Card padding="lg" className="max-w-md w-full">
-        <h1 className="text-2xl font-bold text-gray-900 mb-2 text-center">Create Account</h1>
-        <p className="text-gray-600 text-center text-sm mb-6">List your business and start receiving leads.</p>
+        <h1 className="text-2xl font-bold text-text-primary mb-2 text-center">Create Account</h1>
+        <p className="text-text-secondary text-center text-sm mb-6">List your business and start receiving leads.</p>
         <form onSubmit={handleSignup} className="space-y-4">
           <Input label="Email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required placeholder="you@example.com" />
           <Input label="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required placeholder="At least 6 characters" />
           <Input label="Confirm Password" type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required placeholder="Confirm password" />
-          {error && <p className="text-sm text-red-600">{error}</p>}
+          {error && <p className="text-sm text-red-400">{error}</p>}
           <Button type="submit" loading={loading} className="w-full">Create Account</Button>
         </form>
-        <p className="mt-4 text-center text-sm text-gray-600">
-          Already have an account? <Link href="/auth/login" className="text-brand hover:underline">Sign in</Link>
+        <p className="mt-4 text-center text-sm text-text-secondary">
+          Already have an account? <Link href="/auth/login" className="text-neon hover:underline">Sign in</Link>
         </p>
       </Card>
     </div>

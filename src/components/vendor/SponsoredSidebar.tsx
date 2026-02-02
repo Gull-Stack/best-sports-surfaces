@@ -8,8 +8,8 @@ export default function SponsoredSidebar({ products }: SponsoredSidebarProps) {
   if (!products.length) return null;
 
   return (
-    <div className="bg-gray-50 rounded-xl p-4 border border-gray-200">
-      <p className="text-xs text-gray-400 uppercase tracking-wide mb-3">Sponsored</p>
+    <div className="bg-surface-raised rounded-xl p-4 border border-border">
+      <p className="text-xs text-text-muted uppercase tracking-wide mb-3">Sponsored</p>
       <div className="space-y-4">
         {products.map((product) => (
           <a
@@ -26,9 +26,9 @@ export default function SponsoredSidebar({ products }: SponsoredSidebarProps) {
                 className="w-full rounded-lg mb-2 group-hover:opacity-90 transition-opacity"
               />
             )}
-            <h4 className="text-sm font-semibold text-gray-900 group-hover:text-brand">{product.name}</h4>
-            <p className="text-xs text-gray-500 mt-0.5">{product.description}</p>
-            <p className="text-xs text-gray-400 mt-1">by {product.sponsor_name}</p>
+            <h4 className="text-sm font-semibold text-text-primary group-hover:text-neon">{product.name}</h4>
+            <p className="text-xs text-text-muted mt-0.5">{product.description}</p>
+            <p className="text-xs text-text-muted mt-1">by {product.sponsor_name}</p>
           </a>
         ))}
       </div>

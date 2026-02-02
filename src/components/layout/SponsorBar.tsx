@@ -1,12 +1,12 @@
 export default function SponsorBar() {
   return (
-    <div className="bg-brand text-white text-center py-1.5 text-sm">
+    <div className="bg-neon text-surface text-center py-1.5 text-sm font-medium">
       <span>Sponsored by </span>
       <a
         href="https://atsports.com"
         target="_blank"
         rel="noopener noreferrer"
-        className="font-semibold underline hover:no-underline"
+        className="font-bold underline hover:no-underline"
       >
         ATSports.com
       </a>

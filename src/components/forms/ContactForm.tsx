@@ -41,9 +41,9 @@ export default function ContactForm() {
   if (submitted) {
     return (
       <div className="text-center py-8">
-        <CheckCircle className="h-12 w-12 text-brand mx-auto mb-3" />
+        <CheckCircle className="h-12 w-12 text-neon mx-auto mb-3" />
         <h3 className="text-lg font-semibold">Message Sent!</h3>
-        <p className="text-gray-600">We&apos;ll get back to you within 24 hours.</p>
+        <p className="text-text-secondary">We&apos;ll get back to you within 24 hours.</p>
       </div>
     );
   }
