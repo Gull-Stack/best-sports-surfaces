@@ -105,6 +105,24 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Map Section */}
+      <section className="py-16">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold text-text-primary">Contractors Nationwide</h2>
+            <p className="text-text-secondary mt-2">We have trusted sports surface contractors across the United States.</p>
+          </div>
+          <div className="rounded-xl overflow-hidden border border-border">
+            <MapComponent pins={mapPins} className="h-96 md:h-[500px]" />
+          </div>
+          <div className="flex items-center justify-center gap-6 mt-4 text-sm text-text-muted">
+            <span className="flex items-center gap-2"><span className="w-3 h-3 rounded-full bg-accent" /> Free Listings</span>
+            <span className="flex items-center gap-2"><span className="w-3 h-3 rounded-full bg-neon" /> Premium</span>
+            <span className="flex items-center gap-2"><span className="w-3 h-3 rounded-full bg-amber-500" /> Featured</span>
+          </div>
+        </div>
+      </section>
+
       {/* Sport Categories */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4">
@@ -123,24 +141,6 @@ export default async function HomePage() {
                 <span className="text-sm font-medium text-text-secondary group-hover:text-neon">{sport.label}</span>
               </Link>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Map Section */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold text-text-primary">Contractors Nationwide</h2>
-            <p className="text-text-secondary mt-2">We have trusted sports surface contractors across the United States.</p>
-          </div>
-          <div className="rounded-xl overflow-hidden border border-border">
-            <MapComponent pins={mapPins} className="h-96 md:h-[500px]" />
-          </div>
-          <div className="flex items-center justify-center gap-6 mt-4 text-sm text-text-muted">
-            <span className="flex items-center gap-2"><span className="w-3 h-3 rounded-full bg-accent" /> Free Listings</span>
-            <span className="flex items-center gap-2"><span className="w-3 h-3 rounded-full bg-neon" /> Premium</span>
-            <span className="flex items-center gap-2"><span className="w-3 h-3 rounded-full bg-amber-500" /> Featured</span>
           </div>
         </div>
       </section>
