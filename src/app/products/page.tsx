@@ -70,8 +70,15 @@ const productCategories = [
   {
     id: 'surfaces',
     title: '🎨 Acrytech Court Surfaces',
-    description: 'Professional acrylic court coatings — the industry standard.',
-    images: [],
+    description: 'Official surface of the PPA Tour. Professional acrylic court coatings — the industry standard.',
+    images: [
+      '/products/acrytech-1.jpg',
+      '/products/acrytech-2.png',
+      '/products/acrytech-3.png',
+      '/photos/acrytech-court-4.jpg',
+      '/photos/acrytech-court-9.jpg',
+      '/photos/acrytech-court-6.jpg',
+    ],
     products: [
       {
         name: 'Acrytech Sport Surface System',
