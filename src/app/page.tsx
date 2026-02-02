@@ -71,7 +71,7 @@ export default async function HomePage() {
       <SchemaOrg schema={organizationSchema} />
 
       {/* Hero Section */}
-      <section className="relative py-24 md:py-36 overflow-hidden">
+      <section className="relative py-20 md:py-28 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-neon/5 via-transparent to-transparent" />
         <div className="relative max-w-4xl mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-text-primary mb-4">
@@ -106,9 +106,9 @@ export default async function HomePage() {
       </section>
 
       {/* Map Section */}
-      <section className="py-16">
+      <section className="py-10">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-10">
+          <div className="text-center mb-8">
             <h2 className="text-3xl font-bold text-text-primary">Contractors Nationwide</h2>
             <p className="text-text-secondary mt-2">We have trusted sports surface contractors across the United States.</p>
           </div>
