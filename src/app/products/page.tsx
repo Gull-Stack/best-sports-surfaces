@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowRight, Star, ExternalLink, ShieldCheck, Award } from 'lucide-react';
+import { ArrowRight, Award, ShieldCheck } from 'lucide-react';
 import { SITE_NAME } from '@/lib/constants';
 
 export const metadata: Metadata = {
@@ -8,122 +8,53 @@ export const metadata: Metadata = {
   description: 'Hand-picked recommended products for sports court construction. Dominator Hoops, Selkirk Nets, Acrytech Paint, lighting solutions, and more — trusted by pros.',
 };
 
-const productCategories = [
+const products = [
   {
-    id: 'hoops',
-    title: '🏀 Dominator Hoops',
-    description: 'The best in-ground basketball systems on the market. Period.',
-    images: [
-      '/products/dominator-hoop-1.jpg',
-      '/products/dominator-hoop-2.jpg',
-      '/products/dominator-hoop-3.jpg',
-      '/products/dominator-hoop-4.jpg',
-      '/products/dominator-hoop-5.jpg',
-      '/products/dominator-hoop-6.jpg',
-    ],
-    products: [
-      {
-        name: 'Dominator In-Ground Basketball System',
-        brand: 'Dominator',
-        description: 'Commercial-grade in-ground basketball system that dominates every other hoop on the market. Tempered glass backboard, rock-solid stability, and adjustable height. Built to handle years of aggressive play — from backyard warriors to full-court ballers. If you\'re serious about your court, this is the only hoop worth buying.',
-        url: 'https://www.dominatorhoop.com',
-        badge: 'Top Pick',
-        features: [
-          'Tempered glass backboard',
-          'Adjustable height system',
-          'In-ground steel pole mount',
-          'Commercial-grade construction',
-          'Built to last decades',
-          'Multiple size options',
-        ],
-      },
-    ],
+    slug: 'dominator',
+    name: 'Dominator Hoops',
+    brand: 'Dominator',
+    emoji: '🏀',
+    image: '/products/dominator-hoop-1.jpg',
+    description: 'The best in-ground basketball systems on the market. Commercial-grade, tempered glass, built to last decades.',
+    badge: 'Top Pick',
+    href: '/products/dominator',
   },
   {
-    id: 'nets',
-    title: '🏓 Selkirk Pickleball Nets',
-    description: 'Premium net systems from the most trusted name in pickleball.',
-    images: [
-      '/products/selkirk-net.jpg',
-      '/products/selkirk-net-2.jpg',
-      '/products/selkirk-net-3.jpg',
-      '/products/selkirk-net-4.jpg',
-    ],
-    products: [
-      {
-        name: 'Selkirk Aluminum Pro Net System',
-        brand: 'Selkirk',
-        description: 'The gold standard in pickleball net systems. Lightweight aluminum frame with pro-level net tension and dead-accurate regulation height. Whether you\'re setting up a permanent court or need something portable for tournaments, Selkirk delivers every time.',
-        url: 'https://www.selkirk.com',
-        badge: 'Premium',
-        features: [
-          'Lightweight aluminum frame',
-          'Pro-level net tension',
-          'Regulation 22\' width & height',
-          'Quick setup & breakdown',
-          'Tournament approved',
-          'Powder-coated finish',
-        ],
-      },
-    ],
+    slug: 'selkirk',
+    name: 'Selkirk Pickleball Nets',
+    brand: 'Selkirk',
+    emoji: '🏓',
+    image: '/products/selkirk-net.jpg',
+    description: 'Premium aluminum pickleball net systems from the most trusted name in the sport. Tournament approved.',
+    badge: 'Premium',
+    href: '/products/selkirk',
   },
   {
-    id: 'surfaces',
-    title: '🎨 Acrytech Court Surfaces',
-    description: 'Official surface of the PPA Tour. Professional acrylic court coatings — the industry standard.',
-    images: [
-      '/products/acrytech-1.jpg',
-      '/products/acrytech-2.png',
-      '/products/acrytech-3.png',
-      '/photos/acrytech-court-4.jpg',
-      '/photos/acrytech-court-9.jpg',
-      '/photos/acrytech-court-6.jpg',
-    ],
-    products: [
-      {
-        name: 'Acrytech Sport Surface System',
-        brand: 'Acrytech',
-        description: 'Professional acrylic sport surface coating system used by top contractors nationwide. UV-resistant, slip-resistant, and available in a full spectrum of court colors. When the best contractors in the country need to paint a court, they reach for Acrytech.',
-        url: 'https://www.acrytech.com',
-        badge: 'Industry Standard',
-        features: [
-          'UV & weather resistant',
-          'Anti-slip texture options',
-          'Full color spectrum',
-          'Used by top contractors nationwide',
-          'Proven durability in all climates',
-          'Residential & commercial grade',
-        ],
-      },
-    ],
+    slug: 'acrytech',
+    name: 'Acrytech Court Surfaces',
+    brand: 'Acrytech',
+    emoji: '🎨',
+    image: '/products/acrytech-1.jpg',
+    description: 'Official surface of the PPA Tour. Professional acrylic sport surface coatings — the industry standard.',
+    badge: 'Official PPA Surface',
+    href: '/acrytech',
   },
   {
-    id: 'lighting',
-    title: '💡 Court Lighting',
-    description: 'LED lighting systems for night play and all-weather visibility.',
-    images: [],
-    products: [
-      {
-        name: 'Coming Soon',
-        brand: 'TBD',
-        description: 'We\'re evaluating the best LED court lighting systems on the market. Check back soon for our top picks — or contact us if you manufacture court lighting and want to be featured.',
-        url: '',
-        badge: 'Coming Soon',
-        features: [
-          'LED technology',
-          'Minimal light pollution',
-          'Energy efficient',
-          'Residential & commercial options',
-        ],
-      },
-    ],
+    slug: 'lighting',
+    name: 'Court Lighting',
+    brand: 'Coming Soon',
+    emoji: '💡',
+    image: null,
+    description: 'We\'re evaluating the best LED court lighting systems on the market. Check back soon for our top picks.',
+    badge: 'Coming Soon',
+    href: null,
   },
 ];
 
 const badgeColors: Record<string, string> = {
   'Top Pick': 'bg-neon/10 text-neon border-neon/30',
   'Premium': 'bg-amber-500/10 text-amber-400 border-amber-500/30',
-  'Industry Standard': 'bg-accent/10 text-accent border-accent/30',
+  'Official PPA Surface': 'bg-neon/10 text-neon border-neon/30',
   'Coming Soon': 'bg-surface-hover text-text-muted border-border',
 };
 
@@ -146,7 +77,7 @@ export default function ProductsPage() {
       </div>
 
       {/* Trust Banner */}
-      <div className="mb-16 rounded-xl border border-border bg-surface-card p-6 flex flex-col sm:flex-row items-center justify-center gap-4 text-center sm:text-left">
+      <div className="mb-12 rounded-xl border border-border bg-surface-card p-6 flex flex-col sm:flex-row items-center justify-center gap-4 text-center sm:text-left">
         <ShieldCheck className="h-8 w-8 text-neon flex-shrink-0" />
         <p className="text-text-secondary text-sm">
           Every product on this page is used and recommended by verified contractors in the {SITE_NAME} network. 
@@ -154,87 +85,59 @@ export default function ProductsPage() {
         </p>
       </div>
 
-      {/* Product Categories */}
-      <div className="space-y-24">
-        {productCategories.map((category) => (
-          <section key={category.id} id={category.id}>
-            <div className="mb-8">
-              <h2 className="text-2xl font-bold text-text-primary">{category.title}</h2>
-              <p className="text-text-muted mt-1">{category.description}</p>
-            </div>
-
-            {/* Product Image Gallery */}
-            {category.images.length > 0 && (
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-8">
-                {category.images.map((src, i) => (
-                  <div
-                    key={i}
-                    className={`rounded-xl overflow-hidden border border-border ${
-                      i === 0 ? 'col-span-2 row-span-2' : ''
-                    }`}
-                  >
-                    <img
-                      src={src}
-                      alt={`${category.title} product photo ${i + 1}`}
-                      className={`w-full h-full object-cover ${i === 0 ? 'aspect-[4/3]' : 'aspect-[4/3]'}`}
-                      loading={i < 2 ? 'eager' : 'lazy'}
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {/* Product Cards */}
-            <div className="grid grid-cols-1 gap-6">
-              {category.products.map((product, i) => (
-                <div
-                  key={i}
-                  className="bg-surface-card rounded-xl border border-border p-6 md:p-8 hover:border-neon/30 transition-all group"
-                >
-                  <div className="flex items-start justify-between mb-4">
+      {/* Product Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {products.map((product) => {
+          const Card = (
+            <div
+              className={`bg-surface-card rounded-xl border border-border overflow-hidden hover:border-neon/40 transition-all group ${product.href ? 'cursor-pointer' : ''}`}
+            >
+              {product.image && (
+                <div className="aspect-[16/9] overflow-hidden">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+              )}
+              <div className="p-6">
+                <div className="flex items-start justify-between mb-3">
+                  <div className="flex items-center gap-3">
+                    <span className="text-3xl">{product.emoji}</span>
                     <div>
-                      <h3 className="text-xl font-bold text-text-primary group-hover:text-neon transition-colors">
+                      <h2 className="text-xl font-bold text-text-primary group-hover:text-neon transition-colors">
                         {product.name}
-                      </h3>
+                      </h2>
                       <p className="text-sm text-text-muted">{product.brand}</p>
                     </div>
-                    {product.badge && (
-                      <span className={`px-3 py-1 rounded-full text-xs font-semibold border ${badgeColors[product.badge] || badgeColors['Coming Soon']}`}>
-                        {product.badge}
-                      </span>
-                    )}
                   </div>
-
-                  <p className="text-text-secondary mb-5">{product.description}</p>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-6">
-                    {product.features.map((feature, fi) => (
-                      <div key={fi} className="flex items-center gap-2 text-sm text-text-secondary">
-                        <span className="w-1.5 h-1.5 rounded-full bg-neon flex-shrink-0" />
-                        {feature}
-                      </div>
-                    ))}
-                  </div>
-
-                  {product.url && (
-                    <a
-                      href={product.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 bg-neon text-surface px-5 py-2.5 rounded-lg font-semibold hover:bg-neon-hover transition-colors"
-                    >
-                      Shop {product.brand} <ExternalLink className="h-4 w-4" />
-                    </a>
-                  )}
+                  <span className={`px-2.5 py-1 rounded-full text-xs font-semibold border ${badgeColors[product.badge] || badgeColors['Coming Soon']}`}>
+                    {product.badge}
+                  </span>
                 </div>
-              ))}
+                <p className="text-text-secondary mb-4">{product.description}</p>
+                {product.href && (
+                  <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-neon">
+                    View Details <ArrowRight className="h-4 w-4" />
+                  </span>
+                )}
+              </div>
             </div>
-          </section>
-        ))}
+          );
+
+          return product.href ? (
+            <Link key={product.slug} href={product.href}>
+              {Card}
+            </Link>
+          ) : (
+            <div key={product.slug}>{Card}</div>
+          );
+        })}
       </div>
 
-      {/* Vendor/Brand CTA */}
-      <div className="mt-20 text-center bg-surface-card rounded-2xl border border-border p-8 md:p-12">
+      {/* Manufacturer CTA */}
+      <div className="mt-16 text-center bg-surface-card rounded-2xl border border-border p-8 md:p-12">
         <h2 className="text-2xl font-bold text-text-primary mb-3">
           Manufacture Court Products?
         </h2>
