@@ -14,6 +14,7 @@ const footerLinks = {
     { href: '/cost-estimator', label: 'Cost Estimator' },
     { href: '/blog', label: 'Blog' },
     { href: '/locations', label: 'Locations' },
+    { href: '/products', label: 'Products' },
   ],
   'Company': [
     { href: '/about', label: 'About Us' },
