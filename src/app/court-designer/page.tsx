@@ -372,11 +372,19 @@ function LightingOverlay({ s, offX, offY, totalW, totalL }: any) {
   );
 }
 
-function NetOverlay({ s, offX, offY, totalW, totalL, sport }: any) {
+function NetOverlay({ s, offX, offY, totalW, totalL, sport, rotated }: any) {
   const cx = offX + (totalW * s) / 2;
   const cy = offY + (totalL * s) / 2;
   if (sport === 'basketball' || sport === 'basketball-half') {
-    // Show hoop indicator
+    if (rotated) {
+      // Landscape: hoop on right side
+      return (
+        <g>
+          <circle cx={offX + totalW * s - 12} cy={cy} r={6} fill="none" stroke="#f97316" strokeWidth={2} />
+          <text x={offX + totalW * s - 6} y={cy + 3} textAnchor="start" fill="#f97316" fontSize="7">HOOP</text>
+        </g>
+      );
+    }
     return (
       <g>
         <circle cx={cx} cy={offY + totalL * s - 12} r={6} fill="none" stroke="#f97316" strokeWidth={2} />
@@ -385,6 +393,15 @@ function NetOverlay({ s, offX, offY, totalW, totalL, sport }: any) {
     );
   }
   // Net for tennis/pickleball
+  if (rotated) {
+    // Landscape: net is vertical at center
+    return (
+      <g>
+        <line x1={cx} y1={offY + 10} x2={cx} y2={offY + totalL * s - 10} stroke="#f97316" strokeWidth={3} opacity={0.6} />
+        <text x={cx + 8} y={cy} textAnchor="start" fill="#f97316" fontSize="7">NET</text>
+      </g>
+    );
+  }
   return (
     <g>
       <line x1={offX + 10} y1={cy} x2={offX + totalW * s - 10} y2={cy} stroke="#f97316" strokeWidth={3} opacity={0.6} />
@@ -673,7 +690,7 @@ export default function CourtDesignerPage() {
                   {/* Extras */}
                   {fencing && <FencingOverlay s={s} offX={offX} offY={offY} totalW={renderW} totalL={renderH} />}
                   {lighting && <LightingOverlay s={s} offX={offX} offY={offY} totalW={renderW} totalL={renderH} />}
-                  {netHoop && <NetOverlay s={s} offX={offX} offY={offY} totalW={renderW} totalL={renderH} sport={sport} />}
+                  {netHoop && <NetOverlay s={s} offX={offX} offY={offY} totalW={renderW} totalL={renderH} sport={sport} rotated={isRotated} />}
 
                   {/* Dimension labels */}
                   <text x={offX + (renderW * s) / 2} y={offY + renderH * s + 16} textAnchor="middle" fill="#666" fontSize="11" fontFamily="monospace">
