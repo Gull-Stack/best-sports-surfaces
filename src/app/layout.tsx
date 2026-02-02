@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Geist } from 'next/font/google';
+import Script from 'next/script';
 import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
@@ -55,6 +56,20 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={geist.className}>
+      <head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-VY8GCJKGP2"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-VY8GCJKGP2');
+          `}
+        </Script>
+      </head>
       <body className="min-h-screen flex flex-col bg-surface text-text-primary">
         <SponsorBar />
         <Header />
