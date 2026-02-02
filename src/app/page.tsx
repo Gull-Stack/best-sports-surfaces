@@ -277,6 +277,27 @@ export default async function HomePage() {
         </section>
       )}
 
+      {/* Court Designer Teaser */}
+      <section className="py-14 border-t border-border">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold text-text-primary mb-3">
+            Design Your <span className="neon-text">Dream Court</span>
+          </h2>
+          <p className="text-text-secondary mb-6 max-w-2xl mx-auto">
+            Choose your sport, pick your colors, and see your custom court come to life — with real-time cost estimates.
+          </p>
+          <Link
+            href="/court-designer"
+            className="inline-flex items-center gap-2 bg-neon text-surface px-8 py-3.5 rounded-lg font-semibold text-lg hover:bg-neon-hover transition-colors"
+          >
+            🎨 Launch Court Designer <ArrowRight className="h-5 w-5" />
+          </Link>
+          <p className="mt-4 text-xs text-text-muted">
+            Colors by <Link href="/acrytech" className="text-neon hover:underline">Acrytech</Link> — Official Surface of the PPA Tour
+          </p>
+        </div>
+      </section>
+
       {/* Contractor CTA */}
       <section className="py-16 bg-surface-raised border-t border-border">
         <div className="max-w-4xl mx-auto px-4 text-center">
