@@ -204,31 +204,35 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
-  const supabase = await createClient();
-  
-  // Get top cities by population
-  const { data: cities } = await supabase
-    .from('cities')
-    .select('slug, state_code')
-    .order('population', { ascending: false })
-    .limit(50);
+  try {
+    const { createAdminClient } = await import('@/lib/supabase/admin');
+    const supabase = createAdminClient();
+    
+    // Get top cities by population
+    const { data: cities } = await supabase
+      .from('cities')
+      .select('slug, state_code')
+      .order('population', { ascending: false })
+      .limit(50);
 
-  if (!cities) return [];
+    if (!cities) return [];
 
-  const sports = Object.keys(SPORT_CONFIG);
-  const params: { sport: string; location: string }[] = [];
+    const sports = Object.keys(SPORT_CONFIG);
+    const params: { sport: string; location: string }[] = [];
 
-  // Generate top combos (top 6 sports × top 50 cities)
-  for (const sport of sports) {
-    for (const city of cities) {
-      params.push({
-        sport,
-        location: `${city.slug}-${city.state_code.toLowerCase()}`,
-      });
+    for (const sport of sports) {
+      for (const city of cities) {
+        params.push({
+          sport,
+          location: `${city.slug}-${city.state_code.toLowerCase()}`,
+        });
+      }
     }
-  }
 
-  return params;
+    return params;
+  } catch {
+    return [];
+  }
 }
 
 export default async function SportLocationPage({ params }: Props) {
