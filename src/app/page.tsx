@@ -9,7 +9,7 @@ import { createClient } from '@/lib/supabase/server';
 import { formatDate } from '@/lib/utils';
 import type { MapPin } from '@/components/ui/Map';
 
-export const revalidate = 3600; // refresh vendor data every hour
+export const revalidate = 0; // force fresh data (temporary cache bust)
 
 const howItWorks = [
   { icon: Search, title: 'Search', description: 'Enter your ZIP code and sport type to find local contractors.' },
