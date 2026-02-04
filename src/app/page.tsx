@@ -24,7 +24,7 @@ export default async function HomePage() {
   const supabase = await createClient();
   const { data: vendors } = await supabase
     .from('vendors')
-    .select('id, latitude, longitude, name, tier, slug');
+    .select('id, latitude, longitude, name, tier, slug, logo_url, city, state');
 
   const { data: recentPosts } = await supabase
     .from('blog_posts')
@@ -35,13 +35,16 @@ export default async function HomePage() {
 
   const mapPins: MapPin[] = (vendors || [])
     .filter((v: { latitude: number | null; longitude: number | null }) => v.latitude && v.longitude)
-    .map((v: { id: string; latitude: number; longitude: number; name: string; tier: 'free' | 'paid' | 'featured'; slug: string }) => ({
+    .map((v: { id: string; latitude: number; longitude: number; name: string; tier: 'free' | 'paid' | 'featured'; slug: string; logo_url: string | null; city: string; state: string }) => ({
       id: v.id,
       latitude: v.latitude,
       longitude: v.longitude,
       title: v.name,
       tier: v.tier,
       slug: v.slug,
+      logo: v.logo_url || undefined,
+      city: v.city,
+      state: v.state,
     }));
 
   const websiteSchema = {
