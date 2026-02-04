@@ -129,6 +129,27 @@ export default async function VendorPage({ params }: Props) {
               )}
             </div>
 
+            {/* Acrytech Certified Partner Badge */}
+            {(vendor as any).is_acrytech_partner && (
+              <Card padding="md" className="mb-6 bg-gradient-to-r from-[#1a472a]/20 to-[#00e87b]/10 border-[#00e87b]/30">
+                <div className="flex items-center gap-4">
+                  <img 
+                    src="/logos/acrytech-logo.png" 
+                    alt="Acrytech" 
+                    className="h-12 w-auto"
+                  />
+                  <div>
+                    <h3 className="font-semibold text-neon flex items-center gap-2">
+                      <Award className="h-5 w-5" /> Acrytech Certified Partner
+                    </h3>
+                    <p className="text-sm text-text-secondary">
+                      This contractor exclusively uses Acrytech premium court surfaces — the Official Surface of the PPA Tour.
+                    </p>
+                  </div>
+                </div>
+              </Card>
+            )}
+
             {/* Contact Info (paid only) */}
             {isPaid && (
               <Card padding="md" className="mb-6 bg-neon-subtle border-neon/20">
