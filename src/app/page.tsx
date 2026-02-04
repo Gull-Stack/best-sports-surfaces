@@ -12,6 +12,8 @@ import type { MapPin } from '@/components/ui/Map';
 export const revalidate = 0;
 export const dynamic = 'force-dynamic'; // completely bypass ISR cache
 
+// Build timestamp: 2026-02-03T17:51:00
+
 const howItWorks = [
   { icon: Search, title: 'Search', description: 'Enter your ZIP code and sport type to find local contractors.' },
   { icon: Users, title: 'Compare', description: 'Browse profiles, read reviews, and compare quotes.' },
@@ -113,7 +115,7 @@ export default async function HomePage() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold text-text-primary">Contractors Nationwide</h2>
-            <p className="text-text-secondary mt-2">We have trusted sports surface contractors across the United States.</p>
+            <p className="text-text-secondary mt-2">We have {mapPins.length} trusted sports surface contractors across the United States.</p>
           </div>
           <div className="rounded-xl overflow-hidden border border-border">
             <MapComponent pins={mapPins} className="h-96 md:h-[500px]" />
