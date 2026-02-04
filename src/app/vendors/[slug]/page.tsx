@@ -87,11 +87,6 @@ export default async function VendorPage({ params }: Props) {
               {/* Badges row */}
               <div className="flex items-center gap-3 flex-wrap mb-4">
                 <VendorBadge tier={vendor.tier} />
-                {(vendor as any).is_acrytech_partner && (
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-neon/20 text-neon border border-neon/30">
-                    <Award className="h-3.5 w-3.5" /> Acrytech Partner
-                  </span>
-                )}
               </div>
               {/* Logo + Name row */}
               <div className="flex items-center gap-5">
@@ -155,6 +150,11 @@ export default async function VendorPage({ params }: Props) {
               {vendor.insurance_verified && (
                 <div className="flex items-center gap-2 text-sm text-text-muted">
                   <CheckCircle className="h-4 w-4" /> Insured
+                </div>
+              )}
+              {(vendor as any).is_acrytech_partner && (
+                <div className="flex items-center gap-2 text-sm text-neon">
+                  <img src="/logos/acrytech-logo-white.png" alt="Acrytech" className="h-4 w-auto" /> Acrytech Partner
                 </div>
               )}
               {vendor.license_number && (
