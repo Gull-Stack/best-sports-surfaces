@@ -83,9 +83,9 @@ export default async function VendorPage({ params }: Props) {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/80 to-surface/30" />
           <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 -mb-16">
-            <div className="max-w-7xl mx-auto flex items-end gap-4">
+            <div className="max-w-7xl mx-auto px-4 flex items-end gap-4">
               {vendor.logo_url && (
-                <img src={vendor.logo_url} alt={vendor.name} className="w-20 h-20 md:w-24 md:h-24 rounded-xl object-cover ring-4 ring-surface shadow-2xl" />
+                <img src={vendor.logo_url} alt={vendor.name} className="w-16 h-16 md:w-20 md:h-20 rounded-xl object-cover ring-4 ring-surface shadow-2xl flex-shrink-0" />
               )}
               <div className="flex-1">
                 <div className="flex items-center gap-3 flex-wrap mb-2">
