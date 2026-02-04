@@ -73,37 +73,68 @@ export default async function VendorPage({ params }: Props) {
     <>
       <SchemaOrg schema={localBusinessSchema(vendor)} />
 
+      {/* Premium Hero Section for Paid/Featured Vendors */}
+      {isPaid && (vendor.cover_image || vendor.gallery_urls?.length > 0) && (
+        <div className="relative h-64 md:h-80 overflow-hidden">
+          <img 
+            src={vendor.cover_image || vendor.gallery_urls[0]} 
+            alt={`${vendor.name} featured work`} 
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/70 to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+            <div className="max-w-7xl mx-auto flex items-end gap-4">
+              {vendor.logo_url && (
+                <img src={vendor.logo_url} alt={vendor.name} className="w-20 h-20 md:w-24 md:h-24 rounded-xl object-cover ring-4 ring-surface shadow-2xl" />
+              )}
+              <div className="flex-1">
+                <div className="flex items-center gap-3 flex-wrap mb-2">
+                  <VendorBadge tier={vendor.tier} />
+                  {(vendor as any).is_acrytech_partner && (
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-neon/20 text-neon border border-neon/30">
+                      <Award className="h-3.5 w-3.5" /> Acrytech Partner
+                    </span>
+                  )}
+                </div>
+                <h1 className="text-3xl md:text-4xl font-bold text-white drop-shadow-lg">{vendor.name}</h1>
+                <div className="flex items-center gap-4 mt-2">
+                  <StarRating rating={vendor.rating} showValue count={vendor.review_count} />
+                  <span className="flex items-center gap-1 text-white/80">
+                    <MapPin className="h-4 w-4" />
+                    {vendor.city}, {vendor.state}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Main Content */}
           <div className="flex-1">
-            {/* Cover Image */}
-            {isPaid && vendor.cover_image && (
-              <div className="relative h-48 md:h-64 rounded-xl overflow-hidden mb-6 border border-border">
-                <img src={vendor.cover_image} alt={`${vendor.name} featured work`} className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-surface/60 to-transparent" />
+            {/* Header for Free Tier (no hero image) */}
+            {!isPaid && (
+              <div className="flex items-start gap-4 mb-6">
+                {vendor.logo_url && (
+                  <img src={vendor.logo_url} alt={vendor.name} className="w-20 h-20 rounded-xl object-cover ring-2 ring-border" />
+                )}
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <h1 className="text-2xl md:text-3xl font-bold text-text-primary">{vendor.name}</h1>
+                    <VendorBadge tier={vendor.tier} />
+                  </div>
+                  <div className="flex items-center gap-3 mt-2">
+                    <StarRating rating={vendor.rating} showValue count={vendor.review_count} />
+                  </div>
+                  <div className="flex items-center gap-1 text-text-muted mt-1">
+                    <MapPin className="h-4 w-4" />
+                    <span>{vendor.city}, {vendor.state}</span>
+                  </div>
+                </div>
               </div>
             )}
-
-            {/* Header */}
-            <div className="flex items-start gap-4 mb-6">
-              {vendor.logo_url && (
-                <img src={vendor.logo_url} alt={vendor.name} className="w-20 h-20 rounded-xl object-cover ring-2 ring-border" />
-              )}
-              <div className="flex-1">
-                <div className="flex items-center gap-2 flex-wrap">
-                  <h1 className="text-2xl md:text-3xl font-bold text-text-primary">{vendor.name}</h1>
-                  <VendorBadge tier={vendor.tier} />
-                </div>
-                <div className="flex items-center gap-3 mt-2">
-                  <StarRating rating={vendor.rating} showValue count={vendor.review_count} />
-                </div>
-                <div className="flex items-center gap-1 text-text-muted mt-1">
-                  <MapPin className="h-4 w-4" />
-                  <span>{vendor.city}, {vendor.state}</span>
-                </div>
-              </div>
-            </div>
 
             {/* Quick Info */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
@@ -128,27 +159,6 @@ export default async function VendorPage({ params }: Props) {
                 </div>
               )}
             </div>
-
-            {/* Acrytech Certified Partner Badge */}
-            {(vendor as any).is_acrytech_partner && (
-              <Card padding="md" className="mb-6 bg-gradient-to-r from-[#1a472a]/20 to-[#00e87b]/10 border-[#00e87b]/30">
-                <div className="flex items-center gap-4">
-                  <img 
-                    src="/logos/acrytech-logo-white.png" 
-                    alt="Acrytech" 
-                    className="h-12 w-auto"
-                  />
-                  <div>
-                    <h3 className="font-semibold text-neon flex items-center gap-2">
-                      <Award className="h-5 w-5" /> Acrytech Certified Partner
-                    </h3>
-                    <p className="text-sm text-text-secondary">
-                      This contractor exclusively uses Acrytech premium court surfaces — the Official Surface of the PPA Tour.
-                    </p>
-                  </div>
-                </div>
-              </Card>
-            )}
 
             {/* Contact Info (paid only) */}
             {isPaid && (
