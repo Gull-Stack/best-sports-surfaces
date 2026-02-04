@@ -75,34 +75,38 @@ export default async function VendorPage({ params }: Props) {
 
       {/* Premium Hero Section for Paid/Featured Vendors */}
       {isPaid && (vendor.cover_image || vendor.gallery_urls?.length > 0) && (
-        <div className="relative h-48 md:h-56 overflow-hidden">
+        <div className="relative h-72 md:h-80 overflow-hidden">
           <img 
             src={vendor.cover_image || vendor.gallery_urls[0]} 
             alt={`${vendor.name} featured work`} 
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/80 to-surface/30" />
-          <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 -mb-16">
-            <div className="max-w-7xl mx-auto px-4 flex items-end gap-4">
-              {vendor.logo_url && (
-                <img src={vendor.logo_url} alt={vendor.name} className="w-16 h-16 md:w-20 md:h-20 rounded-xl object-cover ring-4 ring-surface shadow-2xl flex-shrink-0" />
-              )}
-              <div className="flex-1">
-                <div className="flex items-center gap-3 flex-wrap mb-2">
-                  <VendorBadge tier={vendor.tier} />
-                  {(vendor as any).is_acrytech_partner && (
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-neon/20 text-neon border border-neon/30">
-                      <Award className="h-3.5 w-3.5" /> Acrytech Partner
-                    </span>
-                  )}
-                </div>
-                <h1 className="text-3xl md:text-4xl font-bold text-white drop-shadow-lg">{vendor.name}</h1>
-                <div className="flex items-center gap-4 mt-2">
-                  <StarRating rating={vendor.rating} showValue count={vendor.review_count} />
-                  <span className="flex items-center gap-1 text-white/80">
-                    <MapPin className="h-4 w-4" />
-                    {vendor.city}, {vendor.state}
+          <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/60 to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+            <div className="max-w-7xl mx-auto px-4">
+              {/* Badges row */}
+              <div className="flex items-center gap-3 flex-wrap mb-4">
+                <VendorBadge tier={vendor.tier} />
+                {(vendor as any).is_acrytech_partner && (
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-neon/20 text-neon border border-neon/30">
+                    <Award className="h-3.5 w-3.5" /> Acrytech Partner
                   </span>
+                )}
+              </div>
+              {/* Logo + Name row */}
+              <div className="flex items-center gap-5">
+                {vendor.logo_url && (
+                  <img src={vendor.logo_url} alt={vendor.name} className="w-20 h-20 md:w-24 md:h-24 rounded-xl object-cover ring-4 ring-surface shadow-2xl flex-shrink-0" />
+                )}
+                <div>
+                  <h1 className="text-3xl md:text-4xl font-bold text-white drop-shadow-lg">{vendor.name}</h1>
+                  <div className="flex items-center gap-4 mt-2 flex-wrap">
+                    <StarRating rating={vendor.rating} showValue count={vendor.review_count} />
+                    <span className="flex items-center gap-1 text-white/80">
+                      <MapPin className="h-4 w-4" />
+                      {vendor.city}, {vendor.state}
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -110,7 +114,7 @@ export default async function VendorPage({ params }: Props) {
         </div>
       )}
 
-      <div className={`max-w-7xl mx-auto px-4 ${isPaid && (vendor.cover_image || vendor.gallery_urls?.length > 0) ? 'pt-20 pb-8' : 'py-8'}`}>
+      <div className={`max-w-7xl mx-auto px-4 ${isPaid && (vendor.cover_image || vendor.gallery_urls?.length > 0) ? 'pt-8 pb-8' : 'py-8'}`}>
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Main Content */}
           <div className="flex-1">
