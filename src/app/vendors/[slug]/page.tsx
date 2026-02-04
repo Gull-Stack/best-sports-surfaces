@@ -136,7 +136,7 @@ export default async function VendorPage({ params }: Props) {
             )}
 
             {/* Quick Info */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mb-6">
               {vendor.is_verified && (
                 <div className="flex items-center gap-2 text-sm text-neon">
                   <Shield className="h-4 w-4" /> Verified
@@ -152,14 +152,14 @@ export default async function VendorPage({ params }: Props) {
                   <CheckCircle className="h-4 w-4" /> Insured
                 </div>
               )}
-              {(vendor as any).is_acrytech_partner && (
-                <div className="flex items-center gap-2 text-sm text-neon">
-                  <img src="/logos/acrytech-logo-white.png" alt="Acrytech" className="h-4 w-auto" /> Acrytech Partner
-                </div>
-              )}
               {vendor.license_number && (
                 <div className="flex items-center gap-2 text-sm text-text-muted">
                   <Award className="h-4 w-4" /> License #{vendor.license_number}
+                </div>
+              )}
+              {(vendor as any).is_acrytech_partner && (
+                <div className="flex items-center gap-2 text-sm text-neon">
+                  <img src="/logos/acrytech-logo-white.png" alt="Acrytech" className="h-4 w-auto" /> Acrytech Partner
                 </div>
               )}
             </div>
