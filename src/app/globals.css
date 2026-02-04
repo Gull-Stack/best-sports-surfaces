@@ -191,3 +191,26 @@ body {
 .prose td {
   color: var(--color-text-secondary);
 }
+
+/* Mapbox popup overrides */
+.mapboxgl-popup-content {
+  background: #1a1a1a !important;
+  border-radius: 12px !important;
+  padding: 0 !important;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5) !important;
+}
+
+.mapboxgl-popup-tip {
+  border-top-color: #1a1a1a !important;
+}
+
+.mapboxgl-popup-close-button {
+  color: #9ca3af !important;
+  font-size: 18px !important;
+  padding: 8px 12px !important;
+}
+
+.mapboxgl-popup-close-button:hover {
+  color: #fff !important;
+  background: transparent !important;
+}

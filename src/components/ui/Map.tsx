@@ -59,25 +59,25 @@ export default function MapComponent({
 
       pins.forEach((pin) => {
         const color = pin.tier === 'featured' ? '#f59e0b' : pin.tier === 'paid' ? '#00e87b' : '#3b82f6';
-        const tierLabel = pin.tier === 'featured' ? 'Featured' : pin.tier === 'paid' ? '⭐ Recommended' : '';
-        const tierBadge = tierLabel ? `<span style="display:inline-block;background:${pin.tier === 'featured' ? '#f59e0b' : '#00e87b'};color:#000;font-size:10px;font-weight:600;padding:2px 6px;border-radius:4px;margin-bottom:6px;">${tierLabel}</span><br/>` : '';
-        const logoHtml = pin.logo ? `<img src="${pin.logo}" alt="" style="width:40px;height:40px;border-radius:8px;object-fit:cover;margin-right:10px;"/>` : '';
-        const locationHtml = pin.city && pin.state ? `<div style="font-size:11px;color:#666;margin-top:2px;">${pin.city}, ${pin.state}</div>` : '';
+        const tierLabel = pin.tier === 'featured' ? '⭐ Featured' : pin.tier === 'paid' ? '⭐ Recommended' : '';
+        const tierBadge = tierLabel ? `<div style="margin-bottom:10px;"><span style="display:inline-block;background:#00e87b;color:#000;font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;">${tierLabel}</span></div>` : '';
+        const logoHtml = pin.logo ? `<img src="${pin.logo}" alt="" style="width:48px;height:48px;border-radius:10px;object-fit:cover;margin-right:12px;flex-shrink:0;"/>` : '';
+        const locationHtml = pin.city && pin.state ? `<div style="font-size:12px;color:#9ca3af;margin-top:2px;">${pin.city}, ${pin.state}</div>` : '';
         
         const marker = new mapboxgl.Marker({ color })
           .setLngLat([pin.longitude, pin.latitude])
           .setPopup(
-            new mapboxgl.Popup({ offset: 25, maxWidth: '280px' }).setHTML(
-              `<div style="padding:8px;font-family:system-ui,sans-serif;">
+            new mapboxgl.Popup({ offset: 25, maxWidth: '300px', className: 'bss-popup' }).setHTML(
+              `<div style="padding:12px;font-family:system-ui,sans-serif;background:#1a1a1a;border-radius:12px;">
                 ${tierBadge}
                 <div style="display:flex;align-items:center;">
                   ${logoHtml}
                   <div>
-                    <div style="font-weight:700;font-size:14px;color:#111;">${pin.title}</div>
+                    <div style="font-weight:700;font-size:18px;color:#fff;line-height:1.2;">${pin.title}</div>
                     ${locationHtml}
                   </div>
                 </div>
-                ${pin.slug ? `<a href="/vendors/${pin.slug}" style="display:inline-block;margin-top:10px;background:#00e87b;color:#000;font-weight:600;font-size:12px;padding:6px 14px;border-radius:6px;text-decoration:none;">View Profile →</a>` : ''}
+                ${pin.slug ? `<a href="/vendors/${pin.slug}" style="display:inline-block;margin-top:14px;background:#00e87b;color:#000;font-weight:700;font-size:13px;padding:10px 20px;border-radius:8px;text-decoration:none;width:100%;text-align:center;box-sizing:border-box;">View Profile →</a>` : ''}
               </div>`
             )
           )
