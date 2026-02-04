@@ -134,7 +134,7 @@ export default async function VendorPage({ params }: Props) {
               <Card padding="md" className="mb-6 bg-gradient-to-r from-[#1a472a]/20 to-[#00e87b]/10 border-[#00e87b]/30">
                 <div className="flex items-center gap-4">
                   <img 
-                    src="/logos/acrytech-logo.png" 
+                    src="/logos/acrytech-logo-white.png" 
                     alt="Acrytech" 
                     className="h-12 w-auto"
                   />
