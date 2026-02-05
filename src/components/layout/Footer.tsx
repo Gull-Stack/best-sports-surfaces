@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { SITE_NAME } from '@/lib/constants';
 import NewsletterForm from '@/components/forms/NewsletterForm';
 
@@ -57,7 +58,26 @@ export default function Footer() {
         </div>
         <div className="mt-12 pt-8 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-text-muted">&copy; {new Date().getFullYear()} {SITE_NAME}. All rights reserved.</p>
-          <p className="text-sm text-text-muted">Sponsored by <a href="https://atsports.com" target="_blank" rel="noopener noreferrer" className="text-neon hover:text-neon-hover">ATSports.com</a></p>
+          <div className="flex items-center gap-4">
+            <p className="text-sm text-text-muted">Sponsored by <a href="https://atsports.com" target="_blank" rel="noopener noreferrer" className="text-neon hover:text-neon-hover">ATSports.com</a></p>
+            <span className="text-text-muted">•</span>
+            <a 
+              href="https://gullstack.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 text-sm text-text-muted transition hover:text-text-primary"
+            >
+              <span>Marketing by</span>
+              <Image
+                src="/branding/gullstack-logo.png"
+                alt="GullStack"
+                width={18}
+                height={18}
+                className="h-4 w-4 object-contain"
+              />
+              <span className="font-semibold">GullStack</span>
+            </a>
+          </div>
         </div>
       </div>
     </footer>
