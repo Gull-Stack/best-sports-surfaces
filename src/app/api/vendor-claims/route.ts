@@ -123,7 +123,7 @@ Time: ${new Date().toLocaleString('en-US', {
     if (err instanceof z.ZodError) {
       return NextResponse.json({ 
         error: 'Invalid form data',
-        details: err.errors
+        details: err.issues
       }, { status: 400 });
     }
 
