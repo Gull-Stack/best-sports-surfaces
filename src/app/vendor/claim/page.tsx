@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 // Removed createClient - now using API route
@@ -8,15 +8,21 @@ import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import Card from '@/components/ui/Card';
 import { CheckCircle } from 'lucide-react';
+import { getHoneypotProps } from '@/lib/anti-spam';
 
 function ClaimForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const prefilledSlug = searchParams.get('slug') || '';
-  const [form, setForm] = useState({ business_name: '', contact_name: '', contact_email: '', contact_phone: '', vendor_slug: prefilledSlug });
+  const [form, setForm] = useState({ business_name: '', contact_name: '', contact_email: '', contact_phone: '', vendor_slug: prefilledSlug, email_confirm: '' });
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
+  const [formTimestamp, setFormTimestamp] = useState<number>(0);
+
+  useEffect(() => {
+    setFormTimestamp(Date.now());
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,7 +35,10 @@ function ClaimForm() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          ...form,
+          timestamp: formTimestamp,
+        }),
       });
 
       const data = await response.json();
@@ -64,6 +73,12 @@ function ClaimForm() {
       <p className="text-text-secondary text-center mb-6">Verify your ownership to manage your business listing.</p>
       <Card padding="lg">
         <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Honeypot field - hidden from users, catches bots */}
+          <input
+            {...getHoneypotProps()}
+            value={form.email_confirm}
+            onChange={(e) => setForm({ ...form, email_confirm: e.target.value })}
+          />
           <Input label="Listing URL Slug" value={form.vendor_slug} onChange={(e) => setForm({ ...form, vendor_slug: e.target.value })} placeholder="e.g. smith-tennis-courts" required />
           <Input label="Business Name" value={form.business_name} onChange={(e) => setForm({ ...form, business_name: e.target.value })} required />
           <Input label="Your Name" value={form.contact_name} onChange={(e) => setForm({ ...form, contact_name: e.target.value })} required />

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import sgMail from '@sendgrid/mail';
 import { createClient } from '@/lib/supabase/server';
+import { checkSpam, checkRateLimit, getClientIP } from '@/lib/anti-spam';
 
 const schema = z.object({
   business_name: z.string().min(2),
@@ -9,6 +10,8 @@ const schema = z.object({
   contact_email: z.string().email(),
   contact_phone: z.string().optional(),
   vendor_slug: z.string().min(1),
+  email_confirm: z.string().optional(),
+  timestamp: z.number().optional(),
 });
 
 // Configure SendGrid
@@ -20,6 +23,31 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const validatedData = schema.parse(body);
+
+    // Check for spam
+    const spamCheck = checkSpam({
+      email_confirm: validatedData.email_confirm,
+      timestamp: validatedData.timestamp
+    }, 5000); // 5 second minimum for vendor claims
+    
+    if (spamCheck.isSpam) {
+      console.log('Spam detected in vendor claim:', spamCheck.reason, body);
+      // Return success to avoid revealing spam detection to bots
+      return NextResponse.json({ 
+        success: true,
+        message: 'Claim submitted successfully. You will receive a response within 2-3 business days.'
+      });
+    }
+    
+    // Rate limiting by IP
+    const clientIP = getClientIP(request);
+    const rateLimitCheck = checkRateLimit(`vendor-claims:${clientIP}`, 3, 600000); // 3 per 10 minutes
+    
+    if (!rateLimitCheck.allowed) {
+      return NextResponse.json({ 
+        error: 'Too many requests. Please try again later.' 
+      }, { status: 429 });
+    }
 
     // Get authenticated user
     const supabase = await createClient();

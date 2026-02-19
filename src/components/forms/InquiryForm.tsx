@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -9,6 +9,7 @@ import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import Textarea from '@/components/ui/Textarea';
 import { CheckCircle } from 'lucide-react';
+import { getHoneypotProps } from '@/lib/anti-spam';
 
 const inquirySchema = z.object({
   name: z.string().min(1, 'Name is required'),
@@ -18,6 +19,8 @@ const inquirySchema = z.object({
   sport_type: z.string().optional(),
   service_type: z.string().optional(),
   message: z.string().optional(),
+  email_confirm: z.string().optional(),
+  timestamp: z.number().optional(),
 });
 
 type InquiryFormData = z.infer<typeof inquirySchema>;
@@ -30,6 +33,7 @@ interface InquiryFormProps {
 export default function InquiryForm({ vendorId, vendorName }: InquiryFormProps) {
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState('');
+  const [formTimestamp, setFormTimestamp] = useState<number>(0);
 
   const {
     register,
@@ -39,13 +43,21 @@ export default function InquiryForm({ vendorId, vendorName }: InquiryFormProps) 
     resolver: zodResolver(inquirySchema),
   });
 
+  useEffect(() => {
+    setFormTimestamp(Date.now());
+  }, []);
+
   const onSubmit = async (data: InquiryFormData) => {
     try {
       setSubmitError('');
       const res = await fetch('/api/inquiries', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...data, vendor_id: vendorId }),
+        body: JSON.stringify({ 
+          ...data, 
+          vendor_id: vendorId,
+          timestamp: formTimestamp,
+        }),
       });
       if (!res.ok) throw new Error('Failed to submit');
       setSubmitted(true);
@@ -68,6 +80,11 @@ export default function InquiryForm({ vendorId, vendorName }: InquiryFormProps) 
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      {/* Honeypot field - hidden from users, catches bots */}
+      <input
+        {...register('email_confirm')}
+        {...getHoneypotProps()}
+      />
       <h3 className="text-lg font-semibold text-text-primary">
         {vendorName ? `Request a Quote from ${vendorName}` : 'Get a Free Quote'}
       </h3>
