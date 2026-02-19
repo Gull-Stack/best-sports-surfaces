@@ -43,19 +43,20 @@ Selkirk is one of the most trusted names in pickleball, and their Aluminum Pro N
 
 ---
 
-## 2. Dominator Pickleball Net — Quality Meets Value
+## 2. Dominator Pro Max — The Net the Pros Play On
 
-**Best for:** Home courts, recreational players, budget-conscious buyers
+**Best for:** Home courts, facilities, clubs, competitive play
 
-Dominator has built a reputation for excellent customer service and solid products. Their pickleball net system offers quality construction at a more accessible price point. It''s the smart choice for players who want reliable equipment without the premium price tag.
+The Dominator Pro Max is a beast. Built with 6061 T6 aluminum — the same material used in aircraft, automotive, and watercraft manufacturing — this net system is designed to last a lifetime. Literally: it comes with a limited lifetime warranty.
 
 **Why we love it:**
-- Great value for the money
-- Solid, dependable construction
-- Excellent company reputation and customer service
-- Perfect for backyard courts and recreational play
+- 6061 T6 aircraft-grade aluminum frame with stainless steel hardware
+- Built-in heavy-duty locking wheels for semi-permanent portability
+- Hand crank for adjustable net tension with cable-through-top design
+- USAPA regulation dimensions (36" ends, 34" center)
+- Completely weather and rust proof
 
-**The trade-off:** Not quite the premium fit and finish of Selkirk, but honestly, most recreational players won''t notice the difference. An excellent middle-ground option.
+**The trade-off:** At $1,849, it''s a serious investment. And at heavy-duty weight, you''re not throwing this in your trunk for a park session. But for a permanent or semi-permanent setup? This is the net that pros play on.
 
 [View Dominator Details →](/products/dominator-nets)
 
@@ -87,12 +88,12 @@ This is where SwiftNet shines. At just **17 lbs** with a patent-pending carbon f
 
 | Feature | Selkirk | Dominator | SwiftNet |
 |---------|---------|-----------|----------|
-| **Price Range** | $$$ | $$ | $$ |
-| **Weight** | ~30 lbs | ~28 lbs | **17 lbs** |
-| **Best For** | Permanent / Clubs | Home Courts | Travel / Portable |
+| **Price Range** | $$$ | $$$ | $$ |
+| **Weight** | ~30 lbs | Heavy-duty | **17 lbs** |
+| **Best For** | Permanent / Clubs | Home Courts / Facilities | Travel / Portable |
 | **Setup Time** | ~10 min | ~10 min | **~3 min** |
-| **Tournament Approved** | Yes | No | No |
-| **Portability** | Moderate | Moderate | **Excellent** |
+| **USAPA Approved** | Yes | Yes | No |
+| **Portability** | Moderate | Semi-Permanent | **Excellent** |
 
 ---
 
@@ -102,7 +103,7 @@ There''s no single "best" pickleball net — it depends entirely on how you play
 
 - **Choose Selkirk** if you''re setting up a permanent court, running a club, or need tournament-approved equipment. It''s the premium choice for serious players.
 
-- **Choose Dominator** if you want solid quality at a better price point. Great for home courts and recreational play with excellent company support.
+- **Choose Dominator** if you want aircraft-grade aluminum with semi-permanent locking wheels. Built for facilities, home courts, and competitive play with a lifetime warranty.
 
 - **Choose SwiftNet** if portability is your priority. At 17 lbs with 3-minute setup, it''s unmatched for travel, parks, or anywhere you need to set up and break down quickly.
 

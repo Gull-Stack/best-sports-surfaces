@@ -25,20 +25,20 @@ const nets = [
     external: 'https://www.selkirk.com',
   },
   {
-    name: 'Dominator Net',
+    name: 'Dominator Pro Max',
     slug: 'dominator-nets',
     href: '/products/dominator-nets',
-    image: '/products/dominator-hoop-1.jpg', // placeholder until we have dominator net image
-    badge: 'Best Value',
+    image: '/products/dominator-net-1.jpeg',
+    badge: 'Semi-Permanent',
     badgeColor: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30',
     badgeIcon: DollarSign,
-    tagline: 'Quality Meets Value',
-    description: 'Solid construction from a company known for excellent customer service and great products. The smart choice for players who want quality without the premium price tag.',
-    bestFor: 'Home courts, recreational players, budget-conscious buyers',
-    pros: ['Great value', 'Solid construction', 'Excellent customer service', 'Trusted company'],
-    priceRange: '$$',
-    portability: 'Moderate',
-    external: null,
+    tagline: 'The Net the Pros Play On',
+    description: '6061 T6 aluminum construction (aircraft-grade), built-in locking wheels, hand crank net tension, and USAPA regulation dimensions. Semi-permanent meets portable.',
+    bestFor: 'Home courts, facilities, clubs, competitive play',
+    pros: ['Aircraft-grade aluminum', 'Locking wheels', 'Hand crank tension', 'Lifetime warranty'],
+    priceRange: '$$$',
+    portability: 'Semi-Permanent',
+    external: 'https://www.dominatorhoop.com/product/max-semi-permanent-portable-pickleball-net/',
   },
   {
     name: 'SwiftNet® Portable',
@@ -171,31 +171,31 @@ export default function NetsComparisonPage() {
               <tr className="border-b border-border">
                 <td className="p-4 text-text-muted">Price Range</td>
                 <td className="p-4 text-center text-text-secondary">$$$</td>
-                <td className="p-4 text-center text-text-secondary">$$</td>
+                <td className="p-4 text-center text-text-secondary">$$$</td>
                 <td className="p-4 text-center text-text-secondary">$$</td>
               </tr>
               <tr className="border-b border-border">
                 <td className="p-4 text-text-muted">Best For</td>
                 <td className="p-4 text-center text-text-secondary">Permanent / Clubs</td>
-                <td className="p-4 text-center text-text-secondary">Home Courts</td>
+                <td className="p-4 text-center text-text-secondary">Home Courts / Facilities</td>
                 <td className="p-4 text-center text-text-secondary">Travel / Portable</td>
               </tr>
               <tr className="border-b border-border">
                 <td className="p-4 text-text-muted">Portability</td>
                 <td className="p-4 text-center text-text-secondary">Moderate</td>
-                <td className="p-4 text-center text-text-secondary">Moderate</td>
+                <td className="p-4 text-center text-text-secondary">Semi-Permanent</td>
                 <td className="p-4 text-center text-neon font-medium">Excellent</td>
               </tr>
               <tr className="border-b border-border">
-                <td className="p-4 text-text-muted">Tournament Approved</td>
+                <td className="p-4 text-text-muted">USAPA Approved</td>
                 <td className="p-4 text-center text-neon">✓</td>
-                <td className="p-4 text-center text-text-secondary">—</td>
+                <td className="p-4 text-center text-neon">✓</td>
                 <td className="p-4 text-center text-text-secondary">—</td>
               </tr>
               <tr>
                 <td className="p-4 text-text-muted">Weight</td>
                 <td className="p-4 text-center text-text-secondary">~30 lbs</td>
-                <td className="p-4 text-center text-text-secondary">~28 lbs</td>
+                <td className="p-4 text-center text-text-secondary">Heavy-duty</td>
                 <td className="p-4 text-center text-neon font-medium">17 lbs</td>
               </tr>
             </tbody>
@@ -212,8 +212,8 @@ export default function NetsComparisonPage() {
             running a club, or need tournament-approved equipment. It&apos;s the premium choice for a reason.
           </p>
           <p>
-            <strong className="text-text-primary">Choose Dominator</strong> if you want solid quality at a better price point.
-            Great for home courts and recreational play with excellent company support.
+            <strong className="text-text-primary">Choose Dominator</strong> if you want aircraft-grade aluminum with semi-permanent locking wheels.
+            Built for facilities, home courts, and competitive play with a lifetime warranty.
           </p>
           <p>
             <strong className="text-text-primary">Choose SwiftNet</strong> if portability is your priority. At 17 lbs,
