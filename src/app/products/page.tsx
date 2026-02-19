@@ -40,6 +40,16 @@ const products = [
     href: '/products/swiftnet',
   },
   {
+    slug: 'dominator-nets',
+    name: 'Dominator Pro Max Net',
+    brand: 'Dominator',
+    emoji: '🏓',
+    image: '/products/dominator-net-1.jpeg',
+    description: 'Aircraft-grade 6061 T6 aluminum, locking wheels, hand crank tension, USAPA regulation. The net the pros play on.',
+    badge: 'Semi-Permanent',
+    href: '/products/dominator-nets',
+  },
+  {
     slug: 'nets',
     name: 'Pickleball Net Comparison',
     brand: "Buyer's Guide",
@@ -77,6 +87,7 @@ const badgeColors: Record<string, string> = {
   'Official PPA Surface': 'bg-neon/10 text-neon border-neon/30',
   'Coming Soon': 'bg-surface-hover text-text-muted border-border',
   'Best Portable': 'bg-sky-500/10 text-sky-400 border-sky-500/30',
+  'Semi-Permanent': 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30',
   'Guide': 'bg-purple-500/10 text-purple-400 border-purple-500/30',
 };
 
