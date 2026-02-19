@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
-import { createClient } from '@/lib/supabase/client';
+// Removed createClient - now using API route
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import Card from '@/components/ui/Card';
@@ -23,25 +23,29 @@ function ClaimForm() {
     setLoading(true);
     setError('');
 
-    const supabase = createClient();
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) { router.push('/auth/login?next=/vendor/claim'); return; }
+    try {
+      const response = await fetch('/api/vendor-claims', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(form),
+      });
 
-    const { data: vendor } = await supabase.from('vendors').select('id').eq('slug', form.vendor_slug).single();
-    if (!vendor) { setError('Vendor not found. Check the business listing URL.'); setLoading(false); return; }
+      const data = await response.json();
 
-    const { error: insertError } = await supabase.from('vendor_claims').insert({
-      vendor_id: vendor.id,
-      user_id: user.id,
-      business_name: form.business_name,
-      contact_name: form.contact_name,
-      contact_email: form.contact_email,
-      contact_phone: form.contact_phone,
-    });
+      if (!response.ok) {
+        setError(data.error || 'Something went wrong');
+        setLoading(false);
+        return;
+      }
 
-    if (insertError) setError(insertError.message);
-    else setSubmitted(true);
-    setLoading(false);
+      setSubmitted(true);
+    } catch (err) {
+      setError('Network error. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (submitted) {
