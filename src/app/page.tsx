@@ -186,6 +186,7 @@ export default async function HomePage() {
             {[
               { name: 'Dominator Hoops', brand: 'Dominator', emoji: '🏀', desc: 'The best in-ground basketball system on the market. Tempered glass, commercial-grade.', badge: 'Top Pick' },
               { name: 'Selkirk Pro Net', brand: 'Selkirk', emoji: '🏓', desc: 'Premium aluminum pickleball net system from the most trusted name in the sport.', badge: 'Premium' },
+              { name: 'SwiftNet® Portable Net', brand: 'SwiftNet', emoji: '🏓', desc: 'The lightest portable pickleball net. 17 lbs, sets up in 3 minutes. Take it anywhere.', badge: 'Best Portable' },
               { name: 'Acrytech Paint', brand: 'Acrytech', emoji: '🎨', desc: 'Professional acrylic sport surface coating — the industry standard.', badge: 'Pro Grade' },
             ].map((product) => (
               <Link

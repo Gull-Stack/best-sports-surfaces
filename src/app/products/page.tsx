@@ -30,6 +30,26 @@ const products = [
     href: '/products/selkirk',
   },
   {
+    slug: 'swiftnet',
+    name: 'SwiftNet® Portable Net',
+    brand: 'SwiftNet',
+    emoji: '🏓',
+    image: '/products/swiftnet-1.jpg',
+    description: 'The lightest, strongest portable pickleball net. 17 lbs, sets up in 3 minutes. Take it anywhere.',
+    badge: 'Best Portable',
+    href: '/products/swiftnet',
+  },
+  {
+    slug: 'nets',
+    name: 'Pickleball Net Comparison',
+    brand: "Buyer's Guide",
+    emoji: '📊',
+    image: '/products/swiftnet-2.jpg',
+    description: 'Selkirk vs Dominator vs SwiftNet — which pickleball net is right for you? Our head-to-head comparison.',
+    badge: 'Guide',
+    href: '/products/nets',
+  },
+  {
     slug: 'acrytech',
     name: 'Acrytech Court Surfaces',
     brand: 'Acrytech',
@@ -56,6 +76,8 @@ const badgeColors: Record<string, string> = {
   'Premium': 'bg-amber-500/10 text-amber-400 border-amber-500/30',
   'Official PPA Surface': 'bg-neon/10 text-neon border-neon/30',
   'Coming Soon': 'bg-surface-hover text-text-muted border-border',
+  'Best Portable': 'bg-sky-500/10 text-sky-400 border-sky-500/30',
+  'Guide': 'bg-purple-500/10 text-purple-400 border-purple-500/30',
 };
 
 export default function ProductsPage() {
