@@ -47,6 +47,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: city.seo_title || `Sports Surface Contractors in ${city.name}, ${city.state_code}`,
     description: city.seo_description || `Find trusted sports surface contractors in ${city.name}, ${city.state_code}. Compare quotes for tennis courts, basketball courts, and more.`,
+    robots: { index: false, follow: true }, // noindex until pages have unique content
   };
 }
 

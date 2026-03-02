@@ -185,17 +185,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const city = await getCityBySlugAndState(parsed.citySlug, parsed.stateCode);
   if (!city) {
-    // Generate metadata even without a city record
     const cityName = parsed.citySlug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
     return {
       title: `${config.name} ${config.actionWord} in ${cityName}, ${parsed.stateCode} | BestSportsSurfaces.com`,
       description: `Find top-rated ${config.name.toLowerCase()} ${config.actionWord.toLowerCase()} in ${cityName}, ${parsed.stateCode}. Compare quotes, read reviews, and hire the best contractor for your project.`,
+      robots: { index: false, follow: true }, // noindex until pages have unique content
     };
   }
 
   return {
     title: `${config.name} ${config.actionWord} in ${city.name}, ${city.state_code} | BestSportsSurfaces.com`,
     description: `Find top-rated ${config.name.toLowerCase()} ${config.actionWord.toLowerCase()} in ${city.name}, ${city.state_code}. Compare quotes, read reviews, and hire the best contractor for your project.`,
+    robots: { index: false, follow: true }, // noindex until pages have unique content
     openGraph: {
       title: `${config.name} ${config.actionWord} in ${city.name}, ${city.state_code}`,
       description: `Find ${config.name.toLowerCase()} professionals in ${city.name}, ${city.state_code}. Get free quotes today.`,

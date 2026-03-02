@@ -69,5 +69,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  return [...staticPages, ...sportPages, ...sportLocationPages, ...vendorPages, ...blogPages, ...cityPages];
+  // NOTE: sportLocationPages removed from sitemap — 2000+ thin auto-generated pages
+  // were killing crawl budget. Google crawled only 1 of 2622 submitted pages.
+  // Re-add ONLY when these pages have unique, substantial content per city+sport combo.
+  // cityPages also removed — same thin content issue with 201 auto-generated city pages.
+  return [...staticPages, ...sportPages, ...vendorPages, ...blogPages];
 }
