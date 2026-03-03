@@ -27,8 +27,8 @@ interface Palette {
 const SPORTS: Record<Sport, CourtConfig> = {
   tennis:          { label: 'Tennis',               icon: '🎾', courtW: 36, courtL: 78, defaultW: 60,  defaultL: 120, costPerSqFt: [6, 12] },
   pickleball:      { label: 'Pickleball',           icon: '🏓', courtW: 20, courtL: 44, defaultW: 34,  defaultL: 64,  costPerSqFt: [5, 10] },
-  basketball:      { label: 'Basketball',           icon: '🏀', courtW: 50, courtL: 94, defaultW: 50,  defaultL: 94,  costPerSqFt: [5, 11] },
-  'basketball-half': { label: 'Basketball (Half)',  icon: '🏀', courtW: 50, courtL: 47, defaultW: 50,  defaultL: 47,  costPerSqFt: [5, 11] },
+  basketball:      { label: 'Basketball',           icon: '🏀', courtW: 50, courtL: 84, defaultW: 56,  defaultL: 90,  costPerSqFt: [5, 11] },
+  'basketball-half': { label: 'Basketball (Half)',  icon: '🏀', courtW: 50, courtL: 42, defaultW: 56,  defaultL: 48,  costPerSqFt: [5, 11] },
   'multi-sport':   { label: 'Multi-Sport',          icon: '🏅', courtW: 60, courtL: 120, defaultW: 60, defaultL: 120, costPerSqFt: [6, 13] },
 };
 
@@ -185,48 +185,43 @@ function PickleballLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineCo
   );
 }
 
-/* ─── Basketball Court Lines ─── */
+/* ─── Basketball Court Lines (NFHS / High School standard) ─── */
 function BasketballLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineColor, isHalf, rotated }: any) {
-  // courtW = horizontal dimension as rendered, courtL = vertical dimension as rendered
-  // For landscape basketball: courtW=94 (horiz), courtL=50 (vert)
-  // Baselines are on the SHORT sides (left/right in landscape), hoops near baselines
-  // "shortSide" = the 50' dimension, "longSide" = the 94' dimension
   const cx = offX + (totalW * s) / 2;
   const cy = offY + (totalL * s) / 2;
   const hw = (courtW * s) / 2;
   const hl = (courtL * s) / 2;
   const sw = 1.5;
 
-  // Figure out which axis is the long one (94') and which is short (50')
   const isHorizontalLong = courtW > courtL;
 
-  // NBA dimensions in feet
-  const KEY_W = 16;       // lane width
-  const KEY_DEPTH = 19;   // baseline to free throw line  
-  const FT_R = 6;         // free throw circle radius
-  const THREE_R = 23.75;  // 3-point arc radius from hoop center
-  const HOOP_DIST = 5.25; // hoop center from baseline
-  const HOOP_R = 0.75;    // hoop rim radius
-  const BB_W = 3;         // backboard half-width
-  const CENTER_R = 6;     // center circle radius
-  const RESTRICTED_R = 4; // restricted area radius
-  const CORNER_3 = 3;     // corner 3 distance from sideline
-
-  // The "short" dimension (50')
-  const shortDim = isHorizontalLong ? courtL : courtW;
-  const corner3Dist = (shortDim / 2 - CORNER_3) * s;
+  // NFHS (High School) dimensions in feet
+  const KEY_W = 12;        // lane width (12' HS, not 16' NBA)
+  const KEY_DEPTH = 19;    // baseline to free throw line
+  const FT_R = 6;          // free throw circle radius
+  const THREE_R = 19.75;   // 3-point arc radius from hoop center (19'9" HS)
+  const HOOP_DIST = 5.25;  // hoop center from baseline
+  const HOOP_R = 0.75;     // hoop rim radius
+  const BB_OFFSET = 4;     // backboard offset from baseline
+  const BB_W = 3;          // backboard half-width
+  const CENTER_R = 6;      // center circle radius
 
   if (isHorizontalLong) {
-    // LANDSCAPE: long side (94') is horizontal, short side (50') is vertical
-    // Baselines are LEFT (cx-hw) and RIGHT (cx+hw), hoops near baselines
+    // LANDSCAPE: long side is horizontal, baselines are LEFT and RIGHT
 
     const drawEnd = (baseX: number, dir: number) => {
-      // dir: +1 = hoop on right side of baseX, -1 = hoop on left side
       const hoopX = baseX + HOOP_DIST * s * dir;
       const ftX = baseX + KEY_DEPTH * s * dir;
       const keyX = dir > 0 ? baseX : baseX - KEY_DEPTH * s;
-      const arcDy = corner3Dist;
-      const arcDx = Math.sqrt(Math.max(0, (THREE_R * s) ** 2 - arcDy ** 2));
+
+      // 3-point arc: uniform arc from baseline to baseline (no corner segments in HS)
+      const threeR = THREE_R * s;
+      // Where arc meets the baseline (sideline intersection)
+      const sidelineDist = hl; // half the short dimension in pixels
+      const arcMeetsSideline = sidelineDist < threeR;
+      // Arc start/end Y: clamp to sideline
+      const arcDy = arcMeetsSideline ? sidelineDist : threeR;
+      const arcDx = Math.sqrt(Math.max(0, threeR ** 2 - arcDy ** 2));
 
       return (
         <g>
@@ -235,19 +230,18 @@ function BasketballLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineCo
           {/* Free throw circle */}
           <circle cx={ftX} cy={cy} r={FT_R * s} />
           {/* Backboard */}
-          <line x1={baseX + 4 * s * dir} y1={cy - BB_W * s} x2={baseX + 4 * s * dir} y2={cy + BB_W * s} strokeWidth={2.5} />
+          <line x1={baseX + BB_OFFSET * s * dir} y1={cy - BB_W * s} x2={baseX + BB_OFFSET * s * dir} y2={cy + BB_W * s} strokeWidth={2.5} />
           {/* Hoop rim */}
           <circle cx={hoopX} cy={cy} r={HOOP_R * s} strokeWidth={1.5} />
-          {/* Restricted area arc */}
-          <path d={`M ${baseX} ${cy - RESTRICTED_R * s} A ${RESTRICTED_R * s} ${RESTRICTED_R * s} 0 0 ${dir > 0 ? 1 : 0} ${baseX} ${cy + RESTRICTED_R * s}`} />
-          {/* 3-point line: corner segments + arc */}
+          {/* 3-point arc (uniform, no corner segments for HS) */}
           {(() => {
             const topY = cy - arcDy;
             const botY = cy + arcDy;
-            const arcX = baseX + arcDx * dir;
+            const arcX = hoopX + arcDx * dir;
+            const largeArc = arcDy > threeR * Math.sin(Math.PI / 3) ? 1 : 0;
             const sweep = dir > 0 ? 1 : 0;
             return (
-              <path d={`M ${baseX} ${topY} L ${arcX} ${topY} A ${THREE_R * s} ${THREE_R * s} 0 0 ${sweep} ${arcX} ${botY} L ${baseX} ${botY}`} />
+              <path d={`M ${baseX} ${topY} A ${threeR} ${threeR} 0 ${largeArc} ${sweep} ${baseX} ${botY}`} />
             );
           })()}
         </g>
@@ -276,31 +270,36 @@ function BasketballLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineCo
     );
   }
 
-  // PORTRAIT: long side (94') is vertical, short side (50') is horizontal
-  // Baselines are TOP (cy-hl) and BOTTOM (cy+hl)
-  const corner3DistV = ((courtW / 2) - CORNER_3) * s;
+  // PORTRAIT: long side is vertical, baselines are TOP and BOTTOM
 
   const drawEndV = (baseY: number, dir: number) => {
     const hoopY = baseY + HOOP_DIST * s * dir;
     const ftY = baseY + KEY_DEPTH * s * dir;
     const keyY = dir > 0 ? baseY : baseY - KEY_DEPTH * s;
-    const arcDx = corner3DistV;
-    const arcDy = Math.sqrt(Math.max(0, (THREE_R * s) ** 2 - arcDx ** 2));
+
+    const threeR = THREE_R * s;
+    const sidelineDist = hw;
+    const arcDx = sidelineDist < threeR ? sidelineDist : threeR;
+    const arcDy = Math.sqrt(Math.max(0, threeR ** 2 - arcDx ** 2));
 
     return (
       <g>
+        {/* Key / lane */}
         <rect x={cx - (KEY_W / 2) * s} y={keyY} width={KEY_W * s} height={KEY_DEPTH * s} />
+        {/* Free throw circle */}
         <circle cx={cx} cy={ftY} r={FT_R * s} />
-        <line x1={cx - BB_W * s} y1={baseY + 4 * s * dir} x2={cx + BB_W * s} y2={baseY + 4 * s * dir} strokeWidth={2.5} />
+        {/* Backboard */}
+        <line x1={cx - BB_W * s} y1={baseY + BB_OFFSET * s * dir} x2={cx + BB_W * s} y2={baseY + BB_OFFSET * s * dir} strokeWidth={2.5} />
+        {/* Hoop rim */}
         <circle cx={cx} cy={hoopY} r={HOOP_R * s} strokeWidth={1.5} />
-        <path d={`M ${cx - RESTRICTED_R * s} ${baseY} A ${RESTRICTED_R * s} ${RESTRICTED_R * s} 0 0 ${dir > 0 ? 1 : 0} ${cx + RESTRICTED_R * s} ${baseY}`} />
+        {/* 3-point arc (uniform HS arc) */}
         {(() => {
           const leftX = cx - arcDx;
           const rightX = cx + arcDx;
-          const arcY = baseY + arcDy * dir;
+          const largeArc = arcDx > threeR * Math.sin(Math.PI / 3) ? 1 : 0;
           const sweep = dir > 0 ? 1 : 0;
           return (
-            <path d={`M ${leftX} ${baseY} L ${leftX} ${arcY} A ${THREE_R * s} ${THREE_R * s} 0 0 ${sweep} ${rightX} ${arcY} L ${rightX} ${baseY}`} />
+            <path d={`M ${leftX} ${baseY} A ${threeR} ${threeR} 0 ${largeArc} ${sweep} ${rightX} ${baseY}`} />
           );
         })()}
       </g>

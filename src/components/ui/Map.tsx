@@ -50,6 +50,7 @@ export default function MapComponent({
         style: 'mapbox://styles/mapbox/light-v11',
         center: [mapCenter.lng, mapCenter.lat],
         zoom: mapZoom,
+        minZoom: 3.5,
         interactive,
       });
 
