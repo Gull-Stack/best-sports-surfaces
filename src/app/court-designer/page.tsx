@@ -235,22 +235,19 @@ function BasketballLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineCo
           <line x1={baseX + BB_OFFSET * s * dir} y1={cy - BB_W * s} x2={baseX + BB_OFFSET * s * dir} y2={cy + BB_W * s} strokeWidth={2.5} />
           {/* Hoop rim */}
           <circle cx={hoopX} cy={cy} r={HOOP_R * s} strokeWidth={1.5} />
-          {/* 3-point arc centered on hoop */}
+          {/* 3-point line: semicircle arc + straight corner lines to baseline */}
           {(() => {
-            const topY = cy - arcDy;
-            const botY = cy + arcDy;
-            // Landscape: sweep=1 for left baseline (dir>0), sweep=0 for right baseline
-            const sweep = dir > 0 ? 1 : 0;
+            // Arc endpoints at top/bottom of circle (above/below hoop at hoop's x)
+            const arcTopY = cy - threeR;
+            const arcBotY = cy + threeR;
+            // Semicircle from top to bottom, curving away from baseline (into court)
+            const sweep = dir > 0 ? 0 : 1;
             return (
               <>
-                <path d={`M ${baseX} ${topY} A ${threeR} ${threeR} 0 0 ${sweep} ${baseX} ${botY}`} />
-                {/* Corner straight lines if arc doesn't reach sideline */}
-                {arcDy < sidelineDist && (
-                  <>
-                    <line x1={baseX} y1={cy - sidelineDist} x2={baseX} y2={topY} />
-                    <line x1={baseX} y1={botY} x2={baseX} y2={cy + sidelineDist} />
-                  </>
-                )}
+                <path d={`M ${hoopX} ${arcTopY} A ${threeR} ${threeR} 0 0 ${sweep} ${hoopX} ${arcBotY}`} />
+                {/* Straight corner lines from arc endpoints to baseline */}
+                <line x1={hoopX} y1={arcTopY} x2={baseX} y2={arcTopY} />
+                <line x1={hoopX} y1={arcBotY} x2={baseX} y2={arcBotY} />
               </>
             );
           })()}
@@ -304,21 +301,19 @@ function BasketballLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineCo
         <line x1={cx - BB_W * s} y1={baseY + BB_OFFSET * s * dir} x2={cx + BB_W * s} y2={baseY + BB_OFFSET * s * dir} strokeWidth={2.5} />
         {/* Hoop rim */}
         <circle cx={cx} cy={hoopY} r={HOOP_R * s} strokeWidth={1.5} />
-        {/* 3-point arc centered on hoop */}
+        {/* 3-point line: semicircle arc + straight corner lines to baseline */}
         {(() => {
-          const leftX = cx - arcDx;
-          const rightX = cx + arcDx;
-          // Portrait: sweep=1 always, large-arc flips so arc curves INTO the court
-          const largeArc = dir > 0 ? 0 : 1;
+          // Arc endpoints at widest point of circle (left/right of hoop at hoop's y)
+          const arcLeftX = cx - threeR;
+          const arcRightX = cx + threeR;
+          // Semicircle from left to right, curving away from baseline (into court)
+          const sweep = dir > 0 ? 1 : 0;
           return (
             <>
-              <path d={`M ${leftX} ${baseY} A ${threeR} ${threeR} 0 ${largeArc} 1 ${rightX} ${baseY}`} />
-              {arcDx < sidelineDist && (
-                <>
-                  <line x1={cx - sidelineDist} y1={baseY} x2={leftX} y2={baseY} />
-                  <line x1={rightX} y1={baseY} x2={cx + sidelineDist} y2={baseY} />
-                </>
-              )}
+              <path d={`M ${arcLeftX} ${hoopY} A ${threeR} ${threeR} 0 0 ${sweep} ${arcRightX} ${hoopY}`} />
+              {/* Straight corner lines from arc endpoints to baseline */}
+              <line x1={arcLeftX} y1={hoopY} x2={arcLeftX} y2={baseY} />
+              <line x1={arcRightX} y1={hoopY} x2={arcRightX} y2={baseY} />
             </>
           );
         })()}
