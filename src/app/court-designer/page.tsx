@@ -337,20 +337,67 @@ function BasketballLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineCo
   );
 }
 
-/* ─── Multi-Sport Lines (Full Pickleball + Half Basketball outline) ─── */
-function MultiSportLines(props: any) {
-  // Full pickleball court (20x44) drawn with solid lines
-  const pW = props.rotated ? 44 : 20;
-  const pL = props.rotated ? 20 : 44;
-  // Half basketball court (50x42) drawn with dashed lines as overlay
-  const bW = props.rotated ? 42 : 50;
-  const bL = props.rotated ? 50 : 42;
+/* ─── Multi-Sport Lines (Full Pickleball + Basketball 3pt arc & FT line) ─── */
+function MultiSportLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineColor, rotated }: any) {
+  // Full pickleball court (solid)
+  const pW = rotated ? 44 : 20;
+  const pL = rotated ? 20 : 44;
+  const pickleProps = { s, offX, offY, courtW: pW, courtL: pL, totalW, totalL, lineColor, rotated };
+
+  // Basketball overlay: 3pt arc + free throw line only (dashed)
+  // Use the playing area edges as the basketball court boundary
+  const cx = offX + (totalW * s) / 2;
+  const cy = offY + (totalL * s) / 2;
+  const playX = offX + ((totalW - courtW) * s) / 2;
+  const playY = offY + ((totalL - courtL) * s) / 2;
+  const HOOP_DIST = 5.25;
+  const THREE_R = 19.75;
+  const FT_DIST = 19; // free throw line distance from baseline
+  const threeR = THREE_R * s;
+
+  const basketballOverlay = (() => {
+    if (rotated) {
+      // Landscape: baseline on right side of playing area
+      const baseX = playX + courtW * s;
+      const hoopX = baseX - HOOP_DIST * s;
+      const ftX = baseX - FT_DIST * s;
+      const arcTopY = cy - threeR;
+      const arcBotY = cy + threeR;
+      return (
+        <g stroke={lineColor} strokeWidth={1.5} fill="none" opacity={0.5} strokeDasharray="6 3">
+          {/* 3-point arc (semicircle) */}
+          <path d={`M ${hoopX} ${arcTopY} A ${threeR} ${threeR} 0 0 0 ${hoopX} ${arcBotY}`} />
+          {/* Corner lines from arc to baseline */}
+          <line x1={hoopX} y1={arcTopY} x2={baseX} y2={arcTopY} />
+          <line x1={hoopX} y1={arcBotY} x2={baseX} y2={arcBotY} />
+          {/* Free throw line */}
+          <line x1={ftX} y1={cy - (6 * s)} x2={ftX} y2={cy + (6 * s)} />
+        </g>
+      );
+    }
+    // Portrait: baseline at bottom of playing area
+    const baseY = playY + courtL * s;
+    const hoopY = baseY - HOOP_DIST * s;
+    const ftY = baseY - FT_DIST * s;
+    const arcLeftX = cx - threeR;
+    const arcRightX = cx + threeR;
+    return (
+      <g stroke={lineColor} strokeWidth={1.5} fill="none" opacity={0.5} strokeDasharray="6 3">
+        {/* 3-point arc (semicircle) */}
+        <path d={`M ${arcLeftX} ${hoopY} A ${threeR} ${threeR} 0 0 1 ${arcRightX} ${hoopY}`} />
+        {/* Corner lines from arc to baseline */}
+        <line x1={arcLeftX} y1={hoopY} x2={arcLeftX} y2={baseY} />
+        <line x1={arcRightX} y1={hoopY} x2={arcRightX} y2={baseY} />
+        {/* Free throw line */}
+        <line x1={cx - (6 * s)} y1={ftY} x2={cx + (6 * s)} y2={ftY} />
+      </g>
+    );
+  })();
+
   return (
     <>
-      <PickleballLines {...props} courtW={pW} courtL={pL} />
-      <g opacity={0.5} strokeDasharray="6 3">
-        <BasketballLines {...props} courtW={bW} courtL={bL} isHalf={true} rotated={props.rotated} />
-      </g>
+      <PickleballLines {...pickleProps} />
+      {basketballOverlay}
     </>
   );
 }
