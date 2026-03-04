@@ -164,8 +164,8 @@ function PickleballLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineCo
         {/* Net (vertical at center) */}
         <line x1={cx} y1={cy - hl} x2={cx} y2={cy + hl} strokeWidth={2.5} />
         {/* Kitchen / non-volley zone (vertical lines) */}
-        <line x1={cx - kitchen} y1={cy - hl} x2={cx - kitchen} y2={cy + hl} strokeDasharray="4 2" />
-        <line x1={cx + kitchen} y1={cy - hl} x2={cx + kitchen} y2={cy + hl} strokeDasharray="4 2" />
+        <line x1={cx - kitchen} y1={cy - hl} x2={cx - kitchen} y2={cy + hl} />
+        <line x1={cx + kitchen} y1={cy - hl} x2={cx + kitchen} y2={cy + hl} />
         {/* Center line (horizontal, each half) */}
         <line x1={cx - hw} y1={cy} x2={cx - kitchen} y2={cy} />
         <line x1={cx + hw} y1={cy} x2={cx + kitchen} y2={cy} />
@@ -177,8 +177,8 @@ function PickleballLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineCo
     <g stroke={lineColor} strokeWidth={sw} fill="none">
       <rect x={cx - hw} y={cy - hl} width={hw * 2} height={hl * 2} />
       <line x1={cx - hw} y1={cy} x2={cx + hw} y2={cy} strokeWidth={2.5} />
-      <line x1={cx - hw} y1={cy - kitchen} x2={cx + hw} y2={cy - kitchen} strokeDasharray="4 2" />
-      <line x1={cx - hw} y1={cy + kitchen} x2={cx + hw} y2={cy + kitchen} strokeDasharray="4 2" />
+      <line x1={cx - hw} y1={cy - kitchen} x2={cx + hw} y2={cy - kitchen} />
+      <line x1={cx - hw} y1={cy + kitchen} x2={cx + hw} y2={cy + kitchen} />
       <line x1={cx} y1={cy - hl} x2={cx} y2={cy - kitchen} />
       <line x1={cx} y1={cy + hl} x2={cx} y2={cy + kitchen} />
     </g>
