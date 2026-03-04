@@ -29,7 +29,7 @@ const SPORTS: Record<Sport, CourtConfig> = {
   pickleball:      { label: 'Pickleball',           icon: '🏓', courtW: 20, courtL: 44, defaultW: 34,  defaultL: 64,  costPerSqFt: [5, 10] },
   basketball:      { label: 'Basketball',           icon: '🏀', courtW: 50, courtL: 84, defaultW: 56,  defaultL: 90,  costPerSqFt: [5, 11] },
   'basketball-half': { label: 'Basketball (Half)',  icon: '🏀', courtW: 50, courtL: 42, defaultW: 56,  defaultL: 48,  costPerSqFt: [5, 11] },
-  'multi-sport':   { label: 'Multi-Sport',          icon: '🏅', courtW: 60, courtL: 120, defaultW: 60, defaultL: 120, costPerSqFt: [6, 13] },
+  'multi-sport':   { label: 'Multi-Sport',          icon: '🏅', courtW: 50, courtL: 44, defaultW: 56, defaultL: 50, costPerSqFt: [6, 13] },
 };
 
 const PALETTES: Palette[] = [
@@ -337,16 +337,20 @@ function BasketballLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineCo
   );
 }
 
-/* ─── Multi-Sport Lines (Tennis + Pickleball overlay) ─── */
+/* ─── Multi-Sport Lines (Full Pickleball + Half Basketball outline) ─── */
 function MultiSportLines(props: any) {
-  const tW = props.rotated ? 78 : 36;
-  const tL = props.rotated ? 36 : 78;
+  // Full pickleball court (20x44) drawn with solid lines
   const pW = props.rotated ? 44 : 20;
   const pL = props.rotated ? 20 : 44;
+  // Half basketball court (50x42) drawn with dashed lines as overlay
+  const bW = props.rotated ? 42 : 50;
+  const bL = props.rotated ? 50 : 42;
   return (
     <>
-      <TennisLines {...props} courtW={tW} courtL={tL} />
       <PickleballLines {...props} courtW={pW} courtL={pL} />
+      <g opacity={0.5} strokeDasharray="6 3">
+        <BasketballLines {...props} courtW={bW} courtL={bL} isHalf={true} rotated={props.rotated} />
+      </g>
     </>
   );
 }
