@@ -730,11 +730,16 @@ export default function CourtDesignerPage() {
                 {[
                   { label: 'Fencing', checked: fencing, set: setFencing, icon: '🔗' },
                   { label: 'Lighting', checked: lighting, set: setLighting, icon: '💡' },
-                  { label: (sport.includes('basketball') || sport === 'multi-sport') ? 'Dominator Hoop' : 'Net', checked: netHoop, set: setNetHoop, icon: (sport.includes('basketball') || sport === 'multi-sport') ? '🏀' : '🥅' },
+                  { label: (sport.includes('basketball') || sport === 'multi-sport') ? 'Hoop' : 'Net', checked: netHoop, set: setNetHoop, icon: (sport.includes('basketball') || sport === 'multi-sport') ? 'dominator' : '🥅' },
                 ].map((t) => (
                   <label key={t.label} className="mb-2 flex cursor-pointer items-center justify-between last:mb-0">
-                    <span className="text-sm text-text-secondary">
-                      <span className="mr-1.5">{t.icon}</span>{t.label}
+                    <span className="flex items-center text-sm text-text-secondary">
+                      {t.icon === 'dominator' ? (
+                        <img src="/images/dominator-logo.png" alt="Dominator" className="mr-1.5 h-4 inline-block" />
+                      ) : (
+                        <span className="mr-1.5">{t.icon}</span>
+                      )}
+                      {t.label}
                     </span>
                     <div
                       className={`relative h-6 w-11 rounded-full transition-colors ${t.checked ? 'bg-neon' : 'bg-surface'}`}
