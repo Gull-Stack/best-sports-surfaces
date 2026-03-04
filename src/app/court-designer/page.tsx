@@ -399,7 +399,7 @@ function NetOverlay({ s, offX, offY, totalW, totalL, sport, rotated }: any) {
       const baselineX = courtX + renderCourtW * s;
       return (
         <g>
-          <line x1={baselineX - bbDist} y1={cy - bbHalfW} x2={baselineX - bbDist} y2={cy + bbHalfW} stroke="#f97316" strokeWidth={2.5} />
+          <line x1={baselineX - bbDist} y1={cy - bbHalfW} x2={baselineX - bbDist} y2={cy + bbHalfW} stroke="#ffffff" strokeWidth={2.5} />
           <circle cx={baselineX - hoopDist} cy={cy} r={6} fill="none" stroke="#f97316" strokeWidth={2} />
         </g>
       );
@@ -408,7 +408,7 @@ function NetOverlay({ s, offX, offY, totalW, totalL, sport, rotated }: any) {
     const baselineY = courtY + renderCourtL * s;
     return (
       <g>
-        <line x1={cx - bbHalfW} y1={baselineY - bbDist} x2={cx + bbHalfW} y2={baselineY - bbDist} stroke="#f97316" strokeWidth={2.5} />
+        <line x1={cx - bbHalfW} y1={baselineY - bbDist} x2={cx + bbHalfW} y2={baselineY - bbDist} stroke="#ffffff" strokeWidth={2.5} />
         <circle cx={cx} cy={baselineY - hoopDist} r={6} fill="none" stroke="#f97316" strokeWidth={2} />
       </g>
     );
