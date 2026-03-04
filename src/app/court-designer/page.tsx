@@ -339,7 +339,7 @@ function BasketballLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineCo
       {isHalf && (
         <>
           <line x1={cx - hw} y1={cy - hl} x2={cx + hw} y2={cy - hl} strokeWidth={2} />
-          <path d={`M ${cx - CENTER_R * s} ${cy - hl} A ${CENTER_R * s} ${CENTER_R * s} 0 0 1 ${cx + CENTER_R * s} ${cy - hl}`} />
+          <path d={`M ${cx - CENTER_R * s} ${cy - hl} A ${CENTER_R * s} ${CENTER_R * s} 0 0 0 ${cx + CENTER_R * s} ${cy - hl}`} />
           {drawEndV(cy + hl, -1)}
         </>
       )}
