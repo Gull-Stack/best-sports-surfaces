@@ -308,8 +308,8 @@ function BasketballLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineCo
         {(() => {
           const leftX = cx - arcDx;
           const rightX = cx + arcDx;
-          // Portrait: CW (sweep=1) always curves into the court from either baseline
-          const sweep = 1;
+          // Portrait: sweep matches direction so arc curves into the court
+          const sweep = dir > 0 ? 1 : 0;
           return (
             <>
               <path d={`M ${leftX} ${baseY} A ${threeR} ${threeR} 0 0 ${sweep} ${rightX} ${baseY}`} />
