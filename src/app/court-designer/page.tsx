@@ -238,7 +238,7 @@ function BasketballLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineCo
             const arcTopY = cy - threeR;
             const arcBotY = cy + threeR;
             // Semicircle from top to bottom, curving away from baseline (into court)
-            const sweep = dir > 0 ? 0 : 1;
+            const sweep = dir > 0 ? 1 : 0;
             return (
               <>
                 <path d={`M ${hoopX} ${arcTopY} A ${threeR} ${threeR} 0 0 ${sweep} ${hoopX} ${arcBotY}`} />
@@ -394,22 +394,37 @@ function NetOverlay({ s, offX, offY, totalW, totalL, sport, rotated }: any) {
     const hoopDist = 5.25 * s;
     const bbDist = 4 * s;   // backboard 4' from baseline
     const bbHalfW = 3 * s;  // backboard 6' wide (3' half-width)
+    const isHalf = sport === 'basketball-half';
     if (rotated) {
-      // Landscape: hoop on right baseline
-      const baselineX = courtX + renderCourtW * s;
+      // Landscape: baselines are left and right
+      const rightX = courtX + renderCourtW * s;
+      const leftX = courtX;
       return (
         <g>
-          <line x1={baselineX - bbDist} y1={cy - bbHalfW} x2={baselineX - bbDist} y2={cy + bbHalfW} stroke="#ffffff" strokeWidth={2.5} />
-          <circle cx={baselineX - hoopDist} cy={cy} r={6} fill="none" stroke="#f97316" strokeWidth={2} />
+          {/* Right hoop */}
+          <line x1={rightX - bbDist} y1={cy - bbHalfW} x2={rightX - bbDist} y2={cy + bbHalfW} stroke="#ffffff" strokeWidth={2.5} />
+          <circle cx={rightX - hoopDist} cy={cy} r={6} fill="none" stroke="#f97316" strokeWidth={2} />
+          {/* Left hoop (full court only) */}
+          {!isHalf && <>
+            <line x1={leftX + bbDist} y1={cy - bbHalfW} x2={leftX + bbDist} y2={cy + bbHalfW} stroke="#ffffff" strokeWidth={2.5} />
+            <circle cx={leftX + hoopDist} cy={cy} r={6} fill="none" stroke="#f97316" strokeWidth={2} />
+          </>}
         </g>
       );
     }
-    // Portrait: hoop on bottom baseline
-    const baselineY = courtY + renderCourtL * s;
+    // Portrait: baselines are top and bottom
+    const bottomY = courtY + renderCourtL * s;
+    const topY = courtY;
     return (
       <g>
-        <line x1={cx - bbHalfW} y1={baselineY - bbDist} x2={cx + bbHalfW} y2={baselineY - bbDist} stroke="#ffffff" strokeWidth={2.5} />
-        <circle cx={cx} cy={baselineY - hoopDist} r={6} fill="none" stroke="#f97316" strokeWidth={2} />
+        {/* Bottom hoop */}
+        <line x1={cx - bbHalfW} y1={bottomY - bbDist} x2={cx + bbHalfW} y2={bottomY - bbDist} stroke="#ffffff" strokeWidth={2.5} />
+        <circle cx={cx} cy={bottomY - hoopDist} r={6} fill="none" stroke="#f97316" strokeWidth={2} />
+        {/* Top hoop (full court only) */}
+        {!isHalf && <>
+          <line x1={cx - bbHalfW} y1={topY + bbDist} x2={cx + bbHalfW} y2={topY + bbDist} stroke="#ffffff" strokeWidth={2.5} />
+          <circle cx={cx} cy={topY + hoopDist} r={6} fill="none" stroke="#f97316" strokeWidth={2} />
+        </>}
       </g>
     );
   }
@@ -641,27 +656,6 @@ export default function CourtDesignerPage() {
               ))}
             </section>
 
-            {/* Extras */}
-            <section className="rounded-xl border border-border bg-surface-card p-5">
-              <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-text-secondary">Extras</h2>
-              {[
-                { label: 'Fencing', checked: fencing, set: setFencing, icon: '🔗' },
-                { label: 'Lighting', checked: lighting, set: setLighting, icon: '💡' },
-                { label: sport.includes('basketball') ? 'Hoop' : 'Net', checked: netHoop, set: setNetHoop, icon: sport.includes('basketball') ? '🏀' : '🥅' },
-              ].map((t) => (
-                <label key={t.label} className="mb-2 flex cursor-pointer items-center justify-between last:mb-0">
-                  <span className="text-sm text-text-secondary">
-                    <span className="mr-1.5">{t.icon}</span>{t.label}
-                  </span>
-                  <div
-                    className={`relative h-6 w-11 rounded-full transition-colors ${t.checked ? 'bg-neon' : 'bg-surface'}`}
-                    onClick={() => t.set(!t.checked)}
-                  >
-                    <div className={`absolute top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform ${t.checked ? 'left-[22px]' : 'left-0.5'}`} />
-                  </div>
-                </label>
-              ))}
-            </section>
           </div>
 
           {/* ─── Right Panel: Preview + Cost ─── */}
@@ -730,34 +724,59 @@ export default function CourtDesignerPage() {
               </div>
             </div>
 
-            {/* Cost Estimate */}
-            <div className="rounded-xl border border-border bg-surface-card p-5">
-              <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-text-secondary">Estimated Cost</h2>
-              <div className="flex flex-wrap items-end gap-6">
-                <div>
-                  <p className="text-xs text-text-secondary">Surface</p>
-                  <p className="text-2xl font-bold text-neon">
-                    ${costLow.toLocaleString()} – ${costHigh.toLocaleString()}
-                  </p>
-                </div>
-                {fencing && (
-                  <div>
-                    <p className="text-xs text-text-secondary">Fencing</p>
-                    <p className="text-lg font-semibold text-text-primary">+${fencingCost.toLocaleString()}</p>
-                  </div>
-                )}
-                {lighting && (
-                  <div>
-                    <p className="text-xs text-text-secondary">Lighting</p>
-                    <p className="text-lg font-semibold text-text-primary">+${lightingCost.toLocaleString()}</p>
-                  </div>
-                )}
+            {/* Two-column: Extras + Estimated Cost */}
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              {/* Extras */}
+              <div className="rounded-xl border border-border bg-surface-card p-5">
+                <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-text-secondary">Extras</h2>
+                {[
+                  { label: 'Fencing', checked: fencing, set: setFencing, icon: '🔗' },
+                  { label: 'Lighting', checked: lighting, set: setLighting, icon: '💡' },
+                  { label: sport.includes('basketball') ? 'Hoop' : 'Net', checked: netHoop, set: setNetHoop, icon: sport.includes('basketball') ? '🏀' : '🥅' },
+                ].map((t) => (
+                  <label key={t.label} className="mb-2 flex cursor-pointer items-center justify-between last:mb-0">
+                    <span className="text-sm text-text-secondary">
+                      <span className="mr-1.5">{t.icon}</span>{t.label}
+                    </span>
+                    <div
+                      className={`relative h-6 w-11 rounded-full transition-colors ${t.checked ? 'bg-neon' : 'bg-surface'}`}
+                      onClick={() => t.set(!t.checked)}
+                    >
+                      <div className={`absolute top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform ${t.checked ? 'left-[22px]' : 'left-0.5'}`} />
+                    </div>
+                  </label>
+                ))}
               </div>
-              <p className="mt-2 text-xs text-text-secondary">
-                Total range: <span className="font-medium text-text-primary">
-                  ${(costLow + fencingCost + lightingCost).toLocaleString()} – ${(costHigh + fencingCost + lightingCost).toLocaleString()}
-                </span>
-              </p>
+
+              {/* Cost Estimate */}
+              <div className="rounded-xl border border-border bg-surface-card p-5">
+                <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-text-secondary">Estimated Cost</h2>
+                <div className="flex flex-wrap items-end gap-6">
+                  <div>
+                    <p className="text-xs text-text-secondary">Surface</p>
+                    <p className="text-2xl font-bold text-neon">
+                      ${costLow.toLocaleString()} – ${costHigh.toLocaleString()}
+                    </p>
+                  </div>
+                  {fencing && (
+                    <div>
+                      <p className="text-xs text-text-secondary">Fencing</p>
+                      <p className="text-lg font-semibold text-text-primary">+${fencingCost.toLocaleString()}</p>
+                    </div>
+                  )}
+                  {lighting && (
+                    <div>
+                      <p className="text-xs text-text-secondary">Lighting</p>
+                      <p className="text-lg font-semibold text-text-primary">+${lightingCost.toLocaleString()}</p>
+                    </div>
+                  )}
+                </div>
+                <p className="mt-2 text-xs text-text-secondary">
+                  Total range: <span className="font-medium text-text-primary">
+                    ${(costLow + fencingCost + lightingCost).toLocaleString()} – ${(costHigh + fencingCost + lightingCost).toLocaleString()}
+                  </span>
+                </p>
+              </div>
             </div>
 
             {/* CTAs */}
