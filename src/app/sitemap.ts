@@ -48,14 +48,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  // Sport × City combo pages (e.g., /sports/pickleball/denver-co) — the SEO goldmine
-  const sportLocationPages: MetadataRoute.Sitemap = (cities.data || []).flatMap((city) =>
-    SPORT_TYPES.map((sport) => ({
-      url: `${SITE_URL}/sports/${sport.value}/${city.slug}`,
-      changeFrequency: 'weekly' as const,
-      priority: 0.6,
-    }))
-  );
+  // Sport × City combo pages — REMOVED from sitemap (thin auto-generated content)
+  // Re-add when pages have unique substantial content per city+sport combo.
 
   const vendorPages: MetadataRoute.Sitemap = (vendors.data || []).map((vendor) => ({
     url: `${SITE_URL}/vendors/${vendor.slug}`,
