@@ -405,21 +405,24 @@ function LightingOverlay({ s, offX, offY, totalW, totalL }: any) {
 function NetOverlay({ s, offX, offY, totalW, totalL, sport, rotated }: any) {
   const cx = offX + (totalW * s) / 2;
   const cy = offY + (totalL * s) / 2;
-  if (sport === 'basketball' || sport === 'basketball-half') {
+  if (sport === 'basketball' || sport === 'basketball-half' || sport === 'multi-sport') {
     // Court dimensions for hoop placement (NFHS: 5.25' from baseline)
-    const courtW = sport === 'basketball-half' ? 50 : 50;
-    const courtL = sport === 'basketball-half' ? 42 : 84;
+    const courtW = (sport === 'basketball-half' || sport === 'multi-sport') ? 50 : 50;
+    const courtL = (sport === 'basketball-half' || sport === 'multi-sport') ? 42 : 84;
     const renderCourtW = rotated ? courtL : courtW;
     const renderCourtL = rotated ? courtW : courtL;
-    const courtX = offX + ((totalW - renderCourtW) * s) / 2;
-    const courtY = offY + ((totalL - renderCourtL) * s) / 2;
+    // For multi-sport, use total surface as reference (hoop at edge of surface)
+    const courtX = sport === 'multi-sport' ? offX : offX + ((totalW - renderCourtW) * s) / 2;
+    const courtY = sport === 'multi-sport' ? offY : offY + ((totalL - renderCourtL) * s) / 2;
+    const effectiveCourtW = sport === 'multi-sport' ? totalW : renderCourtW;
+    const effectiveCourtL = sport === 'multi-sport' ? totalL : renderCourtL;
     const hoopDist = 5.25 * s;
     const bbDist = 4 * s;   // backboard 4' from baseline
     const bbHalfW = 3 * s;  // backboard 6' wide (3' half-width)
-    const isHalf = sport === 'basketball-half';
+    const isHalf = sport === 'basketball-half' || sport === 'multi-sport';
     if (rotated) {
       // Landscape: baselines are left and right
-      const rightX = courtX + renderCourtW * s;
+      const rightX = courtX + effectiveCourtW * s;
       const leftX = courtX;
       return (
         <g>
@@ -435,7 +438,7 @@ function NetOverlay({ s, offX, offY, totalW, totalL, sport, rotated }: any) {
       );
     }
     // Portrait: baselines are top and bottom
-    const bottomY = courtY + renderCourtL * s;
+    const bottomY = courtY + effectiveCourtL * s;
     const topY = courtY;
     return (
       <g>
@@ -727,7 +730,7 @@ export default function CourtDesignerPage() {
                 {[
                   { label: 'Fencing', checked: fencing, set: setFencing, icon: '🔗' },
                   { label: 'Lighting', checked: lighting, set: setLighting, icon: '💡' },
-                  { label: sport.includes('basketball') ? 'Hoop' : 'Net', checked: netHoop, set: setNetHoop, icon: sport.includes('basketball') ? '🏀' : '🥅' },
+                  { label: (sport.includes('basketball') || sport === 'multi-sport') ? 'Dominator Hoop' : 'Net', checked: netHoop, set: setNetHoop, icon: (sport.includes('basketball') || sport === 'multi-sport') ? '🏀' : '🥅' },
                 ].map((t) => (
                   <label key={t.label} className="mb-2 flex cursor-pointer items-center justify-between last:mb-0">
                     <span className="text-sm text-text-secondary">
