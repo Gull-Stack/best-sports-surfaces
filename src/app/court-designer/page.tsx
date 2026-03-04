@@ -575,13 +575,16 @@ export default function CourtDesignerPage() {
                   <button
                     key={key}
                     onClick={() => changeSport(key)}
-                    className={`rounded-lg border px-3 py-2 text-left text-sm transition-all ${
+                    className={`flex items-center gap-2 rounded-lg border px-3 py-2 text-left text-sm transition-all ${
                       sport === key
                         ? 'border-neon bg-neon-subtle text-neon font-medium'
                         : 'border-border hover:border-neon/40 text-text-secondary hover:text-text-primary'
                     }`}
                   >
-                    <span className="mr-1">{val.icon}</span> {val.label}
+                    <span className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2 ${sport === key ? 'border-neon' : 'border-current opacity-40'}`}>
+                      {sport === key && <span className="block h-2 w-2 rounded-full bg-neon" />}
+                    </span>
+                    <span>{val.icon} {val.label}</span>
                   </button>
                 ))}
               </div>
