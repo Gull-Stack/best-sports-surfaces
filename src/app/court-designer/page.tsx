@@ -359,7 +359,6 @@ function MultiSportLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineCo
 
   return (
     <>
-      <PickleballLines {...pickleProps} />
       <g stroke={lineColor} strokeWidth={1.5} fill="none" opacity={0.45} strokeDasharray="6 3">
         {/* 3-point arc (semicircle curving up into court) */}
         <path d={`M ${arcLeftX} ${hoopY} A ${threeR} ${threeR} 0 0 1 ${arcRightX} ${hoopY}`} />
@@ -369,6 +368,7 @@ function MultiSportLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineCo
         {/* Free throw line */}
         <line x1={cx - (FT_HALF * s)} y1={ftY} x2={cx + (FT_HALF * s)} y2={ftY} />
       </g>
+      <PickleballLines {...pickleProps} />
     </>
   );
 }
