@@ -340,8 +340,8 @@ function BasketballLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineCo
 /* ─── Multi-Sport Lines (Full Pickleball + Basketball 3pt arc & FT line) ─── */
 function MultiSportLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineColor, rotated }: any) {
   // Full pickleball court (solid)
-  const pW = rotated ? 44 : 20;
-  const pL = rotated ? 20 : 44;
+  const pW = rotated ? 20 : 44;
+  const pL = rotated ? 44 : 20;
   const pickleProps = { s, offX, offY, courtW: pW, courtL: pL, totalW, totalL, lineColor, rotated };
 
   // Basketball overlay: 3pt arc + free throw line only (dashed)
