@@ -239,11 +239,11 @@ function BasketballLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineCo
           {(() => {
             const topY = cy - arcDy;
             const botY = cy + arcDy;
-            // Arc subtends less than 180° for HS, so largeArc=0
+            // NFHS 3pt arc: large-arc=1 because arc subtends > 180° (chord is nearly a diameter)
             const sweep = dir > 0 ? 1 : 0;
             return (
               <>
-                <path d={`M ${baseX} ${topY} A ${threeR} ${threeR} 0 0 ${sweep} ${baseX} ${botY}`} />
+                <path d={`M ${baseX} ${topY} A ${threeR} ${threeR} 0 1 ${sweep} ${baseX} ${botY}`} />
                 {/* Corner straight lines if arc doesn't reach sideline */}
                 {arcDy < sidelineDist && (
                   <>
@@ -311,7 +311,7 @@ function BasketballLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineCo
           const sweep = dir > 0 ? 1 : 0;
           return (
             <>
-              <path d={`M ${leftX} ${baseY} A ${threeR} ${threeR} 0 0 ${sweep} ${rightX} ${baseY}`} />
+              <path d={`M ${leftX} ${baseY} A ${threeR} ${threeR} 0 1 ${sweep} ${rightX} ${baseY}`} />
               {arcDx < sidelineDist && (
                 <>
                   <line x1={cx - sidelineDist} y1={baseY} x2={leftX} y2={baseY} />
