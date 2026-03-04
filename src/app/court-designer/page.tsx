@@ -307,7 +307,7 @@ function BasketballLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineCo
           const arcLeftX = cx - threeR;
           const arcRightX = cx + threeR;
           // Semicircle from left to right, curving away from baseline (into court)
-          const sweep = dir > 0 ? 1 : 0;
+          const sweep = dir > 0 ? 0 : 1;
           return (
             <>
               <path d={`M ${arcLeftX} ${hoopY} A ${threeR} ${threeR} 0 0 ${sweep} ${arcRightX} ${hoopY}`} />
