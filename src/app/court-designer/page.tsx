@@ -636,7 +636,7 @@ export default function CourtDesignerPage() {
                         onClick={(e) => e.stopPropagation()}
                         className="h-8 w-8 cursor-pointer rounded border border-border bg-transparent"
                       />
-                      <span className="w-16 font-mono text-xs text-text-secondary">{c.value}</span>
+                      <span className="w-24 text-xs text-text-secondary truncate text-right">{ACRYTECH_COLORS.find(ac => ac.hex === c.value)?.name ?? c.value}</span>
                     </div>
                   </div>
                   {/* Acrytech color swatches — expand on click */}
