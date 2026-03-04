@@ -231,10 +231,7 @@ function BasketballLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineCo
           <rect x={keyX} y={cy - (KEY_W / 2) * s} width={KEY_DEPTH * s} height={KEY_W * s} />
           {/* Free throw circle */}
           <circle cx={ftX} cy={cy} r={FT_R * s} />
-          {/* Backboard */}
-          <line x1={baseX + BB_OFFSET * s * dir} y1={cy - BB_W * s} x2={baseX + BB_OFFSET * s * dir} y2={cy + BB_W * s} strokeWidth={2.5} />
-          {/* Hoop rim */}
-          <circle cx={hoopX} cy={cy} r={HOOP_R * s} strokeWidth={1.5} />
+          {/* Backboard + hoop drawn by NetOverlay (orange) */}
           {/* 3-point line: semicircle arc + straight corner lines to baseline */}
           {(() => {
             // Arc endpoints at top/bottom of circle (above/below hoop at hoop's x)
@@ -297,10 +294,7 @@ function BasketballLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineCo
         <rect x={cx - (KEY_W / 2) * s} y={keyY} width={KEY_W * s} height={KEY_DEPTH * s} />
         {/* Free throw circle */}
         <circle cx={cx} cy={ftY} r={FT_R * s} />
-        {/* Backboard */}
-        <line x1={cx - BB_W * s} y1={baseY + BB_OFFSET * s * dir} x2={cx + BB_W * s} y2={baseY + BB_OFFSET * s * dir} strokeWidth={2.5} />
-        {/* Hoop rim */}
-        <circle cx={cx} cy={hoopY} r={HOOP_R * s} strokeWidth={1.5} />
+        {/* Backboard + hoop drawn by NetOverlay (orange) */}
         {/* 3-point line: semicircle arc + straight corner lines to baseline */}
         {(() => {
           // Arc endpoints at widest point of circle (left/right of hoop at hoop's y)
@@ -705,7 +699,7 @@ export default function CourtDesignerPage() {
                   {/* Extras */}
                   {fencing && <FencingOverlay s={s} offX={offX} offY={offY} totalW={renderW} totalL={renderH} />}
                   {lighting && <LightingOverlay s={s} offX={offX} offY={offY} totalW={renderW} totalL={renderH} />}
-                  {netHoop && !sport.includes('basketball') && <NetOverlay s={s} offX={offX} offY={offY} totalW={renderW} totalL={renderH} sport={sport} rotated={isRotated} />}
+                  {netHoop && <NetOverlay s={s} offX={offX} offY={offY} totalW={renderW} totalL={renderH} sport={sport} rotated={isRotated} />}
 
                   {/* Dimension labels */}
                   <text x={offX + (renderW * s) / 2} y={offY + renderH * s + 16} textAnchor="middle" fill="#666" fontSize="11" fontFamily="monospace">
