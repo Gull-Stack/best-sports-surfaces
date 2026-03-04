@@ -193,7 +193,9 @@ function BasketballLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineCo
   const hl = (courtL * s) / 2;
   const sw = 1.5;
 
-  const isHorizontalLong = courtW > courtL;
+  // Use the `rotated` prop to determine orientation — courtW > courtL
+  // is unreliable for half-court where dimensions are close
+  const isHorizontalLong = rotated;
 
   // NFHS (High School) dimensions in feet
   const KEY_W = 12;        // lane width (12' HS, not 16' NBA)
