@@ -584,34 +584,7 @@ export default function CourtDesignerPage() {
               </div>
             </section>
 
-            {/* Dimensions */}
-            <section className="rounded-xl border border-border bg-surface-card p-5">
-              <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-text-secondary">Dimensions (ft)</h2>
-              <div className="flex items-center gap-3">
-                <div className="flex-1">
-                  <label className="mb-1 block text-xs text-text-secondary">Width</label>
-                  <input
-                    type="number"
-                    value={width}
-                    onChange={(e) => setWidth(Math.max(10, Number(e.target.value)))}
-                    className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-text-primary focus:border-neon focus:outline-none"
-                  />
-                </div>
-                <span className="mt-5 text-text-secondary">×</span>
-                <div className="flex-1">
-                  <label className="mb-1 block text-xs text-text-secondary">Length</label>
-                  <input
-                    type="number"
-                    value={length}
-                    onChange={(e) => setLength(Math.max(10, Number(e.target.value)))}
-                    className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-text-primary focus:border-neon focus:outline-none"
-                  />
-                </div>
-              </div>
-              <p className="mt-2 text-center text-xs text-text-secondary">
-                {width}&apos; × {length}&apos; = <span className="font-semibold text-neon">{sqFt.toLocaleString()} sq ft</span>
-              </p>
-            </section>
+            {/* Dimensions (hidden for now) */}
 
             {/* Color Customization */}
             <section className="rounded-xl border border-border bg-surface-card p-5">
