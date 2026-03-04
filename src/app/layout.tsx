@@ -44,9 +44,7 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-  alternates: {
-    canonical: '/',
-  },
+  alternates: {},
 };
 
 export default function RootLayout({
