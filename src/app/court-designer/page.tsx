@@ -392,11 +392,14 @@ function NetOverlay({ s, offX, offY, totalW, totalL, sport, rotated }: any) {
     const courtX = offX + ((totalW - renderCourtW) * s) / 2;
     const courtY = offY + ((totalL - renderCourtL) * s) / 2;
     const hoopDist = 5.25 * s;
+    const bbDist = 4 * s;   // backboard 4' from baseline
+    const bbHalfW = 3 * s;  // backboard 6' wide (3' half-width)
     if (rotated) {
       // Landscape: hoop on right baseline
       const baselineX = courtX + renderCourtW * s;
       return (
         <g>
+          <line x1={baselineX - bbDist} y1={cy - bbHalfW} x2={baselineX - bbDist} y2={cy + bbHalfW} stroke="#f97316" strokeWidth={2.5} />
           <circle cx={baselineX - hoopDist} cy={cy} r={6} fill="none" stroke="#f97316" strokeWidth={2} />
         </g>
       );
@@ -405,6 +408,7 @@ function NetOverlay({ s, offX, offY, totalW, totalL, sport, rotated }: any) {
     const baselineY = courtY + renderCourtL * s;
     return (
       <g>
+        <line x1={cx - bbHalfW} y1={baselineY - bbDist} x2={cx + bbHalfW} y2={baselineY - bbDist} stroke="#f97316" strokeWidth={2.5} />
         <circle cx={cx} cy={baselineY - hoopDist} r={6} fill="none" stroke="#f97316" strokeWidth={2} />
       </g>
     );
