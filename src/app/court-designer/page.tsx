@@ -384,19 +384,28 @@ function NetOverlay({ s, offX, offY, totalW, totalL, sport, rotated }: any) {
   const cx = offX + (totalW * s) / 2;
   const cy = offY + (totalL * s) / 2;
   if (sport === 'basketball' || sport === 'basketball-half') {
+    // Court dimensions for hoop placement (NFHS: 5.25' from baseline)
+    const courtW = sport === 'basketball-half' ? 50 : 50;
+    const courtL = sport === 'basketball-half' ? 42 : 84;
+    const renderCourtW = rotated ? courtL : courtW;
+    const renderCourtL = rotated ? courtW : courtL;
+    const courtX = offX + ((totalW - renderCourtW) * s) / 2;
+    const courtY = offY + ((totalL - renderCourtL) * s) / 2;
+    const hoopDist = 5.25 * s;
     if (rotated) {
-      // Landscape: hoop on right side
+      // Landscape: hoop on right baseline
+      const baselineX = courtX + renderCourtW * s;
       return (
         <g>
-          <circle cx={offX + totalW * s - 12} cy={cy} r={6} fill="none" stroke="#f97316" strokeWidth={2} />
-          <text x={offX + totalW * s - 6} y={cy + 3} textAnchor="start" fill="#f97316" fontSize="7">HOOP</text>
+          <circle cx={baselineX - hoopDist} cy={cy} r={6} fill="none" stroke="#f97316" strokeWidth={2} />
         </g>
       );
     }
+    // Portrait: hoop on bottom baseline
+    const baselineY = courtY + renderCourtL * s;
     return (
       <g>
-        <circle cx={cx} cy={offY + totalL * s - 12} r={6} fill="none" stroke="#f97316" strokeWidth={2} />
-        <text x={cx} y={offY + totalL * s - 6} textAnchor="middle" fill="#f97316" fontSize="7">HOOP</text>
+        <circle cx={cx} cy={baselineY - hoopDist} r={6} fill="none" stroke="#f97316" strokeWidth={2} />
       </g>
     );
   }
@@ -427,6 +436,7 @@ export default function CourtDesignerPage() {
   const [surroundColor, setSurroundColor] = useState(PALETTES[0].surround);
   const [lineColor, setLineColor] = useState(PALETTES[0].line);
   const [paletteIdx, setPaletteIdx] = useState(0);
+  const [expandedSwatch, setExpandedSwatch] = useState<string | null>('Playing Area');
   const [fencing, setFencing] = useState(false);
   const [lighting, setLighting] = useState(false);
   const [netHoop, setNetHoop] = useState(true);
@@ -593,20 +603,24 @@ export default function CourtDesignerPage() {
                 { label: 'Lines', value: lineColor, set: (v: string) => { setLineColor(v); setPaletteIdx(PALETTES.length - 1); } },
               ].map((c) => (
                 <div key={c.label} className="mb-3">
-                  <div className="flex items-center justify-between mb-1.5">
+                  <div
+                    className="flex items-center justify-between mb-1.5 cursor-pointer"
+                    onClick={() => setExpandedSwatch(expandedSwatch === c.label ? null : c.label)}
+                  >
                     <span className="text-sm text-text-secondary">{c.label}</span>
                     <div className="flex items-center gap-2">
                       <input
                         type="color"
                         value={c.value}
                         onChange={(e) => c.set(e.target.value)}
+                        onClick={(e) => e.stopPropagation()}
                         className="h-8 w-8 cursor-pointer rounded border border-border bg-transparent"
                       />
                       <span className="w-16 font-mono text-xs text-text-secondary">{c.value}</span>
                     </div>
                   </div>
-                  {/* Acrytech color swatches */}
-                  <div className="flex flex-wrap gap-1">
+                  {/* Acrytech color swatches — expand on click */}
+                  {expandedSwatch === c.label && <div className="flex flex-wrap gap-1">
                     {ACRYTECH_COLORS.map((ac) => (
                       <button
                         key={ac.name}
@@ -618,7 +632,7 @@ export default function CourtDesignerPage() {
                         style={{ backgroundColor: ac.hex }}
                       />
                     ))}
-                  </div>
+                  </div>}
                 </div>
               ))}
             </section>
