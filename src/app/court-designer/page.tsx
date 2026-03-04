@@ -214,14 +214,14 @@ function BasketballLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineCo
       const ftX = baseX + KEY_DEPTH * s * dir;
       const keyX = dir > 0 ? baseX : baseX - KEY_DEPTH * s;
 
-      // 3-point arc: uniform arc from baseline to baseline (no corner segments in HS)
+      // 3-point arc: NFHS arc centered on hoop, intersecting baseline
       const threeR = THREE_R * s;
-      // Where arc meets the baseline (sideline intersection)
-      const sidelineDist = hl; // half the short dimension in pixels
-      const arcMeetsSideline = sidelineDist < threeR;
-      // Arc start/end Y: clamp to sideline
-      const arcDy = arcMeetsSideline ? sidelineDist : threeR;
-      const arcDx = Math.sqrt(Math.max(0, threeR ** 2 - arcDy ** 2));
+      const hoopToBase = HOOP_DIST * s; // horizontal distance from hoop to baseline
+      // Where the 3pt circle (centered on hoop) intersects the baseline (vertical line at baseX)
+      const arcIntersectDy = Math.sqrt(Math.max(0, threeR ** 2 - hoopToBase ** 2));
+      // Clamp to sideline if needed
+      const sidelineDist = hl;
+      const arcDy = Math.min(arcIntersectDy, sidelineDist);
 
       return (
         <g>
@@ -233,15 +233,23 @@ function BasketballLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineCo
           <line x1={baseX + BB_OFFSET * s * dir} y1={cy - BB_W * s} x2={baseX + BB_OFFSET * s * dir} y2={cy + BB_W * s} strokeWidth={2.5} />
           {/* Hoop rim */}
           <circle cx={hoopX} cy={cy} r={HOOP_R * s} strokeWidth={1.5} />
-          {/* 3-point arc (uniform, no corner segments for HS) */}
+          {/* 3-point arc centered on hoop */}
           {(() => {
             const topY = cy - arcDy;
             const botY = cy + arcDy;
-            const arcX = hoopX + arcDx * dir;
-            const largeArc = arcDy > threeR * Math.sin(Math.PI / 3) ? 1 : 0;
+            // Arc subtends less than 180° for HS, so largeArc=0
             const sweep = dir > 0 ? 1 : 0;
             return (
-              <path d={`M ${baseX} ${topY} A ${threeR} ${threeR} 0 ${largeArc} ${sweep} ${baseX} ${botY}`} />
+              <>
+                <path d={`M ${baseX} ${topY} A ${threeR} ${threeR} 0 0 ${sweep} ${baseX} ${botY}`} />
+                {/* Corner straight lines if arc doesn't reach sideline */}
+                {arcDy < sidelineDist && (
+                  <>
+                    <line x1={baseX} y1={cy - sidelineDist} x2={baseX} y2={topY} />
+                    <line x1={baseX} y1={botY} x2={baseX} y2={cy + sidelineDist} />
+                  </>
+                )}
+              </>
             );
           })()}
         </g>
@@ -278,9 +286,11 @@ function BasketballLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineCo
     const keyY = dir > 0 ? baseY : baseY - KEY_DEPTH * s;
 
     const threeR = THREE_R * s;
+    const hoopToBase = HOOP_DIST * s;
+    // Where 3pt circle (centered on hoop) intersects the baseline (horizontal line at baseY)
+    const arcIntersectDx = Math.sqrt(Math.max(0, threeR ** 2 - hoopToBase ** 2));
     const sidelineDist = hw;
-    const arcDx = sidelineDist < threeR ? sidelineDist : threeR;
-    const arcDy = Math.sqrt(Math.max(0, threeR ** 2 - arcDx ** 2));
+    const arcDx = Math.min(arcIntersectDx, sidelineDist);
 
     return (
       <g>
@@ -292,14 +302,21 @@ function BasketballLines({ s, offX, offY, courtW, courtL, totalW, totalL, lineCo
         <line x1={cx - BB_W * s} y1={baseY + BB_OFFSET * s * dir} x2={cx + BB_W * s} y2={baseY + BB_OFFSET * s * dir} strokeWidth={2.5} />
         {/* Hoop rim */}
         <circle cx={cx} cy={hoopY} r={HOOP_R * s} strokeWidth={1.5} />
-        {/* 3-point arc (uniform HS arc) */}
+        {/* 3-point arc centered on hoop */}
         {(() => {
           const leftX = cx - arcDx;
           const rightX = cx + arcDx;
-          const largeArc = arcDx > threeR * Math.sin(Math.PI / 3) ? 1 : 0;
           const sweep = dir > 0 ? 1 : 0;
           return (
-            <path d={`M ${leftX} ${baseY} A ${threeR} ${threeR} 0 ${largeArc} ${sweep} ${rightX} ${baseY}`} />
+            <>
+              <path d={`M ${leftX} ${baseY} A ${threeR} ${threeR} 0 0 ${sweep} ${rightX} ${baseY}`} />
+              {arcDx < sidelineDist && (
+                <>
+                  <line x1={cx - sidelineDist} y1={baseY} x2={leftX} y2={baseY} />
+                  <line x1={rightX} y1={baseY} x2={cx + sidelineDist} y2={baseY} />
+                </>
+              )}
+            </>
           );
         })()}
       </g>
