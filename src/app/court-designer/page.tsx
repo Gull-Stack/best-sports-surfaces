@@ -705,7 +705,7 @@ export default function CourtDesignerPage() {
                   {/* Extras */}
                   {fencing && <FencingOverlay s={s} offX={offX} offY={offY} totalW={renderW} totalL={renderH} />}
                   {lighting && <LightingOverlay s={s} offX={offX} offY={offY} totalW={renderW} totalL={renderH} />}
-                  {netHoop && <NetOverlay s={s} offX={offX} offY={offY} totalW={renderW} totalL={renderH} sport={sport} rotated={isRotated} />}
+                  {netHoop && !sport.includes('basketball') && <NetOverlay s={s} offX={offX} offY={offY} totalW={renderW} totalL={renderH} sport={sport} rotated={isRotated} />}
 
                   {/* Dimension labels */}
                   <text x={offX + (renderW * s) / 2} y={offY + renderH * s + 16} textAnchor="middle" fill="#666" fontSize="11" fontFamily="monospace">
