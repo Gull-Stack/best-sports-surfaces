@@ -1,8 +1,16 @@
 import { MetadataRoute } from 'next';
 import { createAdminClient } from '@/lib/supabase/admin';
-import { SPORT_TYPES } from '@/lib/constants';
-
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://bestsportssurfaces.com';
+
+// Slugs that actually have built pages in /sports/[sport]
+const SPORT_PAGE_SLUGS = [
+  'pickleball-courts',
+  'tennis-courts',
+  'basketball-courts',
+  'gym-flooring',
+  'running-tracks',
+  'artificial-turf',
+];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const supabase = createAdminClient();
@@ -32,9 +40,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/terms`, lastModified: new Date(), changeFrequency: 'yearly', priority: 0.1 },
   ];
 
-  // Sport type index pages (e.g., /sports/pickleball)
-  const sportPages: MetadataRoute.Sitemap = SPORT_TYPES.map((sport) => ({
-    url: `${SITE_URL}/sports/${sport.value}`,
+  // Sport type index pages (e.g., /sports/pickleball-courts)
+  const sportPages: MetadataRoute.Sitemap = SPORT_PAGE_SLUGS.map((slug) => ({
+    url: `${SITE_URL}/sports/${slug}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
     priority: 0.8,
