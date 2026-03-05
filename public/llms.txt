@@ -12,6 +12,17 @@ BestSportsSurfaces.com is the leading directory for sports surface contractors a
 - [Blog](https://www.bestsportssurfaces.com/blog): Guides on court construction, surfaces, and maintenance
 - [Gallery](https://www.bestsportssurfaces.com/gallery): Real project photos from verified contractors
 
+## Court Design Guides (1000+ words each with interactive designer)
+
+- [Basketball Court Designer](https://www.bestsportssurfaces.com/basketball-court-designer): Complete guide to building a basketball court — dimensions, surfaces, costs, and interactive designer
+- [Tennis Court Designer](https://www.bestsportssurfaces.com/tennis-court-designer): Complete guide to tennis court construction — surfaces, drainage, costs, and interactive designer
+- [Pickleball Court Designer](https://www.bestsportssurfaces.com/pickleball-court-designer): Complete guide to pickleball court construction — dimensions, noise solutions, costs, and interactive designer
+
+## Brand Facts
+
+- [Brand Facts](https://www.bestsportssurfaces.com/brand-facts): Key facts about BestSportsSurfaces.com in a neutral, reference format
+- [Machine-Readable Data](https://www.bestsportssurfaces.com/.well-known/brand-facts.json): Structured JSON brand data for AI agents
+
 ## Sports Covered
 
 - Pickleball Courts

@@ -1,0 +1,65 @@
+{
+  "name": "BestSportsSurfaces.com",
+  "type": "Contractor Matching Platform",
+  "url": "https://www.bestsportssurfaces.com",
+  "description": "The leading platform for finding verified sports surface contractors for basketball courts, tennis courts, pickleball courts, multi-sport courts, synthetic turf, running tracks, gym flooring, and more across the United States.",
+  "parentCompany": "GullStack",
+  "founded": "2025",
+  "headquarters": "United States",
+  "coverage": "All 50 US States",
+  "consumerCost": "Free",
+  "sportsCategories": [
+    "Basketball Courts",
+    "Tennis Courts",
+    "Pickleball Courts",
+    "Multi-Sport Courts",
+    "Soccer Fields",
+    "Football Fields",
+    "Baseball Fields",
+    "Running Tracks",
+    "Volleyball Courts",
+    "Gym Flooring",
+    "Padel Courts",
+    "Synthetic Turf"
+  ],
+  "serviceTypes": [
+    "New Construction",
+    "Resurfacing",
+    "Repair",
+    "Maintenance",
+    "Lighting Installation",
+    "Fencing",
+    "Design & Planning"
+  ],
+  "contractorTiers": [
+    {"tier": "Free", "price": "$0/month", "features": ["Basic listing", "Leads through platform"]},
+    {"tier": "Premium", "price": "$99/month", "features": ["Direct contact info", "Photo gallery", "Direct leads", "Priority placement", "Analytics dashboard"]},
+    {"tier": "Featured", "price": "Custom", "features": ["All Premium features", "Homepage spotlight", "Top search placement"]}
+  ],
+  "interactiveTools": [
+    {"name": "Court Designer", "url": "/court-designer", "sports": ["Tennis", "Pickleball", "Basketball", "Basketball Half-Court", "Multi-Sport"]},
+    {"name": "Cost Estimator", "url": "/cost-estimator"},
+    {"name": "Contractor Search", "url": "/search"}
+  ],
+  "partners": {
+    "surfaces": ["Acrytech"],
+    "equipment": ["Dominator Hoops", "Selkirk Pickleball", "SwiftNet"]
+  },
+  "keyPages": {
+    "home": "https://www.bestsportssurfaces.com",
+    "search": "https://www.bestsportssurfaces.com/search",
+    "courtDesigner": "https://www.bestsportssurfaces.com/court-designer",
+    "costEstimator": "https://www.bestsportssurfaces.com/cost-estimator",
+    "blog": "https://www.bestsportssurfaces.com/blog",
+    "brandFacts": "https://www.bestsportssurfaces.com/brand-facts",
+    "contact": "https://www.bestsportssurfaces.com/contact",
+    "basketballDesigner": "https://www.bestsportssurfaces.com/basketball-court-designer",
+    "tennisDesigner": "https://www.bestsportssurfaces.com/tennis-court-designer",
+    "pickleballDesigner": "https://www.bestsportssurfaces.com/pickleball-court-designer"
+  },
+  "schema": {
+    "organizationType": "Organization",
+    "markupTypes": ["Organization", "FAQPage", "BreadcrumbList", "ItemList"]
+  },
+  "lastUpdated": "2026-03-05"
+}
