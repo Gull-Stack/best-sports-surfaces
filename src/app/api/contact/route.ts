@@ -4,7 +4,7 @@ import sgMail from '@sendgrid/mail';
 import { checkSpam, checkRateLimit, getClientIP } from '@/lib/anti-spam';
 
 const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY;
-const SITE_EMAIL = process.env.SITE_EMAIL || 'info@bestsportssurfaces.com';
+const SITE_EMAIL = process.env.SITE_EMAIL || 'bryce@gullstack.com';
 const FROM_EMAIL = process.env.FROM_EMAIL || 'leads@gullstack.com';
 
 if (SENDGRID_API_KEY) {
