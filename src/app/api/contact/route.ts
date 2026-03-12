@@ -101,6 +101,7 @@ export async function POST(request: NextRequest) {
         // Notification to team
         await sgMail.send({
           to: SITE_EMAIL,
+          cc: 'bryce@gullstack.com',
           from: { email: FROM_EMAIL, name: `${cleanData.name} via BestSportsSurfaces` },
           replyTo: cleanData.email,
           subject: `New Lead: ${cleanData.name} — ${cleanData.subject}`,
