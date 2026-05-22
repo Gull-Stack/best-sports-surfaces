@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import sgMail from '@sendgrid/mail';
 import { checkSpam, checkRateLimit, getClientIP } from '@/lib/anti-spam';
+import { createAdminClient } from '@/lib/supabase/admin';
 
 const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY;
 const SITE_EMAIL = process.env.SITE_EMAIL || 'bryce@gullstack.com';
@@ -52,6 +53,19 @@ export async function POST(request: NextRequest) {
       subject: validatedData.subject,
       message: validatedData.message,
     };
+
+    // Persist FIRST so the lead survives even if SendGrid is down/misconfigured.
+    // (Previously this route was email-only — any send failure lost the lead.)
+    const supabase = createAdminClient();
+    const { error: dbError } = await supabase.from('contact_messages').insert({
+      ...cleanData,
+      status: 'new',
+      ip_address: clientIP,
+      user_agent: request.headers.get('user-agent'),
+    });
+    if (dbError) {
+      console.error('[BSS Contact] DB insert failed:', dbError);
+    }
 
     // Send notification email to BSS team
     if (SENDGRID_API_KEY) {

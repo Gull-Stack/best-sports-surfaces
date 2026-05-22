@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Send } from 'lucide-react';
+import { trackLead } from '@/lib/track';
 
 export default function NewsletterForm() {
   const [email, setEmail] = useState('');
@@ -18,6 +19,7 @@ export default function NewsletterForm() {
         body: JSON.stringify({ email }),
       });
       if (!res.ok) throw new Error();
+      trackLead('newsletter');
       setStatus('success');
       setEmail('');
     } catch {

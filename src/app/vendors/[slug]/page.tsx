@@ -12,6 +12,7 @@ import InquiryForm from '@/components/forms/InquiryForm';
 import MapComponent from '@/components/ui/DynamicMap';
 import SchemaOrg, { localBusinessSchema } from '@/components/seo/SchemaOrg';
 import type { Vendor, Review } from '@/types';
+import { SITE_URL } from '@/lib/constants';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -46,6 +47,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${vendor.name} - Sports Surface Contractor in ${vendor.city}, ${vendor.state}`,
     description: vendor.short_description || `${vendor.name} is a sports surface contractor in ${vendor.city}, ${vendor.state}. ${vendor.sport_types.join(', ')} specialists.`,
+    alternates: { canonical: `${SITE_URL}/vendors/${slug}` },
     openGraph: {
       title: vendor.name,
       description: vendor.short_description,

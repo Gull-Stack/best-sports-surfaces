@@ -9,6 +9,7 @@ import Input from '@/components/ui/Input';
 import Textarea from '@/components/ui/Textarea';
 import { CheckCircle } from 'lucide-react';
 import { getHoneypotProps } from '@/lib/anti-spam';
+import { trackLead } from '@/lib/track';
 
 const contactSchema = z.object({
   name: z.string().min(2, 'Name is required'),
@@ -46,7 +47,10 @@ export default function ContactForm() {
         timestamp: formTimestamp,
       }),
     });
-    if (res.ok) setSubmitted(true);
+    if (res.ok) {
+      trackLead('contact', { subject: data.subject });
+      setSubmitted(true);
+    }
   };
 
   if (submitted) {

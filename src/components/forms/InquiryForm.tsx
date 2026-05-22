@@ -10,6 +10,7 @@ import Input from '@/components/ui/Input';
 import Textarea from '@/components/ui/Textarea';
 import { CheckCircle } from 'lucide-react';
 import { getHoneypotProps } from '@/lib/anti-spam';
+import { trackLead } from '@/lib/track';
 
 const inquirySchema = z.object({
   name: z.string().min(1, 'Name is required'),
@@ -60,6 +61,11 @@ export default function InquiryForm({ vendorId, vendorName }: InquiryFormProps) 
         }),
       });
       if (!res.ok) throw new Error('Failed to submit');
+      trackLead('inquiry', {
+        vendor_id: vendorId,
+        sport_type: data.sport_type,
+        service_type: data.service_type,
+      });
       setSubmitted(true);
     } catch {
       setSubmitError('Something went wrong. Please try again.');

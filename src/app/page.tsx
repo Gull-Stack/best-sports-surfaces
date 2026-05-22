@@ -8,6 +8,11 @@ import SchemaOrg from '@/components/seo/SchemaOrg';
 import { createClient } from '@/lib/supabase/server';
 import { formatDate } from '@/lib/utils';
 import type { MapPin } from '@/components/ui/Map';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  alternates: { canonical: SITE_URL },
+};
 
 export const revalidate = 0;
 export const dynamic = 'force-dynamic'; // completely bypass ISR cache
@@ -68,7 +73,7 @@ export default async function HomePage() {
     '@type': 'Organization',
     name: SITE_NAME,
     url: SITE_URL,
-    logo: `${SITE_URL}/og-image.png`,
+    logo: `${SITE_URL}/og-image.jpg`,
     description: 'Find trusted sports surface contractors near you. Compare quotes for tennis courts, basketball courts, pickleball courts, and more.',
     sameAs: [],
   };

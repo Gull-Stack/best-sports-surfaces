@@ -9,6 +9,7 @@ import Input from '@/components/ui/Input';
 import Card from '@/components/ui/Card';
 import { CheckCircle } from 'lucide-react';
 import { getHoneypotProps } from '@/lib/anti-spam';
+import { trackLead } from '@/lib/track';
 
 function ClaimForm() {
   const router = useRouter();
@@ -49,8 +50,9 @@ function ClaimForm() {
         return;
       }
 
+      trackLead('vendor_claim', { vendor_slug: form.vendor_slug });
       setSubmitted(true);
-    } catch (err) {
+    } catch {
       setError('Network error. Please try again.');
     } finally {
       setLoading(false);
