@@ -1,5 +1,12 @@
+import { SITE_URL, SITE_NAME } from '@/lib/constants';
+
 interface SchemaOrgProps {
   schema: Record<string, unknown>;
+}
+
+function absoluteUrl(url: string | undefined | null): string | undefined {
+  if (!url) return undefined;
+  return url.startsWith('http') ? url : `${SITE_URL}${url.startsWith('/') ? '' : '/'}${url}`;
 }
 
 export default function SchemaOrg({ schema }: SchemaOrgProps) {
@@ -30,8 +37,8 @@ export function localBusinessSchema(vendor: {
     '@type': 'LocalBusiness',
     name: vendor.name,
     description: vendor.description,
-    telephone: vendor.phone,
-    url: vendor.website,
+    ...(vendor.phone ? { telephone: vendor.phone } : {}),
+    ...(vendor.website ? { url: vendor.website } : {}),
     address: {
       '@type': 'PostalAddress',
       streetAddress: vendor.address,
@@ -70,10 +77,14 @@ export function articleSchema(post: {
     author: { '@type': 'Person', name: post.author },
     datePublished: post.published_at,
     dateModified: post.updated_at,
-    image: post.featured_image,
+    image: absoluteUrl(post.featured_image) || `${SITE_URL}/og-image.jpg`,
     publisher: {
       '@type': 'Organization',
-      name: 'BestSportsSurfaces.com',
+      name: SITE_NAME,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${SITE_URL}/og-image.jpg`,
+      },
     },
   };
 }

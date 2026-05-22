@@ -15,10 +15,11 @@ const SPORT_PAGE_SLUGS = [
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const supabase = createAdminClient();
 
-  const [vendors, posts, cities] = await Promise.all([
+  const [vendors, posts, cities, vendorSupply] = await Promise.all([
     supabase.from('vendors').select('slug, updated_at'),
     supabase.from('blog_posts').select('slug, updated_at').eq('published', true),
-    supabase.from('cities').select('slug, state_code'),
+    supabase.from('cities').select('slug, state_code, population').order('population', { ascending: false }),
+    supabase.from('vendors').select('state, sport_types'),
   ]);
 
   const staticPages: MetadataRoute.Sitemap = [
@@ -48,9 +49,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  // Sport × City combo pages — REMOVED from sitemap (thin auto-generated content)
-  // Re-add when pages have unique substantial content per city+sport combo.
-
   const vendorPages: MetadataRoute.Sitemap = (vendors.data || []).map((vendor) => ({
     url: `${SITE_URL}/vendors/${vendor.slug}`,
     lastModified: new Date(vendor.updated_at),
@@ -65,15 +63,41 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  const cityPages: MetadataRoute.Sitemap = (cities.data || []).map((city) => ({
-    url: `${SITE_URL}/locations/${city.slug}`,
-    changeFrequency: 'weekly' as const,
-    priority: 0.6,
-  }));
+  // Sport × City combo pages. The old sitemap dumped 2,600+ thin auto-pages and
+  // Google crawled only 1 of them. We now include ONLY combos that have matching
+  // contractor supply in that state — the exact pages we set index:true (real
+  // cost/permit/FAQ content + vendors). cityName-only /locations pages stay out
+  // until they have unique content.
+  const supply = new Set<string>();
+  for (const v of vendorSupply.data || []) {
+    for (const t of (v.sport_types || [])) {
+      if (v.state) supply.add(`${v.state}|${t}`);
+    }
+  }
+  // sport URL slug -> vendor sport_types (mirrors SPORT_CONFIG.dbFilter)
+  const SPORT_SLUG_TO_TYPES: Record<string, string[]> = {
+    'pickleball-courts': ['pickleball'],
+    'tennis-courts': ['tennis'],
+    'basketball-courts': ['basketball'],
+    'gym-flooring': ['gym-flooring'],
+    'running-tracks': ['track', 'track-field'],
+    'artificial-turf': ['soccer', 'football', 'baseball'],
+  };
+  const MAX_COMBOS = 1200;
+  const sportLocationPages: MetadataRoute.Sitemap = [];
+  for (const city of cities.data || []) {
+    if (sportLocationPages.length >= MAX_COMBOS) break;
+    for (const [sportSlug, types] of Object.entries(SPORT_SLUG_TO_TYPES)) {
+      if (types.some((t) => supply.has(`${city.state_code}|${t}`))) {
+        sportLocationPages.push({
+          url: `${SITE_URL}/sports/${sportSlug}/${city.slug}-${city.state_code.toLowerCase()}`,
+          lastModified: new Date(),
+          changeFrequency: 'weekly' as const,
+          priority: 0.6,
+        });
+      }
+    }
+  }
 
-  // NOTE: sportLocationPages removed from sitemap — 2000+ thin auto-generated pages
-  // were killing crawl budget. Google crawled only 1 of 2622 submitted pages.
-  // Re-add ONLY when these pages have unique, substantial content per city+sport combo.
-  // cityPages also removed — same thin content issue with 201 auto-generated city pages.
-  return [...staticPages, ...sportPages, ...vendorPages, ...blogPages];
+  return [...staticPages, ...sportPages, ...vendorPages, ...blogPages, ...sportLocationPages];
 }

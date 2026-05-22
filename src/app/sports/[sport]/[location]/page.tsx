@@ -5,6 +5,7 @@ import { MapPin, Phone, ArrowRight, ChevronRight, Search, DollarSign, Clock, Che
 import { createClient } from '@/lib/supabase/server';
 import VendorCard from '@/components/vendor/VendorCard';
 import type { Vendor } from '@/types';
+import { SITE_URL } from '@/lib/constants';
 
 // Sport configuration mapping
 const SPORT_CONFIG: Record<string, {
@@ -187,19 +188,35 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!city) {
     const cityName = parsed.citySlug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
     return {
-      title: `${config.name} ${config.actionWord} in ${cityName}, ${parsed.stateCode} | BestSportsSurfaces.com`,
+      // Unknown city (not in DB) = no real content. Keep noindex.
+      title: `${config.name} ${config.actionWord} in ${cityName}, ${parsed.stateCode}`,
       description: `Find top-rated ${config.name.toLowerCase()} ${config.actionWord.toLowerCase()} in ${cityName}, ${parsed.stateCode}. Compare quotes, read reviews, and hire the best contractor for your project.`,
-      robots: { index: false, follow: true }, // noindex until pages have unique content
+      robots: { index: false, follow: true },
     };
   }
 
+  // Only index when we have matching contractor supply for this sport in this
+  // state. Those pages carry real, intent-matching content (city cost ranges,
+  // permit/HOA answers, FAQs). Pages with no matching vendor stay noindex so we
+  // don't re-flood crawl budget the way the old 2,600-page sitemap did.
+  const supabase = await createClient();
+  const { count } = await supabase
+    .from('vendors')
+    .select('id', { count: 'exact', head: true })
+    .eq('state', city.state_code)
+    .overlaps('sport_types', config.dbFilter);
+  const hasVendors = (count ?? 0) > 0;
+  const canonical = `${SITE_URL}/sports/${sport}/${location}`;
+
   return {
-    title: `${config.name} ${config.actionWord} in ${city.name}, ${city.state_code} | BestSportsSurfaces.com`,
-    description: `Find top-rated ${config.name.toLowerCase()} ${config.actionWord.toLowerCase()} in ${city.name}, ${city.state_code}. Compare quotes, read reviews, and hire the best contractor for your project.`,
-    robots: { index: false, follow: true }, // noindex until pages have unique content
+    title: `${config.name} ${config.actionWord} in ${city.name}, ${city.state_code} — Cost & Free Quotes`,
+    description: `Compare ${config.name.toLowerCase()} ${config.actionWord.toLowerCase()} in ${city.name}, ${city.state_code}. Typical cost ${config.costLow}–${config.costHigh}, ${config.timelineRange} build time. Get free quotes from verified local contractors.`,
+    alternates: { canonical },
+    robots: { index: hasVendors, follow: true },
     openGraph: {
       title: `${config.name} ${config.actionWord} in ${city.name}, ${city.state_code}`,
       description: `Find ${config.name.toLowerCase()} professionals in ${city.name}, ${city.state_code}. Get free quotes today.`,
+      url: canonical,
     },
   };
 }
