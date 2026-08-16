@@ -55,3 +55,24 @@ bestsportssurfaces.com — GullStack-owned marketplace matching court-buyers (an
 - **Still needs Bryce (can't fix in code)**: verify `gullstack.com` AND `bestsportssurfaces.com` senders in SendGrid (real notification fix); confirm `STRIPE_PRICE_ID` set in Vercel prod.
 - **Next up (P1/P2)**: de-friction vendor claims (currently signup → form → 2–3 day manual approval; 0 claims) + add vendor lead-alert emails; deepen thin (~300-word) blog/guide content + add blog↔vendor↔city internal linking; consider a crawlable `/vendors` index; revisit homepage `force-dynamic` (perf).
 - **Lead source of truth**: Supabase `inquiries` table (NOT GA). Check `/admin/inquiries`.
+
+<!-- gs-notes-convention -->
+## Notes convention (read this first)
+
+This repo is the system of record for everything we know about best-sports-surfaces.
+Anyone working here — Bryce, Josh, or a Claude session — saves to these files:
+
+- `CLAUDE.md` (this file) — **Session Log**. Append a dated entry at the TOP
+  of the Session Log section when a session or discrete task ends: what
+  shipped, current state, what's next. 3–8 tight bullets.
+- `docs/roadmap.md` — what we're trying to do here, and what comes next.
+- `docs/notes.md` — durable facts: decisions, gotchas, links, who asked for what.
+
+Rules:
+
+1. Read the newest Session Log entry before starting work.
+2. Write notes as you go, not from memory at the end.
+3. **Commit before the session ends.** An uncommitted note may as well not exist.
+4. No secrets in any of these files — no passwords, keys, or tokens.
+5. Write for someone who wasn't in the room.
+
