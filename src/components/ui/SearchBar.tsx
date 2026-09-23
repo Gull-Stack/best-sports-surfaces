@@ -29,6 +29,7 @@ export default function SearchBar({ size = 'sm', className = '' }: SearchBarProp
     <form onSubmit={handleSubmit} className={`flex flex-col sm:flex-row gap-2 ${className}`}>
       <input
         type="text"
+        aria-label="ZIP code"
         placeholder="Enter ZIP code"
         value={zip}
         onChange={(e) => setZip(e.target.value)}
@@ -39,6 +40,7 @@ export default function SearchBar({ size = 'sm', className = '' }: SearchBarProp
         pattern="[0-9]*"
       />
       <select
+        aria-label="Sport type"
         value={sportType}
         onChange={(e) => setSportType(e.target.value)}
         className={`flex-1 bg-surface-raised border border-border rounded-lg text-text-primary focus:outline-none focus:ring-2 focus:ring-neon ${

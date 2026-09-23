@@ -64,7 +64,7 @@ export default async function BlogPage({
             href={cat === 'All' ? '/blog' : `/blog?category=${encodeURIComponent(cat)}`}
             className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
               activeCategory === cat
-                ? 'bg-neon text-white'
+                ? 'bg-neon text-surface'
                 : 'bg-surface-hover text-text-secondary hover:bg-gray-200'
             }`}
           >

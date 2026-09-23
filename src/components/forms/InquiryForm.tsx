@@ -102,8 +102,8 @@ export default function InquiryForm({ vendorId, vendorName }: InquiryFormProps) 
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-text-secondary mb-1">Sport Type</label>
-          <select {...register('sport_type')} className="w-full px-3 py-2 border border-border rounded-lg text-text-primary focus:outline-none focus:ring-2 focus:ring-neon">
+          <label htmlFor="inquiry-sport-type" className="block text-sm font-medium text-text-secondary mb-1">Sport Type</label>
+          <select id="inquiry-sport-type" {...register('sport_type')} className="w-full px-3 py-2 border border-border rounded-lg text-text-primary focus:outline-none focus:ring-2 focus:ring-neon">
             <option value="">Select type...</option>
             {SPORT_TYPES.map((s) => (
               <option key={s.value} value={s.value}>{s.label}</option>
@@ -112,8 +112,8 @@ export default function InquiryForm({ vendorId, vendorName }: InquiryFormProps) 
           {errors.sport_type && <p className="mt-1 text-sm text-red-400">{errors.sport_type.message}</p>}
         </div>
         <div>
-          <label className="block text-sm font-medium text-text-secondary mb-1">Service Needed</label>
-          <select {...register('service_type')} className="w-full px-3 py-2 border border-border rounded-lg text-text-primary focus:outline-none focus:ring-2 focus:ring-neon">
+          <label htmlFor="inquiry-service-type" className="block text-sm font-medium text-text-secondary mb-1">Service Needed</label>
+          <select id="inquiry-service-type" {...register('service_type')} className="w-full px-3 py-2 border border-border rounded-lg text-text-primary focus:outline-none focus:ring-2 focus:ring-neon">
             <option value="">Select service...</option>
             {SERVICE_TYPES.map((s) => (
               <option key={s.value} value={s.value}>{s.label}</option>

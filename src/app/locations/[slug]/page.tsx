@@ -200,7 +200,7 @@ export default async function CityPage({ params }: Props) {
                 </p>
                 <Link
                   href={`/search?zip=&sport=`}
-                  className="block text-center bg-neon text-white py-2 rounded-lg text-sm font-semibold hover:bg-neon-hover"
+                  className="block text-center bg-neon text-surface py-2 rounded-lg text-sm font-semibold hover:bg-neon-hover"
                 >
                   Request Quotes <ArrowRight className="inline h-4 w-4 ml-1" />
                 </Link>

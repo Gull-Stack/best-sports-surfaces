@@ -100,7 +100,7 @@ export default function ProfilePage() {
                 onClick={() => toggleArrayItem('sport_types', sport.value)}
                 className={`px-3 py-1.5 rounded-full text-sm font-medium border transition-colors ${
                   (vendor.sport_types || []).includes(sport.value)
-                    ? 'bg-neon text-white border-neon'
+                    ? 'bg-neon text-surface border-neon'
                     : 'bg-surface-card text-text-secondary border-border hover:border-neon'
                 }`}
               >
@@ -119,7 +119,7 @@ export default function ProfilePage() {
                 onClick={() => toggleArrayItem('service_types', service.value)}
                 className={`px-3 py-1.5 rounded-full text-sm font-medium border transition-colors ${
                   (vendor.service_types || []).includes(service.value)
-                    ? 'bg-neon text-white border-neon'
+                    ? 'bg-neon text-surface border-neon'
                     : 'bg-surface-card text-text-secondary border-border hover:border-neon'
                 }`}
               >

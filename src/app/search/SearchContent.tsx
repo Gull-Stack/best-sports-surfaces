@@ -233,7 +233,7 @@ export default function SearchContent({ initialVendors, initialTotal }: SearchCo
             onClick={() => setView('list')}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg ${
               view === 'list' 
-                ? 'bg-neon text-white' 
+                ? 'bg-neon text-surface' 
                 : 'bg-surface-card border border-border hover:bg-surface-hover'
             }`}
           >
@@ -244,7 +244,7 @@ export default function SearchContent({ initialVendors, initialTotal }: SearchCo
             onClick={() => setView('map')}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg ${
               view === 'map' 
-                ? 'bg-neon text-white' 
+                ? 'bg-neon text-surface' 
                 : 'bg-surface-card border border-border hover:bg-surface-hover'
             }`}
           >

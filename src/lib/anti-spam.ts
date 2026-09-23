@@ -46,6 +46,8 @@ export function getHoneypotProps() {
     name: 'email_confirm',
     autoComplete: 'off',
     tabIndex: -1,
+    'aria-hidden': true,
+    'aria-label': 'Leave this field empty',
     style: {
       position: 'absolute',
       left: '-9999px',

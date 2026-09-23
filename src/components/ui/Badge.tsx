@@ -7,7 +7,7 @@ interface BadgeProps {
 const colors = {
   default: 'bg-surface-hover text-text-secondary',
   green: 'bg-neon-subtle text-neon',
-  blue: 'bg-accent/10 text-accent',
+  blue: 'bg-accent/10 text-accent-light',
   amber: 'bg-amber-500/10 text-amber-400',
   red: 'bg-red-500/10 text-red-400',
   gray: 'bg-surface-hover text-text-muted',

@@ -23,13 +23,14 @@
   --color-brand-100: rgba(0, 232, 123, 0.15);
 
   /* Accent blue */
-  --color-accent: #3b82f6;
-  --color-accent-hover: #2563eb;
+  --color-accent: #2563eb;
+  --color-accent-hover: #1d4ed8;
+  --color-accent-light: #60a5fa;
 
   /* Text hierarchy */
   --color-text-primary: #f0f0f5;
   --color-text-secondary: #a0a0b5;
-  --color-text-muted: #6a6a80;
+  --color-text-muted: #8a8aa0;
 
   /* Parchment becomes dark */
   --color-parchment: #0a0a0f;

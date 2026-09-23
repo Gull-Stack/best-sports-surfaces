@@ -43,7 +43,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
             onClick={() => onPageChange(page)}
             className={`px-3 py-2 rounded-lg text-sm font-medium ${
               currentPage === page
-                ? 'bg-neon text-white'
+                ? 'bg-neon text-surface'
                 : 'hover:bg-surface-hover text-text-secondary'
             }`}
             aria-current={currentPage === page ? 'page' : undefined}

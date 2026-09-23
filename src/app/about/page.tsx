@@ -223,7 +223,7 @@ export default function AboutPage() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               href="/vendors"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-neon text-white font-semibold rounded-lg hover:opacity-90 transition-opacity"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-neon text-surface font-semibold rounded-lg hover:opacity-90 transition-opacity"
             >
               Browse Contractors <ArrowRight className="h-4 w-4" />
             </Link>

@@ -44,7 +44,7 @@ export default async function DashboardPage() {
         <Card padding="lg" className="mb-8 bg-blue-50 border-blue-200">
           <h2 className="text-lg font-semibold text-text-primary mb-2">Complete Your Profile</h2>
           <p className="text-text-secondary mb-4">Set up your business profile to start receiving leads.</p>
-          <Link href="/dashboard/profile" className="inline-flex items-center gap-2 bg-neon text-white px-4 py-2 rounded-lg font-semibold hover:bg-neon-hover">
+          <Link href="/dashboard/profile" className="inline-flex items-center gap-2 bg-neon text-surface px-4 py-2 rounded-lg font-semibold hover:bg-neon-hover">
             <Settings className="h-4 w-4" /> Set Up Profile
           </Link>
         </Card>

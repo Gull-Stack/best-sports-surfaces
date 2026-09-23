@@ -637,6 +637,7 @@ export default function CourtDesigner({ defaultSport = 'tennis', showHeader = tr
                     <div className="flex items-center gap-2">
                       <input
                         type="color"
+                        aria-label={`${c.label} color`}
                         value={c.value}
                         onChange={(e) => c.set(e.target.value)}
                         onClick={(e) => e.stopPropagation()}

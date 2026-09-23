@@ -149,7 +149,7 @@ export default function PricingPage() {
                     ) : (
                       <X className="h-5 w-5 text-text-muted/30 flex-shrink-0 mt-0.5" />
                     )}
-                    <span className={feature.included ? 'text-text-secondary' : 'text-text-muted/50'}>
+                    <span className={feature.included ? 'text-text-secondary' : 'text-text-muted'}>
                       {feature.text}
                     </span>
                   </li>

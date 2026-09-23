@@ -4,6 +4,13 @@ bestsportssurfaces.com — GullStack-owned marketplace matching court-buyers (an
 
 ## Session Log
 
+### 2026-09-23 — WCAG 2.1 AA fixes (branch `a11y-fixes`, NOT pushed)
+
+- Fleet axe scan: 60/60 pages failing, ~2,800 nodes. Shared cause: the `--color-text-muted` token (#6a6a80) was 3.1–3.5:1 on every dark surface, used in the footer and every card.
+- Fixes: text-muted #6a6a80 → #8a8aa0; accent #3b82f6 → #2563eb (white-text buttons), new `--color-accent-light` #60a5fa for blue badge text; `bg-neon text-white` → `text-surface` everywhere; dropped `/50` `/60` opacity on muted text; labels wired to selects (search sidebar, InquiryForm, cost estimator, SearchBar); aria-labels on list/map toggle and court-designer color pickers; honeypot gets `aria-hidden` + `aria-label` in `lib/anti-spam.ts`.
+- Verified: 13 statically-rendering pages pass on a local `next start`; all 60 live URLs pass with the new CSS + template changes simulated (data pages need Supabase env to render locally).
+- Next: Bryce approves push → PR → Vercel deploy → rescan live.
+
 ### 2026-08-10 — The newsletter form was the only unprotected form on the site
 
 - Traced Bryce's inbox flood of "New Newsletter Subscriber" emails back here. **The footer

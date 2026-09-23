@@ -59,7 +59,7 @@ export default function NewsletterForm() {
       <button
         type="submit"
         disabled={status === 'loading'}
-        className="px-3 py-2 bg-neon text-white rounded-lg hover:bg-neon-hover disabled:opacity-50"
+        className="px-3 py-2 bg-neon text-surface rounded-lg hover:bg-neon-hover disabled:opacity-50"
         aria-label="Subscribe"
       >
         <Send className="h-4 w-4" />

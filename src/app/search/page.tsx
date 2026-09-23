@@ -107,12 +107,16 @@ function SearchContent() {
           <div className="flex border border-border rounded-lg overflow-hidden">
             <button
               onClick={() => setView('list')}
+              aria-label="List view"
+              aria-pressed={view === 'list'}
               className={`px-3 py-2 text-sm ${view === 'list' ? 'bg-neon text-surface' : 'bg-surface-card text-text-secondary'}`}
             >
               <List className="h-4 w-4" />
             </button>
             <button
               onClick={() => setView('map')}
+              aria-label="Map view"
+              aria-pressed={view === 'map'}
               className={`px-3 py-2 text-sm ${view === 'map' ? 'bg-neon text-surface' : 'bg-surface-card text-text-secondary'}`}
             >
               <MapIcon className="h-4 w-4" />
@@ -140,8 +144,9 @@ function SearchContent() {
         <aside className={`w-64 flex-shrink-0 ${showFilters ? 'block' : 'hidden'} md:block`}>
           <div className="bg-surface-card border border-border rounded-xl p-4 space-y-5 sticky top-20">
             <div>
-              <label className="block text-sm font-medium text-text-secondary mb-1">ZIP Code</label>
+              <label htmlFor="search-zip-code" className="block text-sm font-medium text-text-secondary mb-1">ZIP Code</label>
               <input
+                id="search-zip-code"
                 type="text"
                 placeholder="Enter ZIP code"
                 defaultValue={filters.zip}
@@ -154,8 +159,9 @@ function SearchContent() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-text-secondary mb-1">Sport Type</label>
+              <label htmlFor="search-sport-type" className="block text-sm font-medium text-text-secondary mb-1">Sport Type</label>
               <select
+                id="search-sport-type"
                 value={filters.sportType}
                 onChange={(e) => updateFilter('sport', e.target.value)}
                 className="w-full px-3 py-2 border border-border rounded-lg text-sm text-text-primary bg-surface-raised"
@@ -168,8 +174,9 @@ function SearchContent() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-text-secondary mb-1">Service Type</label>
+              <label htmlFor="search-service-type" className="block text-sm font-medium text-text-secondary mb-1">Service Type</label>
               <select
+                id="search-service-type"
                 value={filters.serviceType}
                 onChange={(e) => updateFilter('service', e.target.value)}
                 className="w-full px-3 py-2 border border-border rounded-lg text-sm text-text-primary bg-surface-raised"
@@ -182,8 +189,9 @@ function SearchContent() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-text-secondary mb-1">Distance (miles)</label>
+              <label htmlFor="search-distance-miles" className="block text-sm font-medium text-text-secondary mb-1">Distance (miles)</label>
               <select
+                id="search-distance-miles"
                 value={filters.radius}
                 onChange={(e) => updateFilter('radius', e.target.value)}
                 className="w-full px-3 py-2 border border-border rounded-lg text-sm text-text-primary bg-surface-raised"
@@ -196,8 +204,9 @@ function SearchContent() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-text-secondary mb-1">Minimum Rating</label>
+              <label htmlFor="search-minimum-rating" className="block text-sm font-medium text-text-secondary mb-1">Minimum Rating</label>
               <select
+                id="search-minimum-rating"
                 value={filters.minRating}
                 onChange={(e) => updateFilter('rating', e.target.value)}
                 className="w-full px-3 py-2 border border-border rounded-lg text-sm text-text-primary bg-surface-raised"
@@ -222,8 +231,9 @@ function SearchContent() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-text-secondary mb-1">Sort By</label>
+              <label htmlFor="search-sort-by" className="block text-sm font-medium text-text-secondary mb-1">Sort By</label>
               <select
+                id="search-sort-by"
                 value={filters.sort}
                 onChange={(e) => updateFilter('sort', e.target.value)}
                 className="w-full px-3 py-2 border border-border rounded-lg text-sm text-text-primary bg-surface-raised"

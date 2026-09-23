@@ -182,7 +182,7 @@ export default async function BlogPostPage({ params }: Props) {
                 <p className="text-sm text-text-secondary mb-3">Get free quotes from verified sports surface contractors near you.</p>
                 <Link
                   href="/search"
-                  className="block text-center bg-neon text-white py-2 rounded-lg text-sm font-semibold hover:bg-neon-hover"
+                  className="block text-center bg-neon text-surface py-2 rounded-lg text-sm font-semibold hover:bg-neon-hover"
                 >
                   Find Contractors
                 </Link>

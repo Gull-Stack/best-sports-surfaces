@@ -117,7 +117,7 @@ const galleryImages = [
 
 const typeColors: Record<string, string> = {
   Residential: 'bg-neon-subtle text-neon',
-  Municipal: 'bg-accent/10 text-accent',
+  Municipal: 'bg-accent/10 text-accent-light',
   Commercial: 'bg-amber-500/10 text-amber-400',
   Tournament: 'bg-purple-500/10 text-purple-400',
 };

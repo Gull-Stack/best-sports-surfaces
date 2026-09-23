@@ -98,7 +98,7 @@ export default function VendorCard({ vendor, showDistance, distance }: VendorCar
           <MapPin className="h-4 w-4 flex-shrink-0" />
           <span>{vendor.city}, {vendor.state}</span>
           {showDistance && distance !== undefined && (
-            <span className="text-text-muted/60 ml-1">({distance.toFixed(1)} mi)</span>
+            <span className="text-text-muted ml-1">({distance.toFixed(1)} mi)</span>
           )}
         </div>
 

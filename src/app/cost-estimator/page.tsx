@@ -219,8 +219,9 @@ export default function CostEstimatorPage() {
             ))}
           </div>
           <div className="mb-6">
-            <label className="block text-sm font-medium text-text-secondary mb-1">State (for regional pricing)</label>
+            <label htmlFor="estimator-state" className="block text-sm font-medium text-text-secondary mb-1">State (for regional pricing)</label>
             <select
+              id="estimator-state"
               value={state}
               onChange={(e) => setState(e.target.value)}
               className="w-full px-3 py-2 border border-border rounded-lg text-text-primary"
@@ -282,7 +283,7 @@ export default function CostEstimatorPage() {
           <div className="flex flex-col sm:flex-row gap-3">
             <Link
               href={`/search?sport=${sportType}${state ? `&state=${state}` : ''}`}
-              className="flex-1 inline-flex items-center justify-center gap-2 bg-neon text-white px-6 py-3 rounded-lg font-semibold hover:bg-neon-hover transition-colors"
+              className="flex-1 inline-flex items-center justify-center gap-2 bg-neon text-surface px-6 py-3 rounded-lg font-semibold hover:bg-neon-hover transition-colors"
             >
               <Search className="h-5 w-5" /> Get Exact Quotes from Contractors
             </Link>
