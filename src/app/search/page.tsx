@@ -267,8 +267,8 @@ function SearchContent() {
             </div>
           ) : vendors.length === 0 ? (
             <div className="text-center py-16">
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">No contractors found</h3>
-              <p className="text-gray-600 mb-4">Try adjusting your search filters or expanding your search area.</p>
+              <h3 className="text-lg font-semibold text-text-primary mb-2">No contractors found</h3>
+              <p className="text-text-secondary mb-4">Try adjusting your search filters or expanding your search area.</p>
               <button
                 onClick={() => router.push('/search')}
                 className="text-brand font-medium hover:underline"
